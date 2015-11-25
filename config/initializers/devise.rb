@@ -8,6 +8,17 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'ae322089c4309ed9b89a22a08fe3e5fd9da228bc87633bab49a4aa612e227e63c7d1bc8e0db899b1c1f81eb827f700a1269f3d024730540b4e844d26f0f8fa33'
 
+
+  ######################
+
+  #omniauth
+    config.omniauth :facebook, "1488155564839689", "9f0691f6377899d5e30430fcedf5545d", info_fields: 'first_name,last_name'
+    config.omniauth :twitter, "mnL3dmWAIXtkMNZg45ZlRNCLL", "aUbh7aAsKFSrBvo5LPXwcleBR5QIcmvktgRC89oMSc37b0Sy4N"
+    config.omniauth :vkontakte, "5057668", "ZgJyxLZzPBsAuaB2DCmh"
+  
+  ######################
+
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
