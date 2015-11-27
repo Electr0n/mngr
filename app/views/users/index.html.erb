@@ -1,8 +1,18 @@
-<% @users.map do |i| %>
-<%= i.email %><br>
-<% end %>
+<h1>All users</h1>
 
-<%= t('congradulation') %>
+<table align="left">
+	<tr align="center">
+		<td>Name: </td>
+		<td>Surname: </td>
+		<td>Email: </td>
+	</tr>
+	<% @users.each do |u| %>
+		<tr align="center">
+			<td><%= link_to u.name, user_path(u) %></td>
+			<td><%= u.surname %>
+			<td><%= u.email %></td>
+		</tr>
+	<% end %>
+</table>
 <br>
-
-<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>   
+<%= t('congradulation') %>
