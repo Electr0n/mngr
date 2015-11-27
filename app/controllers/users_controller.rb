@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
 	def update
 		# find_user action
-		@user.update_attributes()
+		@user.update_attributes(user_params)
 	    if @user.errors.empty?
 	      redirect_to user_path(@user)
 	    else
@@ -48,5 +48,9 @@ class UsersController < ApplicationController
 	def find_user
 		@user = User.find(params[:id])
 	end
+
+	def user_params
+    	params.require(:user).permit(:avatar, :name, :surname, :email, :password, :password_confirmation)
+  	end
 
 end
