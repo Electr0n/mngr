@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127070329) do
+ActiveRecord::Schema.define(version: 20151127081943) do
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.date     "date"
+    t.time     "time"
+    t.string   "etype",       limit: 255
+    t.string   "description", limit: 255
+    t.string   "gender",      limit: 255
+    t.integer  "number",      limit: 4
+    t.integer  "agemin",      limit: 4
+    t.integer  "agemax",      limit: 4
+    t.string   "location",    limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events_users", id: false, force: :cascade do |t|
+    t.integer "user_id",  limit: 4
+    t.integer "event_id", limit: 4
+  end
+
+  add_index "events_users", ["event_id"], name: "index_events_users_on_event_id", using: :btree
+  add_index "events_users", ["user_id"], name: "index_events_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",      null: false

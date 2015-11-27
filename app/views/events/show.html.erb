@@ -1,0 +1,36 @@
+<h1><%= @event.name %></h1>
+
+<table>
+	<tr>
+		<td>Date: </td>
+		<td><%= @event.date %></td>
+	</tr>
+	<tr>
+		<td>Time: </td>
+		<td><%= @event.time %></td>
+	</tr>
+	<tr>
+		<td>Type: </td>
+		<td><%= @event.etype %></td>
+	</tr>
+	<tr>
+		<td>Description: </td>
+		<td><%= @event.description %></td>
+	</tr>
+	<tr>
+		<td>Gender: </td>
+		<td><%= @event.gender %></td>
+	</tr>
+	<tr>
+		<td>Number: </td>
+		<td><%= @event.number %></td>
+	</tr>
+	<tr>
+		<td>Age: </td>
+		<td><%= @event.agemin %> - <%= @event.agemax %></td>
+	</tr>
+	<tr>
+		<td><%= link_to "Edit", edit_event_path %></td>
+		<td><%= link_to "Delete", @event, method: :delete %></td>
+	</tr>
+</table>

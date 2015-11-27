@@ -1,23 +1,23 @@
-<br><%= image_tag(current_user.avatar.url(:thumb)) %><br>
-<%= @user.name %><br>
-<%= @user.surname %><br>
-<%= @user.email %><br>
+<h1>All events</h1>
 
-
-<h2>Your events</h2>
 <table>
 	<tr align="center">
 		<td>Name: </td>
 		<td>Gender: </td>
 		<td>Type: </td>
 		<td>Description: </td>
+		<td></td>
 	</tr>
-	<% @user.events.each do |e| %>
+	<% @events.each do |e| %>
 		<tr align="center">
 			<td><%= link_to e.name, event_path(e) %></td>
 			<td><%= e.gender %>
 			<td><%= e.etype %></td>
 			<td><%= e.description %></td>
+			<td></td>
 		</tr>
 	<% end %>
+	<tr align="center">
+		<td colspan="4"><%= link_to "Add new event", new_event_path %></td>
+	</tr>
 </table>

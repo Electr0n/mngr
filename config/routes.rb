@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   	registration: "users"}
 
   resources :users
+  resources :events
   
 end
