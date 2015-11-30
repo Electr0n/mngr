@@ -4,7 +4,7 @@
     <%= form_for @user do |f| %>
     
     <div class="form-group">
-        <%= f.label :avatar, class: 'col-sm-2 control-label'  %>
+        <%= f.label :avatar, class: 'col-sm-4 control-label'  %>
         <div class="col-sm-6">
             <%= f.file_field :avatar %>
         </div>
@@ -12,28 +12,28 @@
 
 
     <div class="form-group">
-        <%= f.label :name, class: 'col-sm-2 control-label'  %>
+        <%= f.label :name, class: 'col-sm-4 control-label'  %>
         <div class="col-sm-6">
             <%= f.text_field :name, autofocus: true, class: 'form-control'  %>
         </div>
     </div>
 
     <div class="form-group">
-        <%= f.label :surname, class: 'col-sm-2 control-label'  %>
+        <%= f.label :surname, class: 'col-sm-4 control-label'  %>
         <div class="col-sm-6">
             <%= f.text_field :surname, autofocus: true, class: 'form-control'  %>
         </div>
     </div>
 
     <div class="form-group">
-        <%= f.label :email, class: 'col-sm-2 control-label'  %>
+        <%= f.label :email, class: 'col-sm-4 control-label'  %>
         <div class="col-sm-6">
             <%= f.email_field :email, class: 'form-control'  %>
         </div>
     </div>
 
     <div class="form-group">
-        <%= f.label :password, class: 'col-sm-2 control-label'  %> 
+        <%= f.label :password, class: 'col-sm-4 control-label'  %> 
         <div class="col-sm-6">
             <%= f.password_field :password, autocomplete: "off", class: 'form-control'  %>
         </div>

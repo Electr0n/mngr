@@ -8,23 +8,27 @@
 </head>
 <body>
 
-<p class="navbar-text pull-right">
-<% if user_signed_in? %>
+<div class="row">
+  <div class="col-md-10"></div>
+  <div class="col-md-2">
+    <% if user_signed_in? %>
 
-  Logged in as <strong><%= current_user.email %></strong>.	</br>
-	
-  <%= link_to "Main", root_path, :class => 'navbar-link' %> |
-  <%= link_to "Events", events_path, :class => 'navbar-link' %> |
-  <%= link_to "Edit profile", edit_user_path(current_user), :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-  <br>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %> | 
-  <%= link_to image_tag('icon-tw16.png'), user_omniauth_authorize_path(:twitter) %> |
-  <%= link_to image_tag('icon-fb16.png'), user_omniauth_authorize_path(:facebook) %> |
-  <%= link_to image_tag('icon-vk16.png'), user_omniauth_authorize_path(:vkontakte) %>
-<% end %>
+      Logged in as <strong><%= current_user.email %></strong>.	</br>
+    	
+      <%= link_to "Main", root_path, :class => 'navbar-link' %> |
+      <%= link_to "Events", events_path, :class => 'navbar-link' %> |
+      <%= link_to "Edit profile", edit_user_path(current_user), :class => 'navbar-link' %> |
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+      <br>
+    <% else %>
+      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+      <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %> | 
+      <%= link_to image_tag('icon-tw16.png'), user_omniauth_authorize_path(:twitter) %> |
+      <%= link_to image_tag('icon-fb16.png'), user_omniauth_authorize_path(:facebook) %> |
+      <%= link_to image_tag('icon-vk16.png'), user_omniauth_authorize_path(:vkontakte) %>
+    <% end %>
+  </div>
+</div>
 
 <% if notice %>
   <p class="alert alert-success"><%= notice %></p>

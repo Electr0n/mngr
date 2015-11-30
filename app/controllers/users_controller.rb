@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 	    if @user.errors.empty?
 	      redirect_to user_path(@user)
 	    else
+	      #flash[:error] = "erunda"
 	      render "edit"
 	    end
 	end
