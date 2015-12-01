@@ -26,9 +26,10 @@ class UsersController < ApplicationController
 		# find_user action
 		@user.update_attributes(user_params)
 	    if @user.errors.empty?
-	      redirect_to user_path(@user)
+	    	sign_in(@user, :bypass => true)
+	    	redirect_to user_path(@user)
 	    else
-	      render "edit"
+	    	render "edit"
 	    end
 	end
 
