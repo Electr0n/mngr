@@ -11,21 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127081943) do
+ActiveRecord::Schema.define(version: 20151201085137) do
 
   create_table "events", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name",               limit: 255
     t.date     "date"
     t.time     "time"
-    t.string   "etype",       limit: 255
-    t.string   "description", limit: 255
-    t.string   "gender",      limit: 255
-    t.integer  "number",      limit: 4
-    t.integer  "agemin",      limit: 4
-    t.integer  "agemax",      limit: 4
-    t.string   "location",    limit: 255
+    t.string   "etype",              limit: 255
+    t.string   "description",        limit: 255
+    t.string   "gender",             limit: 255
+    t.integer  "number",             limit: 4
+    t.integer  "agemin",             limit: 4
+    t.integer  "agemax",             limit: 4
+    t.string   "location",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_file_name",    limit: 255
+    t.string   "photo_content_type", limit: 255
+    t.integer  "photo_file_size",    limit: 4
+    t.datetime "photo_updated_at"
   end
 
   create_table "events_users", id: false, force: :cascade do |t|
