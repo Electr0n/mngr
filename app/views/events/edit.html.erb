@@ -1,43 +1,49 @@
 <h1>Edit event</h1>
 
 <%= form_for @event do |e| %>
+  <div class="field">
+    <%= e.label :photo  %>
+    <div class="col-sm-6">
+      <%= e.file_field :photo %>
+    </div>
+  </div>
 	<div class="field">
-    	<%= e.label :name %><br />
-    	<%= e.text_field :name, autofocus: true %>
-  	</div>
-  	<div class="field">
-    	<%= e.label :date %>
-    	<%= e.date_select :date %><br>
-  	</div>
-  	<div class="field">
-    	<%= e.label :time %>
-    	<%= e.time_select :time %><br>
-  	</div>
-  	<div class="field">
-    	<%= e.label :description %>
-    	<%= e.text_field :description %><br>
-  	</div>
+   	<%= e.label :name %><br />
+   	<%= e.text_field :name, autofocus: true %>
+  </div>
+  <div class="field">
+   	<%= e.label :date %>
+   	<%= e.date_select :date %><br>
+  </div>
+  <div class="field">
+   	<%= e.label :time %>
+   	<%= e.time_select :time %><br>
+  </div>
+  <div class="field">
+   	<%= e.label :description %>
+   	<%= e.text_field :description %><br>
+  </div>
     <div class="field">
       <p>Gender: 
         <%= e.select :gender, (['Male', 'Female', 'IDK'].map {|i| [i,i] } ) %>
       </p>
     </div>
-    <div class="field">
+  <div class="field">
       <p>Number: 
         <%= e.select :number, ((1..100).map {|i| [i,i] } << ["N/A", 0]) %>
       </p>
-    </div>
-    <div class="field">
-      <p>Age: 
-        <%= e.select :agemin, ((0..99).map {|i| [i,i] } << ["N/A", nil]) %>
-        -
-        <%= e.select :agemax, ((0..99).map {|i| [i,i] } << ["N/A", nil]) %>
-      </p>
-    </div>
-    <div class="field">
-      <p>Type: 
-        <%= e.select :etype, (['Party', 'Sport', 'Music', 'Fasion'].map {|i| [i,i] } << ["N/A", "NA"]) %>
-      </p>
-    </div>
-  	<%= e.submit "Save" %>
+  </div>
+  <div class="field">
+    <p>Age: 
+      <%= e.select :agemin, ((0..99).map {|i| [i,i] } << ["N/A", nil]) %>
+      -
+      <%= e.select :agemax, ((0..99).map {|i| [i,i] } << ["N/A", nil]) %>
+    </p>
+  </div>
+  <div class="field">
+    <p>Type: 
+      <%= e.select :etype, (['Party', 'Sport', 'Music', 'Fasion'].map {|i| [i,i] } << ["N/A", "NA"]) %>
+    </p>
+  </div>
+  <%= e.submit "Save" %>
 <% end %>
