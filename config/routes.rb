@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   	registration: "users"}
 
   resources :users
-  resources :events
+  resources :events do
+  	get :join, 		on: :member
+  	get :unfollow, 	on: :member
+  end
   
 end
