@@ -14,7 +14,11 @@
 			<td><%= e.gender %>
 			<td><%= e.etype %></td>
 			<td><%= e.description %></td>
-			<td></td>
+			<% if current_user.events.include?(e) then %>
+			<td><%= link_to "unfollow", unfollow_event_path(e) %></td>
+			<% else %>
+			<td><%= link_to "join", join_event_path(e) %></td>
+			<% end %>
 		</tr>
 	<% end %>
 	<tr align="center">

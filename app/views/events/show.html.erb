@@ -1,7 +1,12 @@
 <h1><%= @event.name %></h1>
 
-<br><%= image_tag(@event.photo.url(:thumb)) %><br>
+<br><%= if current_user.events.include?(@event) then
+		link_to "unfollow", unfollow_event_path(@event)
+	else
+ 		link_to "join", join_event_path(@event)
+ 	end %><br>
 
+<br><%= image_tag(@event.photo.url(:thumb)) %><br>
 <table>
 	<tr>
 		<td>Date: </td>

@@ -1,6 +1,16 @@
 class EventsController < ApplicationController
 
-  before_action :find_event, only: [:edit, :show, :update, :destroy]
+  before_action :find_event, only: [:edit, :show, :update, :destroy, :join, :unfollow]
+
+  def join
+    current_user.events << @event
+    redirect_to(:back)
+  end
+
+  def unfollow
+    current_user.events.delete(@event)
+    redirect_to(:back)
+  end
 
   def index
     @events = Event.all
