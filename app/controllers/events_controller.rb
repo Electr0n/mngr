@@ -2,21 +2,6 @@ class EventsController < ApplicationController
 
   before_action :find_event, only: [:edit, :show, :update, :destroy, :join, :unfollow]
 
-  def join
-    #action find_event
-    if current_user.events.include?(@event)
-    else
-      current_user.events << @event
-    end 
-    redirect_to(:back)
-  end
-
-  def unfollow
-    #action find_event  
-    current_user.events.delete(@event)
-    redirect_to(:back)
-  end
-
   def index
     @events = Event.all
   end
@@ -66,6 +51,21 @@ class EventsController < ApplicationController
 
   def find_event
     @event = Event.find(params[:id])
+  end
+
+  def join
+    #action find_event
+    if current_user.events.include?(@event)
+    else
+      current_user.events << @event
+    end 
+    redirect_to(:back)
+  end
+
+  def unfollow
+    #action find_event  
+    current_user.events.delete(@event)
+    redirect_to(:back)
   end
 
 end

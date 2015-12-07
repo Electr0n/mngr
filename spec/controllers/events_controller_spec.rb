@@ -2,33 +2,39 @@ require 'rails_helper'
 
 describe EventsController do
 	
-	describe "index action" do
-		
+	describe "action INDEX" do
 		it "renders index view" do
 			get :index
-			expect(response).to be_success
+			expect(response).to render_template(:index)
 		end
-
 	end
 
-	describe "show action" do
-
+	describe "action SHOW" do
 		it "renders show template if event is found" do
 			e = create(:event)
 			get :show, { id: e.id }
-      		expect(response).to be_success
+      		expect(response).to render_template(:show)
 		end
-
 	end
 
-	describe "action create" do
-		
-		it "" do
+	describe "action CREATE" do
+		it "should save" do
 			e = create(:event)
-			post :create
-			expect(e.errors.empty?).to eq("true")
+			expect(e.save).to be true
       	end
+      	it "sohuld render new if not valid event" do
+      		e = build(:event, name: "ab")
+      		post :create, event: e.attributes
+      		expect(e.valid?).to be false and
+      		 expect(response).to render_template(:new)		
+      	end
+	end
 
+	describe "action NEW" do
+		it "should render new" do
+			get :new
+			expect(response).to render_template(:new)
+		end
 	end
 
 end
