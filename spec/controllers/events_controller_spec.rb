@@ -37,4 +37,12 @@ describe EventsController do
 		end
 	end
 
+	#describe "action DESTROY" do
+	#	it "should render index page after seccess" do
+	#		e = create(:event)
+	#		delete :destroy, id: e.id
+	#		expect(response).to redirect_to(events_path)
+	#	end
+	#end
+
 end
