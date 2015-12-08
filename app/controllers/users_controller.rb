@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :find_user, only: [:show, :edit, :update]
+	before_action :find_user, only: [:show, :edit, :update, :destroy]
 
 	def index
 		@users = User.all 
@@ -42,12 +42,18 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
+		@user.destroy
+		render "index"
 	end
 
 	protected
 
 	def find_user
-		@user = User.find(params[:id])
+		begin
+	        @user = User.find(params[:id])
+	    rescue
+	        render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+	    end
 	end
 
 	def user_params
