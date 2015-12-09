@@ -47,6 +47,25 @@ describe UsersController do
 		end
 	end
 
+	describe "action UPDATE" do
+		it "should update and redirect to user's page" do
+			u = create(:user)
+			put :update, { id: u.id , user: attributes_for(:user, email: "a@b.c")}
+			u.reload
+			sign_in u
+			expect(u.email).to eq("a@b.c") and
+			 expect(response).to redirect_to user_path(u)
+		end
+		it "should render edit template if user not valid" do
+			u = create(:user)
+			patch :update, { id: u.id , user: attributes_for(:user, email: "ab.c")}
+			u.reload
+			sign_in u
+			expect(u.email).not_to eq("ab.c")
+			############# we sohuld check here if rendering edit template
+		end
+	end
+
 	describe "action DESTROY" do
 		it "should delete user" do
 			u = create(:user)

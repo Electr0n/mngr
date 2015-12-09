@@ -18,9 +18,12 @@ describe EventsController do
 	end
 
 	describe "action CREATE" do
-		it "should save" do
-			e = create(:event)
-			expect(e.save).to be true
+		it "should save event and render even't page" do
+			u = create(:user)
+			e = build(:event)
+			u.events << e
+			expect(e.save).to be true and
+			 expect(get :show, {id: e.id}).to render_template(:show)
       	end
       	it "sohuld render new if not valid event" do
       		e = build(:event, name: "ab")
@@ -30,6 +33,23 @@ describe EventsController do
       	end
 	end
 
+	describe "action UPDATE" do
+		it "should update and redirect to event's page" do
+			e = create(:event)
+			put :update, { id: e.id, event: attributes_for(:event, name: "newname")}
+			e.reload
+			expect(e.name).to eq("newname") and
+			 expect(response).to redirect_to event_path(e)
+		end
+		it "should render edit if not valid attributes" do
+			e = create(:event)
+			put :update, { id: e.id, event: attributes_for(:event, name: "ne")}
+			e.reload
+			expect(e.name).not_to eq("ne")
+			##### here should check redirect to edit form
+		end
+	end
+
 	describe "action NEW" do
 		it "should render new" do
 			get :new
@@ -37,12 +57,54 @@ describe EventsController do
 		end
 	end
 
-	#describe "action DESTROY" do
-	#	it "should render index page after seccess" do
-	#		e = create(:event)
-	#		delete :destroy, id: e.id
-	#		expect(response).to redirect_to(events_path)
-	#	end
-	#end
+	describe "action DESTROY" do
+		it "should render index page after seccess" do
+			u = create(:user)
+			sign_in u
+			e = create(:event)
+			delete :destroy, { id: e.id }
+			expect(response).to redirect_to(user_path(u))
+		end
+	end
+
+	describe "action JOIN" do
+		it "should add event to user's event list and redirect back" do
+			u = create(:user)
+			sign_in u
+			e = create(:event)
+			@request.env['HTTP_REFERER'] = 'http://test.com/users/index'
+			get :join, {id: e.id }
+			expect(response).to redirect_to(:back)
+		end
+		it "should render current user's page couse event is already iclude in evets page" do
+			u = create(:user)
+			sign_in u
+			e = create(:event)
+			u.events << e
+			@request.env['HTTP_REFERER'] = 'http://test.com/users/index'
+			get :join, {id: e.id }
+			expect(response).to redirect_to(user_path(u))
+		end
+	end
+
+	describe "action UNFOLLOW" do
+		it "should delete event from user's list and redirect back" do
+			u = create(:user)
+			sign_in u
+			e = create(:event)
+			u.events << e
+			@request.env['HTTP_REFERER'] = 'http://test.com/users/index'
+			get :unfollow, {id: e.id }
+			expect(response).to redirect_to(:back)
+		end
+		it "should render current user's page couse user's list already not inlcude this event" do
+			u = create(:user)
+			sign_in u
+			e = create(:event)
+			@request.env['HTTP_REFERER'] = 'http://test.com/users/index'
+			get :unfollow, {id: e.id }
+			expect(response).to redirect_to(user_path(u))
+		end
+	end
 
 end
