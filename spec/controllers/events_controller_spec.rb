@@ -18,12 +18,14 @@ describe EventsController do
 	end
 
 	describe "action CREATE" do
-		it "should save event and render even't page" do
+		it "should save event, push it to current user and render event's page" do
 			u = create(:user)
+			sign_in u
 			e = build(:event)
-			u.events << e
+			post :create, event: e.attributes
 			expect(e.save).to be true and
-			 expect(get :show, {id: e.id}).to render_template(:show)
+			 expect(u.events.count).to eq(1) and
+			  expect(get :show, {id: e.id}).to render_template(:show)
       	end
       	it "sohuld render new if not valid event" do
       		e = build(:event, name: "ab")
@@ -41,12 +43,14 @@ describe EventsController do
 			expect(e.name).to eq("newname") and
 			 expect(response).to redirect_to event_path(e)
 		end
-		it "should render edit if not valid attributes" do
-			e = create(:event)
+		it "should render edit if not valid attributes for update" do
+			e = build(:event)
+			e.save
 			put :update, { id: e.id, event: attributes_for(:event, name: "ne")}
 			e.reload
 			expect(e.name).not_to eq("ne")
-			##### here should check redirect to edit form
+			put :update, { id: e.id, event: attributes_for(:event, name: "ne")}
+			expect(response).to render_template(:edit)
 		end
 	end
 
