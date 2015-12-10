@@ -56,16 +56,22 @@ class EventsController < ApplicationController
   def join
     #action find_event
     if current_user.events.include?(@event)
+      redirect_to current_user
     else
       current_user.events << @event
+      redirect_to(:back)
     end 
-    redirect_to(:back)
+    
   end
 
   def unfollow
-    #action find_event  
-    current_user.events.delete(@event)
-    redirect_to(:back)
+    #action find_event
+    if current_user.events.include?(@event)
+      current_user.events.delete(@event)
+      redirect_to(:back)
+    else
+      redirect_to (current_user)
+    end
   end
 
 end
