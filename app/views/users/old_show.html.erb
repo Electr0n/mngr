@@ -15,7 +15,7 @@
 	<% @user.events.each do |e| %>
 		<tr align="center">
 			<td><%= link_to e.name, event_path(e) %></td>
-			<td><%= e.gender %>
+			<td><%= e.gender %></td>
 			<td><%= e.etype %></td>
 			<td><%= e.description %></td>
 			<td><%= link_to "unfollow", unfollow_event_path(e)%></td>

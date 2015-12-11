@@ -1,0 +1,21 @@
+%h1 All events
+%table
+  %tr{:align => "center"}
+    %td Name:
+    %td Gender:
+    %td Type:
+    %td Description:
+    %td
+  - @events.each do |e|
+    %tr{:align => "center"}
+      %td= link_to e.name, event_path(e)
+      %td
+        = e.gender
+        %td= e.etype
+        %td= e.description
+        - if current_user.events.include?(e) then
+          %td= link_to "unfollow", unfollow_event_path(e)
+        - else
+          %td= link_to "join", join_event_path(e)
+  %tr{:align => "center"}
+    %td{:colspan => "4"}= link_to "Add new event", new_event_path

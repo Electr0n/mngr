@@ -8,6 +8,10 @@ https://gorails.com/setup/ubuntu/14.10
   Ruby -v     << ruby 2.2.3p173 (2015-08-18 revision 51636) [i686-linux]
   Rails -v    << Rails 4.2.4
 
+  	Usefull links:
+  http://jsfiddle.net/
+  http://htmltohaml.com/
+
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

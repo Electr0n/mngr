@@ -1,0 +1,53 @@
+%h2 Edit
+= form_for @user do |f|
+  .form-group
+    = f.label :name, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = f.text_field :name, autofocus: true, class: 'form-control'
+  .form-group
+    = f.label :surname, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = f.text_field :surname, class: 'form-control'
+  .form-group
+    = f.label :email, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = f.email_field :email, class: 'form-control'
+  .form-group
+    = f.label :birthday, class: 'col-sm-4 control-label'
+    .col-sm-6.date-select
+      = f.date_select(:bday, start_year: 1940, end_year: Time.now.year)
+  .form-group
+    = f.label :gender, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = radio_button("user", "gender", "Male")
+      = label_tag :gender, "Male"
+      = radio_button("user", "gender", "Female")
+      = label_tag :gender, "Female"
+      = radio_button("user", "gender", "NA")
+      = label_tag :gender, "Not sure"
+  .form-group
+    = f.label :phone, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = telephone_field("user", "phone", class: 'form-control')
+  .form-group
+    = f.label :hobby, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = f.text_area :hobby, class: 'form-control'
+  .form-group
+    = f.label :about, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = f.text_area :about, class: 'form-control'
+  .form-group
+    = f.label :password, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = f.password_field :password, autocomplete: "off", class: 'form-control'
+  .form-group
+    = f.label :avatar, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = f.file_field :avatar
+  .form-group
+    .col-sm-6
+      = f.submit "Update", class: "btn btn-primary"
+%br
+= button_to "Cancel my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-default btn-xs'
+= link_to "Back", :back

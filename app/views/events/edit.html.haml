@@ -1,0 +1,41 @@
+%h1 Edit event
+= form_for @event do |e|
+  .field
+    = e.label :photo
+    .col-sm-6
+      = e.file_field :photo
+  .field
+    = e.label :name
+    %br/
+    = e.text_field :name, autofocus: true
+  .field
+    = e.label :date
+    = e.date_select :date
+    %br
+  .field
+    = e.label :time
+    = e.time_select :time
+    %br
+  .field
+    = e.label :description
+    = e.text_field :description
+    %br
+  .field
+    %p
+      Gender:
+      \#{e.select :gender, (['Male', 'Female', 'IDK'].map {|i| [i,i] } )}
+  .field
+    %p
+      Number:
+      \#{e.select :number, ((1..100).map {|i| [i,i] } << ["N/A", 0])}
+  .field
+    %p
+      Age:
+      \#{e.select :agemin, ((0..99).map {|i| [i,i] } << ["N/A", nil])}
+      \-
+      \#{e.select :agemax, ((0..99).map {|i| [i,i] } << ["N/A", nil])}
+  .field
+    %p
+      Type:
+      \#{e.select :etype, (['Party', 'Sport', 'Music', 'Fasion'].map {|i| [i,i] } << ["N/A", "NA"])}
+  = e.submit "Save"
