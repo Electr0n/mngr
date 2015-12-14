@@ -8,10 +8,12 @@ class UsersController < ApplicationController
 	end
 
 	def new
+		#registrtions controller
 		@user = User.new
 	end
 
 	def create
+		#registrtions controller
 		@user = User.new(user_params)
 		if @user.save
 	      sign_in @user

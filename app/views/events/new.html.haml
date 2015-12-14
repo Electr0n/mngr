@@ -1,40 +1,65 @@
 %h1 New event
 = form_for @event do |e|
-  .field
-    = e.label :name
-    %br/
-    = e.text_field :name, autofocus: true
-  .field
-    = e.label :photo
-    = e.file_field :photo
-  .field
-    = e.label :date
-    = e.date_select :date
+  .form-group
+    = e.label :name, class: "col-sm-1 control-label"
+    .col-sm-2
+      = e.text_field :name, autofocus: true, class: 'form-control'
+  %br
+  %br
+  .form-group
+    = e.label :date, class: "col-sm-1 control-label"
+    .col-sm-2
+      = e.date_select :date, class: 'form-control'
+  %br
+  .form-group
+    = e.label :time, class: "col-sm-1 control-label"
+    .col-sm-2
+      = e.time_select :time, class: 'form-control'
     %br
-  .field
-    = e.label :time
-    = e.time_select :time
+  .form-group
+    = e.label :description, class: "col-sm-1 control-label"
+    .col-sm-2
+      = e.text_field :description, class: 'form-control'
     %br
-  .field
-    = e.label :description
-    = e.text_field :description
+  .form-group
+    = e.label :gender, class: 'col-sm-1 control-label'
+    .col-sm-2
+      = radio_button("user", "gender", "Male")
+      = label_tag :gender, "Male"
+      = radio_button("user", "gender", "Female")
+      = label_tag :gender, "Female"
+      = radio_button("user", "gender", "NA")
+      = label_tag :gender, "Not sure"
     %br
-  .field
-    %p
-      Gender:
-      \#{e.select :gender, (['Male', 'Female', 'IDK'].map {|i| [i,i] } )}
-  .field
-    %p
-      Number:
-      \#{e.select :number, ((1..100).map {|i| [i,i] } << ["N/A", 0])}
-  .field
-    %p
-      Age:
-      \#{e.select :agemin, ((0..99).map {|i| [i,i] } << ["N/A", nil])}
-      \-
-      \#{e.select :agemax, ((0..99).map {|i| [i,i] } << ["N/A", nil])}
-  .field
-    %p
-      Type:
-      \#{e.select :etype, (['Party', 'Sport', 'Music', 'Fasion'].map {|i| [i,i] } << ["N/A", "NA"])}
-  = e.submit "Save"
+  .form-group
+    = e.label :number, class: 'col-sm-1 control-label'
+    .col-sm-2
+      = e.number_field :number, class: 'form-control'
+    %br
+  .form-group
+    = e.label :age, class: 'col-sm-1 control-label'
+    .col-sm-1
+      = e.number_field :agemin, class: 'form-control'
+    .col-sm-1
+      = e.number_field :agemax, class: 'form-control'
+    %br
+  .form-group
+    = e.label :etype, class: 'col-sm-1 control-label'
+    .col-sm-3
+      = radio_button("event", "etype", "Party")
+      = label_tag :etype, "Party"
+      = radio_button("event", "etype", "Sport")
+      = label_tag :etype, "Sport"
+      = radio_button("event", "etype", "Music")
+      = label_tag :etype, "Music"
+      = radio_button("event", "etype", "Fashion")
+      = label_tag :etype, "Fashion"
+      = radio_button("event", "etype", "NA")
+      = label_tag :etype, "Not sure"
+    %br
+  .form-group
+    = e.label :photo, class: "col-sm-1"
+    .col-sm-2
+      = e.file_field :photo
+    %br
+  = e.submit "Save", class: "btn btn-primary"

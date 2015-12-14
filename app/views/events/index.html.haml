@@ -14,8 +14,8 @@
         %td= e.etype
         %td= e.description
         - if current_user.events.include?(e) then
-          %td= link_to "unfollow", unfollow_event_path(e)
+          %td= link_to "unfollow", unfollow_event_path(e), class: "btn btn-primary"
         - else
-          %td= link_to "join", join_event_path(e)
+          %td= link_to "join", join_event_path(e), class: "btn btn-primary"
   %tr{:align => "center"}
-    %td{:colspan => "4"}= link_to "Add new event", new_event_path
+    %td{:colspan => "4"}= link_to "Add new event", new_event_path, class: "btn btn-primary"

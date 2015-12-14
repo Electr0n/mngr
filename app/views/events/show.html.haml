@@ -1,10 +1,10 @@
 %h1= @event.name
 %br
-  = if current_user.events.include?(@event) then    |
-    link_to "unfollow", unfollow_event_path(@event) |
-    else                                            |
-    link_to "join", join_event_path(@event)         |
-    end                                             |
+  = if current_user.events.include?(@event) then                              |
+    link_to "unfollow", unfollow_event_path(@event), class: "btn btn-primary" |
+    else                                                                      |
+    link_to "join", join_event_path(@event), class: "btn btn-primary"         |
+    end                                                                       |
   %br
     %br
       = image_tag(@event.photo.url(:thumb))
@@ -34,5 +34,5 @@
               = @event.agemin
               \- #{@event.agemax}
           %tr
-            %td= link_to "Edit", edit_event_path
-            %td= link_to "Delete", @event, method: :delete
+            %td= link_to "Edit", edit_event_path, class: "btn btn-primary"
+            %td= link_to "Delete", @event, method: :delete, class: "btn btn-primary"
