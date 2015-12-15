@@ -25,4 +25,12 @@ class User < ActiveRecord::Base
   		end
 	end
 
+	def country_
+  		Carmen::Country.coded(country).name
+  	end
+
+  	def city_
+  		Carmen::Country.coded(country).subregions.coded(city).name
+ 	end
+
 end

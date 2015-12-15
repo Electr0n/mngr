@@ -1,0 +1,38 @@
+%h1= @event.name
+%br
+  = if current_user.events.include?(@event) then                              |
+    link_to "unfollow", unfollow_event_path(@event), class: "btn btn-primary" |
+    else                                                                      |
+    link_to "join", join_event_path(@event), class: "btn btn-primary"         |
+    end                                                                       |
+  %br
+    %br
+      = image_tag(@event.photo.url(:thumb))
+      %br
+        %table
+          %tr
+            %td Date:
+            %td= @event.date
+          %tr
+            %td Time:
+            %td= @event.time
+          %tr
+            %td Type:
+            %td= @event.etype
+          %tr
+            %td Description:
+            %td= @event.description
+          %tr
+            %td Gender:
+            %td= @event.gender
+          %tr
+            %td Number:
+            %td= @event.number
+          %tr
+            %td Age:
+            %td
+              = @event.agemin
+              \- #{@event.agemax}
+          %tr
+            %td= link_to "Edit", edit_event_path, class: "btn btn-primary"
+            %td= link_to "Delete", @event, method: :delete, class: "btn btn-primary"

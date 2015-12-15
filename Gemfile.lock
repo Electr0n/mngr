@@ -42,6 +42,11 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.0)
+    carmen (1.0.1)
+      unicode_utils (~> 1.4.0)
+    carmen-rails (1.0.1)
+      carmen (~> 1.0.0)
+      rails
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -73,6 +78,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    haml (4.0.7)
+      tilt
     hashie (3.4.3)
     i18n (0.7.0)
     jbuilder (2.3.2)
@@ -210,6 +217,7 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicode_utils (1.4.0)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -223,9 +231,11 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  carmen-rails
   coffee-rails (~> 4.1.0)
   devise
   factory_girl_rails
+  haml (~> 4.0, >= 4.0.7)
   jbuilder (~> 2.0)
   jquery-rails
   mysql2 (~> 0.3.20)

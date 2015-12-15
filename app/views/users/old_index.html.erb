@@ -9,7 +9,7 @@
 	<% @users.each do |u| %>
 		<tr align="center">
 			<td><%= link_to u.name, user_path(u) %></td>
-			<td><%= u.surname %>
+			<td><%= u.surname %></td>
 			<td><%= u.email %></td>
 		</tr>
 	<% end %>

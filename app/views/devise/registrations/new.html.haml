@@ -1,0 +1,21 @@
+%h2 Sign up
+= form_for  @user do |f|
+  = devise_error_messages!
+  .form-group
+    = f.label :email, class: 'col-sm-1 control-label'
+    = f.email_field :email, class: 'col-sm-2'
+    %br
+  .form-group
+    = f.label :password, class: 'col-sm-1 control-label'
+    - if @validatable
+      %em
+        (#{@minimum_password_length} characters minimum)
+    = f.password_field :password, autocomplete: "off", class: 'col-sm-2'
+    %br
+  .form-group
+    = f.label :password_confirmation, class: 'col-sm-1 control-label'
+    = f.password_field :password_confirmation, autocomplete: "off", class: 'col-sm-2 control-label'
+    %br
+  .actions
+    = f.submit "Sign up"
+= render "devise/shared/links"

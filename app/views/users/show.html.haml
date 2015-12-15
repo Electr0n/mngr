@@ -1,0 +1,66 @@
+%br
+  = image_tag(@user.avatar.url(:thumb), class: 'img-circle')
+.col-sm-1
+  Name:
+.col-sm-3
+  = @user.name
+%br
+.col-sm-1
+  Surname:
+.col-sm-3
+  = @user.surname
+%br
+.col-sm-1
+  Email:
+.col-sm-3
+  = @user.email
+%br
+.col-sm-1
+  Birthday:
+.col-sm-3
+  = @user.bday
+%br
+.col-sm-1
+  Gender:
+.col-sm-3
+  = @user.gender
+%br
+.col-sm-1
+  Country:
+.col-sm-3
+  = @user.country_
+%br
+.col-sm-1
+  City:
+.col-sm-3
+  = @user.city_
+%br
+.col-sm-1
+  Phone:
+.col-sm-3
+  = @user.phone
+%br
+.col-sm-1
+  Hobby:
+.col-sm-3
+  = @user.hobby
+%br
+.col-sm-1
+  About:
+.col-sm-3
+  = @user.about
+%br
+%h2 Your events
+%table
+  %tr{:align => "center"}
+    %td Name:
+    %td Gender:
+    %td Type:
+    %td Description:
+  - @user.events.each do |e|
+    %tr{:align => "center"}
+      %td= link_to e.name, event_path(e)
+      %td= e.gender
+      %td= e.etype
+      %td= e.description
+      %td= link_to "unfollow", unfollow_event_path(e)

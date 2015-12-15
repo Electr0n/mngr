@@ -8,10 +8,12 @@ class UsersController < ApplicationController
 	end
 
 	def new
+		#registrtions controller
 		@user = User.new
 	end
 
 	def create
+		#registrtions controller
 		@user = User.new(user_params)
 		if @user.save
 	      sign_in @user
@@ -46,6 +48,10 @@ class UsersController < ApplicationController
 		render "index"
 	end
 
+	def subregion_options
+    	render partial: 'subregion_select'
+ 	end
+
 	protected
 
 	def find_user
@@ -57,7 +63,8 @@ class UsersController < ApplicationController
 	end
 
 	def user_params
-    	params.require(:user).permit(:avatar, :name, :surname, :email, :password, :password_confirmation)
+    	params.require(:user).permit(:name, :surname, :email, :bday, :gender, :phone, :hobby, :about,
+    	 :password, :password_confirmation, :avatar, :country, :city)
   	end
 
 end

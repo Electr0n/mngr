@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   	omniauth_callbacks: "omniauth_callbacks", 
   	registration: "users"}
 
-  resources :users
+  resources :users do
+    get :subregion_options
+  end
   resources :events do
-  	get :join, 		on: :member
+  	get :join, 		  on: :member
   	get :unfollow, 	on: :member
   end
-  
+ 
 end
