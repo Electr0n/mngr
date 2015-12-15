@@ -1,0 +1,9 @@
+#user_city_wrapper
+  - parent_region ||= params[:parent_region]
+  - country = Carmen::Country.coded(parent_region)
+  - if country.nil?
+    %em Please select a country above
+  - elsif country.subregions?
+    = subregion_select(:user, :city, parent_region)
+  - else
+    = text_field(:user, :city)

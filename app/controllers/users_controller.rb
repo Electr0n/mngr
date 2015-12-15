@@ -48,6 +48,10 @@ class UsersController < ApplicationController
 		render "index"
 	end
 
+	def subregion_options
+    	render partial: 'subregion_select'
+ 	end
+
 	protected
 
 	def find_user
@@ -60,7 +64,7 @@ class UsersController < ApplicationController
 
 	def user_params
     	params.require(:user).permit(:name, :surname, :email, :bday, :gender, :phone, :hobby, :about,
-    	 :password, :password_confirmation, :avatar)
+    	 :password, :password_confirmation, :avatar, :country, :city)
   	end
 
 end

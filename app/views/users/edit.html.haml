@@ -2,27 +2,27 @@
 = form_for @user do |f|
   .form-group
     = f.label :name, class: 'col-sm-1 control-label'
-    .col-sm-2
+    .col-sm-3
       = f.text_field :name, autofocus: true, class: 'form-control'
     %br
   .form-group
     = f.label :surname, class: 'col-sm-1 control-label'
-    .col-sm-2
+    .col-sm-3
       = f.text_field :surname, class: 'form-control'
     %br
   .form-group
     = f.label :email, class: 'col-sm-1 control-label'
-    .col-sm-2
+    .col-sm-3
       = f.email_field :email, class: 'form-control'
     %br
   .form-group
     = f.label :birthday, class: 'col-sm-1 control-label'
-    .col-sm-2.date-select
+    .col-sm-3.date-select
       = f.date_select(:bday, start_year: 1940, end_year: Time.now.year)
     %br
   .form-group
     = f.label :gender, class: 'col-sm-1 control-label'
-    .col-sm-2
+    .col-sm-3
       = radio_button("user", "gender", "Male")
       = label_tag :gender, "Male"
       = radio_button("user", "gender", "Female")
@@ -31,36 +31,45 @@
       = label_tag :gender, "Not sure"
     %br
   .form-group
+    = f.label :country, class: 'col-sm-1 control-label'
+    .col-sm-3
+      = f.country_select :country, priority: %w(BY RU UA), prompt: 'Please select a country'
+    %br
+  .form-group
+    = f.label :city
+    .col-sm-3
+      = render partial: 'subregion_select', locals: {parent_region: f.object.country}
+  .form-group
     = f.label :phone, class: 'col-sm-1 control-label'
-    .col-sm-2
+    .col-sm-3
       = telephone_field("user", "phone", class: 'form-control')
     %br
   .form-group
     = f.label :hobby, class: 'col-sm-1 control-label'
-    .col-sm-2
+    .col-sm-3
       = f.text_area :hobby, class: 'form-control'
     %br
     %br
     %br
   .form-group
     = f.label :about, class: 'col-sm-1 control-label'
-    .col-sm-2
+    .col-sm-3
       = f.text_area :about, class: 'form-control'
     %br
     %br
     %br
   .form-group
     = f.label :password, class: 'col-sm-1 control-label'
-    .col-sm-2
+    .col-sm-3
       = f.password_field :password, autocomplete: "off", class: 'form-control'
     %br
   .form-group
     = f.label :avatar, class: 'col-sm-1 control-label'
-    .col-sm-2
+    .col-sm-3
       = f.file_field :avatar
     %br
   .form-group
-    .col-sm-2
+    .col-sm-3
       = f.submit "Update", class: "btn btn-primary"
 = button_to "Cancel my account", registration_path(@user), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-primary"
-= link_to "Back", :back, class: "btn btn-primary"
+= link_to "Back", :back
