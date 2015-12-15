@@ -36,9 +36,10 @@
       = f.country_select :country, priority: %w(BY RU UA), prompt: 'Please select a country'
     %br
   .form-group
-    = f.label :city
+    = f.label :city, class: 'col-sm-1 control-label'
     .col-sm-3
       = render partial: 'subregion_select', locals: {parent_region: f.object.country}
+    %br
   .form-group
     = f.label :phone, class: 'col-sm-1 control-label'
     .col-sm-3
