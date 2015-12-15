@@ -36,3 +36,4 @@
           %tr
             %td= link_to "Edit", edit_event_path, class: "btn btn-primary"
             %td= link_to "Delete", @event, method: :delete, class: "btn btn-primary"
+= commontator_thread(@event)
