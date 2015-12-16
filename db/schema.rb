@@ -11,7 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201085137) do
+ActiveRecord::Schema.define(version: 20151216131715) do
+
+  create_table "commontator_comments", force: :cascade do |t|
+    t.string   "creator_type",      limit: 255
+    t.integer  "creator_id",        limit: 4
+    t.string   "editor_type",       limit: 255
+    t.integer  "editor_id",         limit: 4
+    t.integer  "thread_id",         limit: 4,                 null: false
+    t.text     "body",              limit: 65535,             null: false
+    t.datetime "deleted_at"
+    t.integer  "cached_votes_up",   limit: 4,     default: 0
+    t.integer  "cached_votes_down", limit: 4,     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commontator_comments", ["cached_votes_down"], name: "index_commontator_comments_on_cached_votes_down", using: :btree
+  add_index "commontator_comments", ["cached_votes_up"], name: "index_commontator_comments_on_cached_votes_up", using: :btree
+  add_index "commontator_comments", ["creator_id", "creator_type", "thread_id"], name: "index_commontator_comments_on_c_id_and_c_type_and_t_id", using: :btree
+  add_index "commontator_comments", ["thread_id", "created_at"], name: "index_commontator_comments_on_thread_id_and_created_at", using: :btree
+
+  create_table "commontator_subscriptions", force: :cascade do |t|
+    t.string   "subscriber_type", limit: 255, null: false
+    t.integer  "subscriber_id",   limit: 4,   null: false
+    t.integer  "thread_id",       limit: 4,   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commontator_subscriptions", ["subscriber_id", "subscriber_type", "thread_id"], name: "index_commontator_subscriptions_on_s_id_and_s_type_and_t_id", unique: true, using: :btree
+  add_index "commontator_subscriptions", ["thread_id"], name: "index_commontator_subscriptions_on_thread_id", using: :btree
+
+  create_table "commontator_threads", force: :cascade do |t|
+    t.string   "commontable_type", limit: 255
+    t.integer  "commontable_id",   limit: 4
+    t.datetime "closed_at"
+    t.string   "closer_type",      limit: 255
+    t.integer  "closer_id",        limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commontator_threads", ["commontable_id", "commontable_type"], name: "index_commontator_threads_on_c_id_and_c_type", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "name",               limit: 255
@@ -87,5 +129,20 @@ ActiveRecord::Schema.define(version: 20151201085137) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role"], name: "index_users_on_role", using: :btree
   add_index "users", ["surname"], name: "index_users_on_surname", using: :btree
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "votable_id",   limit: 4
+    t.string   "votable_type", limit: 255
+    t.integer  "voter_id",     limit: 4
+    t.string   "voter_type",   limit: 255
+    t.boolean  "vote_flag"
+    t.string   "vote_scope",   limit: 255
+    t.integer  "vote_weight",  limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end

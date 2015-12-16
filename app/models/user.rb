@@ -6,10 +6,11 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook, :twitter, :vkontakte]
 
   has_and_belongs_to_many :events
-
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
+  acts_as_commontator
+  
   	def self.from_omniauth(auth)
   		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
 	    	user.email = auth.uid+"@"+auth.provider+".com"
@@ -18,8 +19,9 @@ class User < ActiveRecord::Base
 		    	user.name = auth.info.first_name
 		    	user.surname = auth.info.last_name
 		    else
-		    	user.name = 'N/A'
-		    	user.surname = 'N/A'
+		    	fullname      = auth.info.name.split(' ')
+          user.name     = fullname[1]
+          user.surname  = fullname[0]
 		    end
 		    #user.image = auth.info.image # assuming the user model has an image
   		end

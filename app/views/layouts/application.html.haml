@@ -13,6 +13,7 @@
           Logged in as
           = succeed "." do
             %strong= current_user.email
+          %br
           = link_to "Main", root_path, :class => 'navbar-link'
           |
           = link_to "Events", events_path, :class => 'navbar-link'
