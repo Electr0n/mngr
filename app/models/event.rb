@@ -6,6 +6,7 @@ class Event < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
   acts_as_commontable
+  acts_as_gmappable
 
   validates :name, length: {maximum: 100, minimum: 5}
   validates :agemin, :agemax, :number, numericality: { greater_than_or_equal_to: 0 }
