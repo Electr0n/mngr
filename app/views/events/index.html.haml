@@ -11,7 +11,7 @@
       %td= link_to e.name, event_path(e)
       %td
         = e.gender
-        %td= e.etype
+        %td
         %td= e.description
         - if current_user.events.include?(e) then
           %td= link_to "unfollow", unfollow_event_path(e), class: "btn btn-primary"

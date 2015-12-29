@@ -44,20 +44,6 @@
       = e.number_field :agemax, class: 'form-control'
     %br
   .form-group
-    = e.label :etype, class: 'col-sm-1 control-label'
-    .col-sm-3
-      = radio_button("event", "etype", "Party")
-      = label_tag :etype, "Party"
-      = radio_button("event", "etype", "Sport")
-      = label_tag :etype, "Sport"
-      = radio_button("event", "etype", "Music")
-      = label_tag :etype, "Music"
-      = radio_button("event", "etype", "Fashion")
-      = label_tag :etype, "Fashion"
-      = radio_button("event", "etype", "NA")
-      = label_tag :etype, "Not sure"
-    %br
-  .form-group
     = e.label :photo, class: "col-sm-1"
     .col-sm-2
       = e.file_field :photo

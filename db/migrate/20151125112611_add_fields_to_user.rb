@@ -1,6 +1,6 @@
 class AddFieldsToUser < ActiveRecord::Migration
   def self.up
-  	add_column		:users, :name, 		:string, 	null: false, default: "Vasya"
+  	add_column		:users, :name, 		:string
   	add_column		:users, :surname, 	:string
   	add_column		:users, :bday, 		:date
   	add_column		:users, :gender, 	:string

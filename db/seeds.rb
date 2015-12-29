@@ -11,15 +11,15 @@ u5 = User.create(email: 'boobs@xxx.com', name: 'Pomela', surname: 'Anderson', pa
 
 
 e1 = Event.create(name: 'birthday', date: '29 dec 2016', time: '17:00', description: "It will be fun!!!",
-		etype: "party", gender: "Female", number: '15', agemin: '18', agemax: '30')
+		gender: "Female", number: '15', agemin: '18', agemax: '30')
 e2 = Event.create(name: 'roller skating', date: '30 may 2016', time: '22:00', description: "Skating all nigth, take ur friends",
-		etype: "sport", gender: 'NA', number: '0', agemin: '16', agemax: '90')
+		gender: 'NA', number: '0', agemin: '16', agemax: '90')
 e3 = Event.create(name: 'concert', date: '30 sep 2017', time: '21:00', description: "Imagine Dragons",
-		etype: "music", gender: 'NA', number: '10000', agemin: '18', agemax: '0')
+		gender: 'NA', number: '10000', agemin: '18', agemax: '0')
 e4 = Event.create(name: 'speed dating', date: '20 mar 2016', time: '15:00', description: "Find your love",
-		etype: "NA", gender: "NA", number: '30', agemin: '18', agemax: '0')
+		gender: "NA", number: '30', agemin: '18', agemax: '0')
 e5 = Event.create(name: 'office party', date: '25 jul 2016', time: '20:00', description: "Beer, Vodka and Meet",
-		etype: "party", gender: "NA", number: '50', agemin: '18', agemax: '0')
+		gender: "NA", number: '50', agemin: '18', agemax: '0')
 
 u1.events << [e1, e3, e5]
 u2.events << [e2, e1, e5]
