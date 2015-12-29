@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218122344) do
+ActiveRecord::Schema.define(version: 20151216131715) do
 
   create_table "commontator_comments", force: :cascade do |t|
     t.string   "creator_type",      limit: 255
@@ -72,18 +72,13 @@ ActiveRecord::Schema.define(version: 20151218122344) do
     t.string   "photo_content_type", limit: 255
     t.integer  "photo_file_size",    limit: 4
     t.datetime "photo_updated_at"
-    t.float    "latitude",           limit: 24
-    t.float    "longitude",          limit: 24
-    t.boolean  "gmaps"
   end
 
   add_index "events", ["agemax"], name: "index_events_on_agemax", using: :btree
   add_index "events", ["agemin"], name: "index_events_on_agemin", using: :btree
   add_index "events", ["date"], name: "index_events_on_date", using: :btree
   add_index "events", ["gender"], name: "index_events_on_gender", using: :btree
-  add_index "events", ["latitude"], name: "index_events_on_latitude", using: :btree
   add_index "events", ["location"], name: "index_events_on_location", using: :btree
-  add_index "events", ["longitude"], name: "index_events_on_longitude", using: :btree
   add_index "events", ["name"], name: "index_events_on_name", using: :btree
   add_index "events", ["number"], name: "index_events_on_number", using: :btree
 
