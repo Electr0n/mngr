@@ -80,6 +80,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    geocoder (1.2.14)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -241,6 +242,7 @@ DEPENDENCIES
   commontator (~> 4.10.0)
   devise
   factory_girl_rails
+  geocoder
   haml (~> 4.0, >= 4.0.7)
   jbuilder (~> 2.0)
   jquery-rails
