@@ -36,4 +36,26 @@
           %tr
             %td= link_to "Edit", edit_event_path, class: "btn btn-primary"
             %td= link_to "Delete", @event, method: :delete, class: "btn btn-primary"
+/ Set height and width with CSS
+#googleMap{:style => "height:400px;width:40%;"}
+/ Add Google Maps
+
+:javascript
+  var map;
+  function initMap() {
+    var myCenter = {lat: #{@event.latitude}, lng: #{@event.longitude}};
+    map = new google.maps.Map(document.getElementById('googleMap'), {
+      center: myCenter,
+      zoom: 12
+    });
+
+    var marker = new google.maps.Marker({
+      position: myCenter,
+      map: map,
+      title: 'Hello World!'
+    });
+  }
+%script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3tpHZzNzF1JWKOruUBy3PrOksKDRvII&callback=initMap"}
+
+
 = commontator_thread(@event)

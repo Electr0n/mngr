@@ -16,6 +16,8 @@ gem 'haml', '~> 4.0', '>= 4.0.7'
 gem 'carmen-rails'
 gem 'commontator', '~> 4.10.0'
 gem 'acts_as_votable'
+gem 'geocoder'
+gem 'jquery-turbolinks'
 
 ###########
 
