@@ -18,6 +18,7 @@ gem 'commontator', '~> 4.10.0'
 gem 'acts_as_votable'
 gem 'geocoder'
 gem 'jquery-turbolinks'
+gem 'active_link_to'
 
 ###########
 

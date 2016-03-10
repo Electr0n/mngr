@@ -1,21 +1,23 @@
-%h1 All events
-%table
-  %tr{:align => "center"}
-    %td Name:
-    %td Gender:
-    %td Type:
-    %td Description:
-    %td
-  - @events.each do |e|
+.content
+  .sub_header
+    All events
+  %table.event_list 
     %tr{:align => "center"}
-      %td= link_to e.name, event_path(e)
-      %td
-        = e.gender
+      %th Name:
+      %th Gender:
+      %th Type:
+      %th Description:
+      %th
+    - @events.each do |e|
+      %tr{:align => "center"}
+        %td= link_to e.name, event_path(e)
         %td
-        %td= e.description
-        - if current_user.events.include?(e) then
-          %td= link_to "unfollow", unfollow_event_path(e), class: "btn btn-primary"
-        - else
-          %td= link_to "join", join_event_path(e), class: "btn btn-primary"
-  %tr{:align => "center"}
-    %td{:colspan => "4"}= link_to "Add new event", new_event_path, class: "btn btn-primary"
+          = e.gender
+          %td
+          %td= e.description
+          - if current_user.events.include?(e) then
+            %td= link_to "unfollow", unfollow_event_path(e), class: "btn btn-add"
+          - else
+            %td= link_to "join", join_event_path(e), class: "btn btn-add"
+    %tr{:align => "center"}
+      %td{:colspan => "4"}= link_to "Add new event", new_event_path, class: "btn btn-confirm"

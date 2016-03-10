@@ -5,3 +5,26 @@
   To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
   =require twitter-bootstrap-static/fontawesome
   */
+
+body { background-color: #F8F8FF; }
+
+/* Layout panel */
+.ControlPanel { width: 100%; margin-bottom: 1em; background-color: #5F9EA0; padding: 1em; color: #fff;
+ text-align: center; font-family: 'Candal', sans-serif; font-weight: bold; }
+.ControlPanel a { background-color: #98FB98; padding: 1em 4em 1em 4em; color: #008080; font-size: 15.5px; margin-left: -0.5em; 
+text-decoration: none; }
+.ControlPanel a:hover { padding: 2em 5em 2em 5em; color: black; }
+.ControlPanel a.active { background-color: #5F9EA0; padding: 1em 4em 1em 4em; color: #98FB98; }
+
+.sub_header { font-family: 'Candal', sans-serif; font-weight: bold; font-size: 35px; padding-bottom: 15px; margin-left: 100px;}
+.content { width: 65%; margin: 0 auto; text-align: left; }
+
+.col-sm-1 { font-family: 'Candal', sans-serif; font-weight: bold; text-align: left; }
+.btn.btn-confirm { margin: 10px 0px 10px 100px; font-size: 20px; font-family: 'Candal', sans-serif; font-weight: bold; text-decoration: none; user-select: none;
+ outline: none; padding: .2em 1.5em; background-color: #5F9EA0; border-radius: 0px; color: #98FB98;}
+.btn.btn-confirm:hover { background-color: #98FB98; color: black; }
+.btn.btn-add { font-size: 10px; font-family: 'Candal', sans-serif; font-weight: bold; text-decoration: none; user-select: none;
+ outline: none; background-color: #5F9EA0; border-radius: 0px; color: #98FB98; }
+
+table.event_list td { width: 5%; margin: 0; padding: 1px 0px 1px 0px; text-align: left; font-family: 'Candal', sans-serif; }
+table.event_list th { width: 5%; font-family: 'Candal', sans-serif; font-weight: bold; }
