@@ -1,61 +1,64 @@
-%h1= @event.name
-%br
-  = if current_user.events.include?(@event) then                              |
-    link_to "unfollow", unfollow_event_path(@event), class: "btn btn-primary" |
-    else                                                                      |
-    link_to "join", join_event_path(@event), class: "btn btn-primary"         |
-    end                                                                       |
+.content
+  .sub_header
+    = @event.name
   %br
+    = if current_user.events.include?(@event) then                              |
+      link_to "unfollow", unfollow_event_path(@event), class: "btn btn-add"     |
+      else                                                                      |
+      link_to "join", join_event_path(@event), class: "btn btn-add"             |
+      end                                                                       |
     %br
-      = image_tag(@event.photo.url(:thumb))
       %br
-        %table
-          %tr
-            %td Date:
-            %td= @event.date
-          %tr
-            %td Time:
-            %td= @event.time
-          %tr
-            %td Type:
-            %td
-          %tr
-            %td Description:
-            %td= @event.description
-          %tr
-            %td Gender:
-            %td= @event.gender
-          %tr
-            %td Number:
-            %td= @event.number
-          %tr
-            %td Age:
-            %td
-              = @event.agemin
-              \- #{@event.agemax}
-          %tr
-            %td= link_to "Edit", edit_event_path, class: "btn btn-primary"
-            %td= link_to "Delete", @event, method: :delete, class: "btn btn-primary"
-/ Set height and width with CSS
-#googleMap{:style => "height:400px;width:40%;"}
-/ Add Google Maps
+        %br
+          %table.event_list{:width => "50%", :display => "inline"}
+            %tr
+              %th Date:
+              %td= @event.date 
+            %tr
+              %th Time:
+              %td= @event.time
+            %tr
+              %th Type:
+              %td
+            %tr
+              %th Description:
+              %td= @event.description
+            %tr
+              %th Gender:
+              %td= @event.gender
+            %tr
+              %th Number:
+              %td= @event.number
+            %tr
+              %th Age:
+              %td
+                = @event.agemin
+                \- #{@event.agemax}
+          = image_tag(@event.photo.url(:thumb))
+          %br
+          %br
+          = link_to "Edit", edit_event_path, class: "btn btn-confirm"
+          = link_to "Delete", @event, method: :delete, class: "btn btn-confirm" 
+  / Set height and width with CSS
+  #googleMap{:style => "height:600px;width:100%;"}
+  / Add Google Maps
 
-:javascript
-  var map;
-  function initMap() {
-    var myCenter = {lat: #{@event.latitude}, lng: #{@event.longitude}};
-    map = new google.maps.Map(document.getElementById('googleMap'), {
-      center: myCenter,
-      zoom: 12
-    });
+  :javascript
+    var map;
+    function initMap() {
+      var myCenter = {lat: #{@event.latitude}, lng: #{@event.longitude}};
+      map = new google.maps.Map(document.getElementById('googleMap'), {
+        center: myCenter,
+        zoom: 12
+      });
 
-    var marker = new google.maps.Marker({
-      position: myCenter,
-      map: map,
-      title: 'Hello World!'
-    });
-  }
-%script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3tpHZzNzF1JWKOruUBy3PrOksKDRvII&callback=initMap"}
+      var marker = new google.maps.Marker({
+        position: myCenter,
+        map: map,
+        title: 'Hello World!'
+      });
+    }
+  %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3tpHZzNzF1JWKOruUBy3PrOksKDRvII&callback=initMap"}
 
 
-= commontator_thread(@event)
+  = commontator_thread(@event)

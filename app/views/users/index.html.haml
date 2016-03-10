@@ -1,13 +1,15 @@
-%h1 All users
-%table{:align => "left"}
-  %tr{:align => "center"}
-    %td Name:
-    %td Surname:
-    %td Email:
-  - @users.each do |u|
+.content 
+  .sub_header
+    All users
+  %table.event_list{:align => "left"}
     %tr{:align => "center"}
-      %td= link_to u.name, user_path(u)
-      %td= u.surname
-      %td= u.email
-%br
-  = t('congradulation')
+      %th Name:
+      %th Surname:
+      %th Email:
+    - @users.each do |u|
+      %tr{:align => "center"}
+        %td= link_to u.name, user_path(u)
+        %td= u.surname
+        %td= u.email
+  %br
+    = t('congradulation')

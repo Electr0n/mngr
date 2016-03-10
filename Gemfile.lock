@@ -20,6 +20,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_link_to (1.0.3)
+      actionpack
     activejob (4.2.4)
       activesupport (= 4.2.4)
       globalid (>= 0.3.0)
@@ -238,6 +240,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to
   acts_as_votable
   byebug
   carmen-rails
@@ -267,4 +270,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
