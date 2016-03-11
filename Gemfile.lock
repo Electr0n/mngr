@@ -43,6 +43,8 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap3-datetimepicker-rails (4.14.30)
+      momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     byebug (8.2.0)
     carmen (1.0.1)
@@ -109,6 +111,8 @@ GEM
     mimemagic (0.3.0)
     mini_portile (0.6.2)
     minitest (5.8.3)
+    momentjs-rails (2.11.0)
+      railties (>= 3.1)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -242,6 +246,7 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   acts_as_votable
+  bootstrap3-datetimepicker-rails (~> 4.14.30)
   byebug
   carmen-rails
   coffee-rails (~> 4.1.0)
@@ -253,6 +258,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  momentjs-rails (>= 2.9.0)
   mysql2 (~> 0.3.20)
   omniauth
   omniauth-facebook

@@ -39,7 +39,7 @@
 		.ControlPanel
 			= active_link_to "Main", root_path, :active => :exclusive
 			- if user_signed_in?
-				= active_link_to "Profile", edit_user_path(current_user), :active => :exclusive
+				= active_link_to "Profile", user_path(current_user), :active => :exclusive
 				= active_link_to "Events", events_path, :active => :exclusive
 			= active_link_to "Peoples", root_path, :active => :exclusive
 			= active_link_to "Media", root_path, :active => :exclusive
