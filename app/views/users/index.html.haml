@@ -1,3 +1,4 @@
+#cities{data: Carmen::Country.all.reduce({}) {|memo, e| memo.merge({ e.name.gsub(' ', '-') => e.subregions.map{|q| [q.code, q.name]} })}  }
 .content
   = form_tag users_path, :method => 'get' do
     %p
@@ -18,11 +19,8 @@
       %br
       = country_select_tag :country, params[:country], :priority => %w(BY RU UA), prompt: 'Please select a country'
       %br
-      //= render partial: 'subregion_select', locals: {parent_region: country}
-      //= select_tag :city, prompt: 'Please select a city'
-      //= binding.pry
-      
-      //= select_tag :city, options_from_collection_for_select(Carmen::Country.named( "Belarus" ).subregions, :code, :name, :type), prompt: 'Please select a city'
+
+      = select_tag :city, options_from_collection_for_select(Carmen::Country.named( "Belarus" ).subregions, :code, :name, :type), prompt: 'Please select a city'
       %br
       = submit_tag "Search", :name => nil, :surname => nil, :gender => nil, :country => nil
   .sub_header
