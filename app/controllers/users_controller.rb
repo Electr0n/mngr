@@ -4,7 +4,8 @@ class UsersController < ApplicationController
 	before_action :find_user, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@users = User.all 
+		@users = User.search(params[:name], params[:surname], params[:gender], params[:date].try(:[], :year),
+		params[:date].try(:[], :month), params[:country], params[:city])
 	end
 
 	def new

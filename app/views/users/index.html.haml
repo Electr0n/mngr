@@ -1,4 +1,30 @@
-.content 
+.content
+  = form_tag users_path, :method => 'get' do
+    %p
+      = text_field_tag :name, params[:name], placeholder: " Name"
+      %br
+      = text_field_tag :surname, params[:surname], placeholder: " Surname"
+      %br
+      = radio_button_tag("gender", "Male")
+      = label_tag :gender, "Male"
+      = radio_button_tag("gender", "Female")
+      = label_tag :gender, "Female"
+      = radio_button_tag("gender", "", 1)
+      = label_tag :gender, "No matter"
+      %br
+      = select_year(''.to_i, start_year: 1940, end_year: 2015, :prompt => "nevermind")
+      %br
+      = select_month(''.to_i,  :prompt => "nevermind")
+      %br
+      = country_select_tag :country, params[:country], :priority => %w(BY RU UA), prompt: 'Please select a country'
+      %br
+      //= render partial: 'subregion_select', locals: {parent_region: country}
+      //= select_tag :city, prompt: 'Please select a city'
+      //= binding.pry
+      
+      //= select_tag :city, options_from_collection_for_select(Carmen::Country.named( "Belarus" ).subregions, :code, :name, :type), prompt: 'Please select a city'
+      %br
+      = submit_tag "Search", :name => nil, :surname => nil, :gender => nil, :country => nil
   .sub_header
     All users
   %table.event_list{:align => "left"}
