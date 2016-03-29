@@ -15,14 +15,13 @@
       %br
       = select_year(''.to_i, start_year: 1940, end_year: 2015, :prompt => "nevermind")
       %br
-      = select_month(''.to_i,  :prompt => "nevermind")
+      = select_month(''.to_i, :prompt => "nevermind")
       %br
       = country_select_tag :country, params[:country], :priority => %w(BY RU UA), prompt: 'Please select a country'
       %br
-
-      = select_tag :city, options_from_collection_for_select(Carmen::Country.named( "Belarus" ).subregions, :code, :name, :type), prompt: 'Please select a city'
+      = select_tag :city, prompt: 'Please select a city'
       %br
-      = submit_tag "Search", :name => nil, :surname => nil, :gender => nil, :country => nil
+      = submit_tag "Search", :name => nil, :surname => nil, :gender => nil, :country => nil, :city => nil
   .sub_header
     All users
   %table.event_list{:align => "left"}
