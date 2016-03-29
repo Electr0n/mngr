@@ -11,28 +11,44 @@ class User < ActiveRecord::Base
 
   acts_as_commontator
   
-  	def self.from_omniauth(auth)
-  		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-	    	user.email = auth.uid+"@"+auth.provider+".com"
-	    	user.password = Devise.friendly_token[0,20]
-		    if auth.provider != 'twitter'
-		    	user.name = auth.info.first_name
-		    	user.surname = auth.info.last_name
-		    else
-		    	fullname      = auth.info.name.split(' ')
+    def self.from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.email = auth.uid+"@"+auth.provider+".com"
+        user.password = Devise.friendly_token[0,20]
+        if auth.provider != 'twitter'
+          user.name = auth.info.first_name
+          user.surname = auth.info.last_name
+        else
+          fullname      = auth.info.name.split(' ')
           user.name     = fullname[1]
           user.surname  = fullname[0]
-		    end
-		    #user.image = auth.info.image # assuming the user model has an image
-  		end
-	end
+        end
+        #user.image = auth.info.image # assuming the user model has an image
+      end
+    end
 
-	def country_
-  		Carmen::Country.coded(country).name
-  	end
+    def country_
+      Carmen::Country.coded(country).name
+    end
 
-  	def city_
-  		Carmen::Country.coded(country).subregions.coded(city).name
- 	end
+    def city_
+      Carmen::Country.coded(country).subregions.coded(city).name
+    end
+
+    def self.search(name, surname, gender, year, month, country, city)
+      if name || surname || gender || year
+        @user = User.where("name LIKE ? AND surname LIKE ? AND gender LIKE ? AND extract(year  from bday) LIKE ?
+          AND country LIKE ?", "%#{name}%", "%#{surname}%", "#{gender}%", "%#{year}%", "%#{country}%").all
+        if month != ""
+          @user = @user.where("extract(month  from bday) = ?", "#{month}").all
+        end
+        if country!= "" && city!= ""
+          @user = @user.where("city LIKE ?", "%#{city}%").all
+        end
+        return @user
+      else
+        User.all
+      end
+    end
 
 end

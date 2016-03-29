@@ -10,3 +10,14 @@ ready = ->
     select_wrapper.load(url)
 $(document).ready(ready)
 $(document).on('page:load', ready)
+
+$(document).ready ->
+  $('select#country').change ->
+    x = $(@).find(':selected').text().toLowerCase().replace(' ', '-')
+    options = _.map $('#cities').data(x), (city) ->
+      code = city[0]
+      name = city[1]
+      option = $('<option></option>').attr("value", code).text(name)
+    $('#city').empty()
+    _.each options, (el) ->
+      $('#city').append(el)
