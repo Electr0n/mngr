@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229121620) do
+ActiveRecord::Schema.define(version: 20160330113145) do
 
   create_table "commontator_comments", force: :cascade do |t|
     t.string   "creator_type",      limit: 255
@@ -84,6 +84,14 @@ ActiveRecord::Schema.define(version: 20151229121620) do
   add_index "events", ["name"], name: "index_events_on_name", using: :btree
   add_index "events", ["number"], name: "index_events_on_number", using: :btree
 
+  create_table "events_tags", id: false, force: :cascade do |t|
+    t.integer "event_id", limit: 4
+    t.integer "tag_id",   limit: 4
+  end
+
+  add_index "events_tags", ["event_id"], name: "index_events_tags_on_event_id", using: :btree
+  add_index "events_tags", ["tag_id"], name: "index_events_tags_on_tag_id", using: :btree
+
   create_table "events_users", id: false, force: :cascade do |t|
     t.integer "user_id",  limit: 4
     t.integer "event_id", limit: 4
@@ -91,6 +99,18 @@ ActiveRecord::Schema.define(version: 20151229121620) do
 
   add_index "events_users", ["event_id"], name: "index_events_users_on_event_id", using: :btree
   add_index "events_users", ["user_id"], name: "index_events_users_on_user_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name", limit: 255
+  end
+
+  create_table "tags_users", id: false, force: :cascade do |t|
+    t.integer "user_id", limit: 4
+    t.integer "tag_id",  limit: 4
+  end
+
+  add_index "tags_users", ["tag_id"], name: "index_tags_users_on_tag_id", using: :btree
+  add_index "tags_users", ["user_id"], name: "index_tags_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",     null: false

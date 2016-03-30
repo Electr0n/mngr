@@ -1,0 +1,7 @@
+.content
+	.sub_header
+		= @tag.name
+	%br
+	= link_to "List", tags_path, class: "btn btn-confirm"
+	= link_to "Edit", edit_tag_path, class: "btn btn-confirm"
+	= link_to "Delete", @tag, method: :delete, class: "btn btn-confirm" 

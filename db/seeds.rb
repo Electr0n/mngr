@@ -25,3 +25,25 @@ u1.events << [e1, e3, e5]
 u2.events << [e2, e1, e5]
 u3.events << [e1, e5, e4]
 u4.events << [e1, e2, e3, e4, e5]
+
+t1 = Tag.create(name: "Sport")
+t2 = Tag.create(name: "Music")
+t3 = Tag.create(name: "Art")
+t4 = Tag.create(name: "Health")
+t5 = Tag.create(name: "Party")
+t6 = Tag.create(name: "Food")
+t7 = Tag.create(name: "Date")
+t8 = Tag.create(name: "Exhibitions")
+t9 = Tag.create(name: "Competitions")
+t10 = Tag.create(name: "Other")
+
+u1.tags << [t1, t2, t5, t6, t8, t9]
+u2.tags << [t1, t2, t3, t4, t6, t10]
+u3.tags << [t3, t4, t7, t10]
+u4.tags << [t5, t7, t8, t9]
+
+e1.tags << [t2, t5, t6]
+e2.tags << [t1, t4, t10]
+e3.tags << [t2, t3]
+e4.tags << [t5, t7]
+e5.tags << [t2, t5, t6]

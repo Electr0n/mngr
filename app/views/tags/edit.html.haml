@@ -1,0 +1,11 @@
+.content
+	.sub_header
+		Edit tag
+	= form_for @tag do |t|
+		.form-group
+			= t.label :name, class: "col-sm-1 control-label"
+			.col-sm-5
+				= t.text_field :name, autofocus: true, class: 'form-control'
+		%br
+		%br
+		= t.submit "Save", class: "btn btn-confirm"
