@@ -51,6 +51,19 @@
   .col-sm-3
     = @user.about
   %br
+  .col-sm-1
+    Tags:
+  - if @user.tags.empty?
+    No tags
+  - else
+    .col-sm-3
+      - @user.tags.each do |t|
+        = t.name
+  .col-sm-1
+    = link_to "Edit tags", 'index', class: "btn btn-add"
+  %br
+  %br
+  %br
   = link_to "Edit profile", edit_user_path(current_user), class: "btn btn-confirm"
   .sub_header
     Your events

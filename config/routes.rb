@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   	get :join, 		  on: :member
   	get :unfollow, 	on: :member
   end
+  resources :tags do
+  end
 
   mount Commontator::Engine => '/commontator'
  

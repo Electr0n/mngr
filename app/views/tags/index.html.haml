@@ -1,0 +1,17 @@
+.content
+	.sub_header
+		TAGS
+	- if @tags.empty?
+		no tags
+	- else
+		%table
+			%tr
+				%th ID:
+				%th Name:
+			- @tags.each do |t|
+				%tr
+					%td= t.id
+					%td= link_to t.name, tag_path(t)
+	%br
+	%br
+	= link_to "Add tag", new_tag_path, class: "btn btn-confirm"
