@@ -27,17 +27,20 @@ class UsersController < ApplicationController
 
 	def update
 		# find_user action
+		binding.pry
 		@user.update_attributes(user_params)
+		@user.tags = Tag.where(id: tags_params[:tags].split(','))
 	    if @user.errors.empty?
 	    	sign_in(@user, :bypass => true)
 	    	redirect_to user_path(@user)
 	    else
-	    	render "edit"
+	    	redirect_to edit_user_path(@user)
 	    end
 	end
 
 	def edit
 		# find_user action
+		@tags = Tag.all
 	end
 
 	def show
@@ -66,6 +69,10 @@ class UsersController < ApplicationController
 	def user_params
     	params.require(:user).permit(:name, :surname, :email, :bday, :gender, :phone, :hobby, :about,
     	 :password, :password_confirmation, :avatar, :country, :city)
+  	end
+
+  	def tags_params
+  		params.require(:user).permit(:tags)
   	end
 
 end

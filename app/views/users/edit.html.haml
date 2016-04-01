@@ -47,6 +47,27 @@
       .col-sm-5
         = telephone_field("user", "phone", class: 'form-control')
       %br
+    :javascript
+      $(function() {
+        $( "#sortable1, #sortable2" ).sortable({
+          connectWith: ".connectedSortable"
+        }).disableSelection();
+      });
+    .form-group
+      = f.label :tags, class: 'col-sm-1 control-label'
+      .col-sm-5
+        - @a=[]
+        %ul#sortable1.connectedSortable
+          - @user.tags.each do |t|
+            - @a << t
+            %li.ui-state-default #{t.name}
+        - @a.split(" ")
+        = binding.pry
+        = f.hidden_field :tags, :value => @a.map(&:id).join(',')
+    %ul#sortable2.connectedSortable
+      - (@tags-@user.tags).each do |t|
+        %li.ui-state-highlight #{t.name}
+    %br
     .form-group
       = f.label :hobby, class: 'col-sm-1 control-label'
       .col-sm-5
