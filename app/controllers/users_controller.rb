@@ -27,9 +27,8 @@ class UsersController < ApplicationController
 
 	def update
 		# find_user action
-		binding.pry
 		@user.update_attributes(user_params)
-		@user.tags = Tag.where(id: tags_params[:tags].split(','))
+		@user.tags = Tag.where(name: tags_params[:tags].split(','))
 	    if @user.errors.empty?
 	    	sign_in(@user, :bypass => true)
 	    	redirect_to user_path(@user)

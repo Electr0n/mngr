@@ -52,26 +52,42 @@
         $( "#sortable1, #sortable2" ).sortable({
           connectWith: ".connectedSortable"
         }).disableSelection();
+        $(function() {
+          $('.edit_user').submit(function() {
+              tag_list = document.getElementById("sortable1");
+              var element = tag_list.children;
+              var tags = [];
+              for (var i = 0; i < element.length; i++) {
+                tags += element[i].innerHTML;
+                tags += ",";
+              }
+              document.getElementById("user_tags").value = tags;
+              return true;
+            });
+        });
       });
     .form-group
       = f.label :tags, class: 'col-sm-1 control-label'
-      .col-sm-5
-        - @a=[]
+      .col-sm-11
         %ul#sortable1.connectedSortable
           - @user.tags.each do |t|
-            - @a << t
             %li.ui-state-default #{t.name}
-        - @a.split(" ")
-        = binding.pry
-        = f.hidden_field :tags, :value => @a.map(&:id).join(',')
-    %ul#sortable2.connectedSortable
-      - (@tags-@user.tags).each do |t|
-        %li.ui-state-highlight #{t.name}
+        %ul#sortable2.connectedSortable
+          - (@tags-@user.tags).each do |t|
+            %li.ui-state-highlight #{t.name}
+        = f.hidden_field :tags
     %br
     .form-group
       = f.label :hobby, class: 'col-sm-1 control-label'
       .col-sm-5
         = f.text_area :hobby, class: 'form-control'
+      %br
+      %br
+      %br
+      %br
+      %br
+      %br
+      %br
       %br
       %br
       %br
