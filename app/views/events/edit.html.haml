@@ -78,12 +78,43 @@
             document.getElementById("event_longitude").value = lng;
 
           });
+
+        $(function() {
+          $( "#sortable1, #sortable2" ).sortable({
+            connectWith: ".connectedSortable"
+          }).disableSelection();
+          $(function() {
+            $('.edit_event').submit(function() {
+                tag_list = document.getElementById("sortable1");
+                var element = tag_list.children;
+                var tags = [];
+                for (var i = 0; i < element.length; i++) {
+                  tags += element[i].innerHTML;
+                  tags += ",";
+                }
+                document.getElementById("event_tags").value = tags;
+                return true;
+              });
+          });
+        });
+
         }
       %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3tpHZzNzF1JWKOruUBy3PrOksKDRvII&callback=initMap"} 
       .col-sm-1
         = e.hidden_field :latitude, class: 'form-control'
       .col-sm-1
         = e.hidden_field :longitude, class: 'form-control'
+    .form-group
+      = e.label :tags, class: 'col-sm-1 control-label'
+      .col-sm-11
+        %ul#sortable1.connectedSortable
+          - @event.tags.each do |t|
+            %li.ui-state-default #{t.name}
+        %ul#sortable2.connectedSortable
+          - (@tags-@event.tags).each do |t|
+            %li.ui-state-highlight #{t.name}
+        = e.hidden_field :tags
+    %br
     .form-group
       = e.label :photo, class: "col-sm-1"
       .col-sm-5

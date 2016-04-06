@@ -25,12 +25,14 @@ class EventsController < ApplicationController
   end
 
   def edit
-    #action find_event    
+    #action find_event
+    @tags = Tag.all    
   end
 
   def update
     #action find_event  
     @event.update_attributes(event_params)
+    @event.tags = Tag.where(name: tags_params[:tags].split(','))
     if @event.errors.empty?
       redirect_to event_path(@event)
     else
@@ -47,6 +49,10 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :date, :time, :description, :gender, :number,
       :agemin, :agemax, :location, :photo, :latitude, :longitude)
+  end
+
+  def tags_params
+    params.require(:event).permit(:tags)
   end
 
   def find_event
