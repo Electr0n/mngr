@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:edit, :show, :update, :destroy, :join, :unfollow]
 
   def index
-    @events = Event.all
+    @events = Event.all.page(params[:page]).per(10)
   end
 
   def new

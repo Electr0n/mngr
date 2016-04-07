@@ -20,6 +20,7 @@ gem 'geocoder'
 gem 'jquery-turbolinks'
 gem 'active_link_to'
 gem 'pry'
+gem 'kaminari'
 
 ###########
 
