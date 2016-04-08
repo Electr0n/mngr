@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.search(params[:name], params[:surname], params[:gender], params[:date].try(:[], :year),
-		params[:date].try(:[], :month), params[:country], params[:city])
+		params[:date].try(:[], :month), params[:country], params[:city]).page(params[:page]).per(10)
 	end
 
 	def new
@@ -44,6 +44,7 @@ class UsersController < ApplicationController
 
 	def show
 		# find_user action
+		@events = @user.events.all.page(params[:page]).per(10)
 	end
 
 	def destroy

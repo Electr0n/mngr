@@ -71,10 +71,13 @@
       %th Gender:
       %th Type:
       %th Description:
-    - @user.events.each do |e|
+    - @events.each do |e|
       %tr{:align => "center"}
         %td= link_to e.name, event_path(e)
         %td= e.gender
-        %td= e.etype
+        %td
+          - e.tags.each do |t|
+            =t.name
         %td= e.description
         %td= link_to "unfollow", unfollow_event_path(e)
+  = paginate @events
