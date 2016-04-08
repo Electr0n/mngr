@@ -1,5 +1,5 @@
 ready = ->
-  $('select#user_country').change ->
+  $('select#user_country').change (event) ->
     select_wrapper = $('#user_city_wrapper')
 
     $('select', select_wrapper).attr('disabled', true)
