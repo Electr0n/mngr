@@ -1,6 +1,6 @@
 == README
 
-                            Step by step
+                            Step by step!
 https://gorails.com/setup/ubuntu/14.10
 
 	 sudo apt-get install imagemagick
