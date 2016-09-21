@@ -6,7 +6,9 @@
   =require twitter-bootstrap-static/fontawesome
   */
 
-body { background-color: #F8F8FF; }
+body { 
+  background-color: #F8F8FF;
+}
 
 /* Layout panel */
 .ControlPanel { 

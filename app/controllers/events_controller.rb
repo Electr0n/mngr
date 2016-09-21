@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 
-  before_action :find_event, only: [:edit, :show, :update, :destroy, :join, :unfollow]
+  before_action :find_event, only: [:edit, :show, :update, :destroy, :join, 
+    :unfollow]
 
   def index
     @events = Event.all.page(params[:page]).per(10)
@@ -21,16 +22,16 @@ class EventsController < ApplicationController
   end
 
   def show
-    #action find_event
+    # action find_event
   end
 
   def edit
-    #action find_event
+    # action find_event
     @tags = Tag.all    
   end
 
   def update
-    #action find_event  
+    # action find_event  
     @event.update_attributes(event_params)
     @event.tags = Tag.where(name: tags_params[:tags].split(','))
     if @event.errors.empty?
@@ -39,16 +40,16 @@ class EventsController < ApplicationController
       render "edit"
     end
   end
-  
+
   def destroy
-    #action find_event  
+    # action find_event  
     @event.destroy
     redirect_to user_path(current_user)
   end
 
   def event_params
-    params.require(:event).permit(:name, :date, :time, :description, :gender, :number,
-      :agemin, :agemax, :location, :photo, :latitude, :longitude)
+    params.require(:event).permit(:name, :date, :time, :description, :gender, 
+      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude)
   end
 
   def tags_params
@@ -60,18 +61,17 @@ class EventsController < ApplicationController
   end
 
   def join
-    #action find_event
+    # action find_event
     if current_user.events.include?(@event)
       redirect_to current_user
     else
       current_user.events << @event
       redirect_to(:back)
     end 
-    
   end
 
   def unfollow
-    #action find_event
+    # action find_event
     if current_user.events.include?(@event)
       current_user.events.delete(@event)
       redirect_to(:back)
