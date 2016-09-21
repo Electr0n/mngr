@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :events
   has_and_belongs_to_many :tags
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => 
+    "100x100#" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   acts_as_commontator
@@ -24,7 +25,7 @@ class User < ActiveRecord::Base
           user.name     = fullname[1]
           user.surname  = fullname[0]
         end
-        #user.image = auth.info.image # assuming the user model has an image
+        # user.image = auth.info.image # assuming the user model has an image
       end
     end
 
@@ -38,8 +39,9 @@ class User < ActiveRecord::Base
 
     def self.search(name, surname, gender, year, month, country, city)
       if name || surname || gender || year
-        @user = User.where("name LIKE ? AND surname LIKE ? AND gender LIKE ? AND extract(year  from bday) LIKE ?
-          AND country LIKE ?", "%#{name}%", "%#{surname}%", "#{gender}%", "%#{year}%", "%#{country}%").all
+        @user = User.where("name LIKE ? AND surname LIKE ? AND gender LIKE ? 
+          AND extract(year  from bday) LIKE ? AND country LIKE ?", "%#{name}%", 
+          "%#{surname}%", "#{gender}%", "%#{year}%", "%#{country}%").all
         if month != ""
           @user = @user.where("extract(month  from bday) = ?", "#{month}").all
         end
