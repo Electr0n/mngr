@@ -7,11 +7,16 @@
   */
 
 body { 
-  background-color: #F8F8FF;
+  background-color: #E0FFFF;
 }
 
-/* Layout panel */
-.ControlPanel { 
+/*Layout panel*/
+.main_header {
+  min-height: 60px;
+  background-color: #E0FFFF;
+  padding-top: 10px;
+}
+.control_panel { 
   width: 100%;
   margin-bottom: 1em;
   background-color: #5F9EA0;
@@ -21,23 +26,22 @@ body {
   font-family: 'Candal', sans-serif;
   font-weight: bold;
 }
-.ControlPanel a {
-  background-color: #98FB98;
+.control_panel a {
+  background-color: #5F9EA0;
   padding: 1em 4em 1em 4em;
-  color: #008080; font-size: 15.5px;
+  color: #7FFFD4; font-size: 15.5px;
   margin-left: -0.5em;
   text-decoration: none;
 }
-.ControlPanel a:hover {
+.control_panel a:hover {
   padding: 2em 5em 2em 5em;
   color: black;
 }
-.ControlPanel a.active {
-  background-color: #5F9EA0;
+.control_panel a.active {
+  background-color: #7FFFD4;
   padding: 1em 4em 1em 4em;
-  color: #98FB98;
+  color: #008080;
 }
-
 .sub_header {
   font-family: 'Candal', sans-serif;
   font-weight: bold;
@@ -45,12 +49,60 @@ body {
   padding-bottom: 15px;
   margin-left: 100px;
 }
-.content {
-  width: 65%;
-  margin: 0 auto;
-  text-align: left;
+.footer {
+  position: fixed;
+  bottom: 0px;
+  min-height: 20px;
+  width: 100%;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  background-color: #5F9EA0;
+  text-align: center;
+  font-family: 'Candal', sans-serif;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/*Body building*/
+.content {
+  width: 60%;
+  margin: 0 auto;
+  text-align: left;
+  background-color: #F8F8FF;
+  padding-bottom: 50px;
+}
+.left_side {
+  width: 16%;
+  position: absolute;
+  left: 20px;
+  min-height: 800px;
+}
+.right_side {
+  width: 16%;
+  position: absolute;
+  right: 20px;
+  min-height: 800px;
+}
+.preview_box1 {
+  height: 350px;
+  background-color: #5F9EA0;
+  margin-bottom: 40px;
+}
+.banner_box1 {
+  height: 300px;
+  background-color: #5F9EA0;
+  margin-bottom: 20px;
+}
+.banner_box2 {
+  height: 400px;
+  background-color: #5F9EA0;
+  margin-bottom: 20px;
+}
+.user_avatar {
+  position: absolute;
+  left: 50%;
+}
 .col-sm-1 {
   font-family: 'Candal', sans-serif;
   font-weight: bold;
@@ -84,7 +136,7 @@ body {
 }
 .btn.btn-del {
   font-size: 10px;
-  font-family: 'Candal', sans-serif;
+  
   font-weight: bold;
   text-decoration: none;
   user-select: none;
@@ -94,7 +146,7 @@ body {
 }
 
 table.event_list td {
-  width: 5%; margin: 0;
+  width: 20%; margin: 0;
   padding: 1px 0px 1px 0px;
   text-align: left;
   font-family: 'Candal', sans-serif;

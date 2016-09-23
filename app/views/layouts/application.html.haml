@@ -8,7 +8,7 @@
 		%script{:src => 'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'}
 		= csrf_meta_tags
 	%body
-		.row
+		.main_header
 			.col-md-10
 			.col-md-2
 				- if user_signed_in?
@@ -38,7 +38,7 @@
 			%p.alert.alert-success= notice
 		- if alert
 			%p.alert.alert-danger= alert
-		.ControlPanel
+		.control_panel
 			= active_link_to "Main", root_path, :active => :exclusive
 			- if user_signed_in?
 				= active_link_to "Profile", user_path(current_user), :active => :exclusive
@@ -46,4 +46,17 @@
 			= active_link_to "Peoples", root_path, :active => :exclusive
 			= active_link_to "Media", root_path, :active => :exclusive
 			= active_link_to "Help", root_path, :active => :exclusive
-		= yield
+		.left_side
+			.preview_box1
+				%p place for preview newest events
+			.banner_box1
+				%p place for BANNERS
+		.right_side
+			.banner_box1
+				%p place for BANNERS
+			.banner_box2
+				%p place for BANNERS
+		.content
+			= yield
+		.footer
+			%p footer
