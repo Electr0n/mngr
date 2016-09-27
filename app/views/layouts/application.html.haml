@@ -10,8 +10,8 @@
 	%body
 		.content_wrapper
 			.main_header
-				.col-md-10
-				.col-md-2
+				.logo
+				.account_links
 					- if user_signed_in?
 						Logged in as
 						= succeed "." do
@@ -47,16 +47,14 @@
 				= active_link_to "Peoples", root_path, :active => :exclusive
 				= active_link_to "Media", root_path, :active => :exclusive
 				= active_link_to "Help", root_path, :active => :exclusive
-			.left_side
-				.preview_box1
-					%p place for preview newest events
-				.banner_box1
-					%p place for BANNERS
-			.right_side
-				.banner_box1
-					%p place for BANNERS
-				.banner_box2
-					%p place for BANNERS
+			.banner.box1.left
+				%p place for preview newest events
+			.banner.box2.right
+				%p place for BANNERS
+			.banner.box3.left
+				%p place for BANNERS
+			.banner.box3.right
+				%p place for BANNERS
 			.content
 				= yield
 		.footer
