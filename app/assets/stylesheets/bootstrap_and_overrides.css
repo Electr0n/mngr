@@ -105,7 +105,7 @@ html, body {
   font-weight: bold;
   margin-left: auto;
   margin-right: auto;
-  clear:both;
+  clear: both;
 }
 /*Media*/
 @media (max-width: 1050px){
@@ -122,10 +122,23 @@ html, body {
 @media (max-width: 830px){
   .content {
     position: absolute;
-    top: 656px;
+    top: 550px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
   }
-  .box2 {
-    right: auto;
+  .box1 {
+    width: 300px;
+  }
+  .box3 {
+    /*align-self: flex-end;
+    bottom: 0;*/
+  }
+  .left {
+    left: 10%;
+  }
+  .right {
+    right: 10%;
   }
 }
 /*Inner content style*/
