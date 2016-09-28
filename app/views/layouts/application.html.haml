@@ -47,14 +47,16 @@
 				= active_link_to "Peoples", root_path, :active => :exclusive
 				= active_link_to "Media", root_path, :active => :exclusive
 				= active_link_to "Help", root_path, :active => :exclusive
-			.banner.box2.left
-				%p BANNER №1
-			.banner.box1.right
-				%p EVENT'S VINDGET
-			.banner.box3.left
-				%p BANNER №2
-			.banner.box3.right
-				%p BANNER №3
+			.left_side
+				.banner.box2
+					%p BANNER №1
+				.banner.box3
+					%p BANNER №2
+			.right_side
+				.banner.box1
+					%p EVENT'S VINDGET
+				.banner.box3
+					%p BANNER №3
 			.content
 				= yield
 		.footer

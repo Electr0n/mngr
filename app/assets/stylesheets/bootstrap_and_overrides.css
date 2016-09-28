@@ -75,24 +75,29 @@ html, body {
 .banner {
   width: 16%;
   min-width: 200px;
-  position: absolute;
+  position: relative;
   background-color: #5F9EA0;
 }
 .box1 {
   min-height: 400px;
+  margin-bottom: 20px;
 }
 .box2 {
   min-height: 400px;
+  margin-bottom: 20px;
 }
 .box3 {
   min-height: 300px; 
-  top: 565px; 
 }
-.left {
-  left: 1%;
+.left_side {
+  float: left;
+  left: 3%;
+  position: relative;
 }
-.right {
-  right: 1%;
+.right_side {
+  float: right;
+  right: 3%;
+  position: relative;
 }
 .footer {
   position: relative;
@@ -108,37 +113,30 @@ html, body {
   clear: both;
 }
 /*Media*/
-@media (max-width: 1050px){
-  .content {
-    width: 630px;
+@media (max-width: 1400px){
+  .left_side {
+    left: 1%;
   }
-  .left {
-    left: 0%;
-  }
-  .right {
-    right: 0%;
+  .right_side {
+    right: 1%;
   }
 }
-@media (max-width: 830px){
+@media (max-width: 1100px){
   .content {
-    position: absolute;
-    top: 550px;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
+    min-width: 630px;
+    margin: 0 200px 0 200px; 
   }
-  .box1 {
-    width: 300px;
+  .left_side {
+    left: 0%;
   }
-  .box3 {
-    /*align-self: flex-end;
-    bottom: 0;*/
+  .right_side {
+    right: 0%;
   }
-  .left {
-    left: 10%;
+  .content_wrapper {
+    min-width: 830px;
   }
-  .right {
-    right: 10%;
+  .footer {
+    min-width: 830px;
   }
 }
 /*Inner content style*/
