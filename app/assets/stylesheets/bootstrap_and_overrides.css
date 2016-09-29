@@ -58,7 +58,7 @@ html, body {
   padding: 1.1% 3.5% 1.1% 3.5%;
   color: #008080;
 }
-/*Content body*/
+/*BODY*/
 .content_wrapper {
   min-height: 100%;
   height: auto !important;
@@ -112,61 +112,119 @@ html, body {
   margin-right: auto;
   clear: both;
 }
-/*Media*/
-@media (max-width: 1400px){
-  .left_side {
-    left: 1%;
-  }
-  .right_side {
-    right: 1%;
-  }
+/*Contents' elements style*/
+.user_avatar {
+  min-width: 300px;
+  width: 30%;
+  height: 300px;
+  margin: 0% 1.5% 1.5% 0%;
+  float: left;
+  text-align: center;
+  margin: 10px 0px 0px 0px;
 }
-@media (max-width: 1100px){
-  .content {
-    min-width: 630px;
-    margin: 0 200px 0 200px; 
-  }
-  .left_side {
-    left: 0%;
-  }
-  .right_side {
-    right: 0%;
-  }
-  .content_wrapper {
-    min-width: 830px;
-  }
-  .footer {
-    min-width: 830px;
-  }
+.user_info {
+  min-width: 300px;
+  min-height: 300px;
+  width: 60%;
+  float: left;
+  left: 300px;
 }
-/*Inner content style*/
+.col-1 {
+  font-family: 'Candal', sans-serif;
+  font-weight: bold;
+  text-align: left;
+  min-width: 100px;
+  width: 30%;
+  float: left;
+  padding: 5px 0px 0px 0px;
+}
+.col-2 {
+  font-family: 'Candal', sans-serif;
+  text-align: left;
+  min-width: 200px;
+  width: 70%;
+  min-height: 25px;
+  float: left;
+  padding: 5px 0px 0px 15px;
+}
 .sub_header {
+  width: 100%;
+  text-align: center;
   font-family: 'Candal', sans-serif;
   font-weight: bold;
   font-size: 35px;
-  padding-bottom: 15px;
-  margin-left: 100px;
+  padding: 15px 0px 15px 0px;
 }
-.user_avatar {
-  position: absolute;
-  left: 50%;
+.divider {
+  width: 100%;
+  background-color: #E0FFFF;
+  height: 20px;
+}
+.event_el {
+  width: 85%;
+  max-height: 100px;
+  font-family: 'Candal', sans-serif;
+  font-size: 18px;
+  margin: 0px auto 5px auto;
+  border-width: 3px;
+  border-color: #5F9EA0;
+  border-style: outset;
+}
+.event_date {
+  display: inline-block;
+  width: 140px;
+  height: 100px;
+  text-align: center;
+  padding-top: 7px;
+  border-width: 3px;
+  border-color: #5F9EA0;
+  border-style: outset;
+}
+.event_name {
+  width: 300px;
+  height: 100px;
+  display: inline-block;
+  padding-top: 7px;
+  border-width: 3px;
+  border-color: #5F9EA0;
+  border-style: outset;
+}
+.event_desc {
+  width: 200px;
+  height: 100px;
+  display: inline-block;
+  border-width: 3px;
+  border-color: #5F9EA0;
+  border-style: outset;
+}
+.event_img {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
 }
 .col-sm-1 {
   font-family: 'Candal', sans-serif;
   font-weight: bold;
   text-align: left;
 }
+.user_edit {
+  position: static;
+  text-align: center;
+  width: 300px;
+  margin: 30px 0px 5px 0px;
+}
 .btn.btn-confirm {
-  margin: 10px 0px 10px 100px;
   font-size: 20px;
   font-family: 'Candal', sans-serif;
   font-weight: bold;
   text-decoration: none;
   user-select: none;
-  outline: none; padding: .2em 1.5em;
+  outline: none;
+  padding: 4px 30px 4px 30px;
   background-color: #5F9EA0;
   border-radius: 0px;
   color: #98FB98;
+  width: auto;
 }
 .btn.btn-confirm:hover {
   background-color: #98FB98;
@@ -204,7 +262,6 @@ table.event_list th {
   font-family: 'Candal', sans-serif;
   font-weight: bold;
 }
-
 #sortable1, #sortable2 {
     border: 2px solid #5F9EA0;
     width: 142px;
@@ -220,4 +277,56 @@ table.event_list th {
     font-size: 1.2em;
     width: 120px;
     border: 1px solid #5F9EA0;
+}
+
+/*MEDIA WIDTH <1400px*/
+@media (max-width: 1400px){
+  /*BODY*/
+  .left_side {
+    left: 1%;
+  }
+  .right_side {
+    right: 1%;
+  }
+}
+/*MEDIA WIDTH <1320*/
+@media (max-width: 1320px){
+  /*CONTENT*/
+  .user_info {
+    max-width: 400px;
+  }
+}
+/*MEDIA WIDTH <1200*/
+@media (max-width: 1200px){
+  /*CONTENT*/
+  .user_info {
+    max-width: 340px;
+  }
+  .col-1 {
+    min-width: 70px;
+  }
+}
+/*MEDIA WIDTH <1100px*/
+@media (max-width: 1100px){
+  /*BODY*/
+  .content {
+    min-width: 630px;
+    margin: 0 200px 0 200px; 
+  }
+  .left_side {
+    left: 0%;
+  }
+  .right_side {
+    right: 0%;
+  }
+  .content_wrapper {
+    min-width: 1030px;
+  }
+  .footer {
+    min-width: 1030px;
+  }
+  /*CONTENT*/
+  .user_info {
+    max-width: 300px;
+  }
 }

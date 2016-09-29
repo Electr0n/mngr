@@ -1,71 +1,84 @@
-%br
-.col-sm-1
-  Name:
-.col-sm-3
-  = @user.name
 .user_avatar
   = image_tag(@user.avatar.url(:medium))
-  / = image_tag(@user.avatar.url(:medium), class: 'img-circle')
-%br
-.col-sm-1
-  Surname:
-.col-sm-3
-  = @user.surname
-%br
-.col-sm-1
-  Email:
-.col-sm-3
-  = @user.email
-%br
-.col-sm-1
-  Birthday:
-.col-sm-3
-  = @user.bday
-%br
-.col-sm-1
-  Gender:
-.col-sm-3
-  = @user.gender
-%br
-.col-sm-1
-  Country:
-.col-sm-3
-  = @user.country_
-%br
-.col-sm-1
-  City:
-.col-sm-3
-  = @user.city_
-%br
-.col-sm-1
-  Phone:
-.col-sm-3
-  = @user.phone
-%br
-.col-sm-1
-  Hobby:
-.col-sm-3
-  = @user.hobby
-%br
-.col-sm-1
-  About:
-.col-sm-3
-  = @user.about
-%br
-.col-sm-1
-  Tags:
-- if @user.tags.empty?
-  No tags
-- else
-  .col-sm-3
-    - @user.tags.each do |t|
-      = t.name
-%br
-%br
-%br
-= link_to "Edit profile", edit_user_path(current_user), class: "btn btn-confirm"
+.user_info
+  .col-1
+    Name:
+  .col-2
+    = @user.name
+  .col-1
+    Surname:
+  .col-2
+    = @user.surname
+  .col-1
+    Email:
+  .col-2
+    = @user.email
+  .col-1
+    Birthday:
+  .col-2
+    = @user.bday
+  .col-1
+    Gender:
+  .col-2
+    = @user.gender
+  .col-1
+    Country:
+  .col-2
+    = @user.country_
+  .col-1
+    City:
+  .col-2
+    = @user.city_
+  .col-1
+    Phone:
+  .col-2
+    = @user.phone
+  .col-1
+    Hobby:
+  .col-2.text_area
+    = @user.hobby
+  .col-1
+    About:
+  .col-2.text_area
+    = @user.about
+  .col-1
+    Tags:
+  - if @user.tags.empty?
+    No tags
+  - else
+    .col-2
+      - @user.tags.each do |t|
+        = t.name
+.user_edit
+  = link_to "Edit profile", edit_user_path(current_user), class: "btn btn-confirm user_edit"
+.divider
 .sub_header
   Your events
+- @events.each do |e|
+  .event_el
+    .event_date
+      = e.date
+      = e.time.strftime("%H:%M")
+    .event_name
+      = e.name
+      - e.tags.each do |t|
+        = t.name
+    .event_desc
+      = e.description
+    .event_img
+      = image_tag(e.photo.url(:thumb))
+/ %table.event_el
+/   - @events.each do |e|
+/     %tr
+/       %td.col_date
+/         = e.date
+/         = e.time.strftime("%H:%M")
+/       %td.col_name
+/         = e.name
+/       %td.col_desc
+/         = e.description
+/       %td.col_img
+/         = image_tag(e.photo.url(:thumb))
 %table.event_list
   %tr{:align => "center"}
     %th Name:
@@ -75,6 +88,7 @@
   - @events.each do |e|
     %tr
       %td= link_to e.name, event_path(e)
+      = image_tag(e.photo.url(:medium))
       %td= e.gender
       %td
         - e.tags.each do |t|
