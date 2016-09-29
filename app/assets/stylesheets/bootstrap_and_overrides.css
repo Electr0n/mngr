@@ -162,7 +162,7 @@ html, body {
 }
 .event_el {
   width: 85%;
-  max-height: 100px;
+  max-height: 106px;
   font-family: 'Candal', sans-serif;
   font-size: 18px;
   margin: 0px auto 5px auto;
@@ -181,7 +181,7 @@ html, body {
   border-style: outset;
 }
 .event_name {
-  width: 300px;
+  width: 100px;
   height: 100px;
   display: inline-block;
   padding-top: 7px;
@@ -190,9 +190,10 @@ html, body {
   border-style: outset;
 }
 .event_desc {
-  width: 200px;
+  width: 100px;
   height: 100px;
   display: inline-block;
+  padding-top: 7px;
   border-width: 3px;
   border-color: #5F9EA0;
   border-style: outset;
@@ -201,6 +202,10 @@ html, body {
   display: inline-block;
   width: 100px;
   height: 100px;
+  padding-top: 7px;
+  border-width: 3px;
+  border-color: #5F9EA0;
+  border-style: outset;
 }
 .col-sm-1 {
   font-family: 'Candal', sans-serif;
