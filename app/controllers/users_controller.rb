@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     @users = User.search(params[:name], params[:surname], params[:gender], 
       params[:date].try(:[], :year), params[:date].try(:[], :month), 
-      params[:country], params[:city]).page(params[:page]).per(10)
+      params[:country], params[:city]).page(params[:page]).per(5)
   end
 
   def new
