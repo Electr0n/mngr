@@ -1,5 +1,7 @@
 .user_avatar
   = image_tag(@user.avatar.url(:medium))
+  .user_edit
+    = link_to "Edit profile", edit_user_path(current_user), class: "btn btn-confirm user_edit"
 .user_info
   .col-1
     Name:
@@ -49,59 +51,20 @@
     .col-2
       - @user.tags.each do |t|
         = t.name
-.user_edit
-  = link_to "Edit profile", edit_user_path(current_user), class: "btn btn-confirm user_edit"
 .divider
 .sub_header
   Your events
 - @events.each do |e|
   .event_el
+    .event_name
+      = link_to e.name, event_path(e)
     .event_date
       = e.date
       = e.time.strftime("%H:%M")
-    .event_name
-      2
     .event_desc
-      3
+      = e.description
     .event_img
-      4
-/ - @events.each do |e|
-/   .event_el
-/     .event_date
-/       = e.date
-/       = e.time.strftime("%H:%M")
-/     .event_name
-/       = e.name
-/     .event_desc
-/       = e.description
-/     .event_img
-/      = image_tag(e.photo.url(:thumb))
-/ %table.event_el
-/   - @events.each do |e|
-/     %tr
-/       %td.col_date
-/         = e.date
-/         = e.time.strftime("%H:%M")
-/       %td.col_name
-/         = e.name
-/       %td.col_desc
-/         = e.description
-/       %td.col_img
-/         = image_tag(e.photo.url(:thumb))
-%table.event_list
-  %tr{:align => "center"}
-    %th Name:
-    %th Gender:
-    %th Type:
-    %th Description:
-  - @events.each do |e|
-    %tr
-      %td= link_to e.name, event_path(e)
-      = image_tag(e.photo.url(:medium))
-      %td= e.gender
-      %td
-        - e.tags.each do |t|
-          =t.name
-      %td= e.description
-      %td= link_to "unfollow", unfollow_event_path(e)
-= paginate @events
+      = image_tag(e.photo.url(:thumb))
+.pagin_box
+  = paginate @events
+.divider_f
