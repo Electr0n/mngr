@@ -117,7 +117,6 @@ html, body {
   min-width: 300px;
   width: 30%;
   height: 400px;
-  margin: 0% 1.5% 1.5% 0%;
   float: left;
   text-align: center;
   margin: 10px 0px 0px 0px;
@@ -170,44 +169,52 @@ html, body {
   bottom: 0px;
   margin-bottom: -50px;
 }
+/*EVENT PREVIEW ELEMENT*/
+.event_header {
+  width: 85%;
+  font-family: 'Candal', sans-serif;
+  font-size: 24px;
+  margin: 0px auto 10px auto;
+}
 .event_el {
   width: 85%;
-  height: 103px;
-  max-height: 103px;
+  height: 123px;
+  max-height: 123px;
   font-family: 'Candal', sans-serif;
   font-size: 18px;
   margin: 0px auto 10px auto;
   border-width: 3px;
   border-color: #5F9EA0;
   border-style: outset;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;  
+  text-align: center;
+}
+.wrapper_1 {
+  order: 1;
+  width: 100%;
+  float: left;
+}
+.wrapper_2 {
+  display: flex;
 }
 .event_date {
   float: left;
-  min-width: 120px;
-  width: 15%;
-  height: 100px;
+  width: 120px;
+  height: 85px;
   text-align: center;
   padding-top: 7px;
   border-top: 0px;
   border-color: #5F9EA0;
   border-style: outset;
-}
-.event_name {
-  float: left;
-  min-width: 120px;
-  width: 15%;
-  height: 100px;
-  padding-top: 7px;
-  border-top: 0px;
-  border-color: #5F9EA0;
-  border-style: outset;
-  text-align: center;
 }
 .event_desc {
-  float: left;
   min-width: 200px;
-  max-width: 50%;
-  height: 100px;
+  width: auto;
+  height: 85px;
   font-size: 18px;
   padding-top: 7px;
   border-right: 0px;
@@ -218,14 +225,41 @@ html, body {
   text-overflow: ellipsis;
 }
 .event_img {
+  order: 2;
   float: right;
-  width: 100px;
-  height: 100px;
+  min-width: 120px;
+  width: 120px;
+  min-height: 120px;
+  height: 120px;
   margin-top: -3px;
   border-top: 0px;
   border-color: #5F9EA0;
   border-style: outset;
 }
+.event_adr {
+  order: 1;
+  float: left;
+  min-width: 300px;
+  max-width: 400px;
+  height: 35px;
+  max-height: 35px;
+  border-color: #5F9EA0;
+  border-style: outset;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+}
+.event_tags {
+  order: 2;
+  float: left;
+  width: 100%;
+  height: 35px;
+  max-height: 35px;
+  border-color: #5F9EA0;
+  border-style: outset;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+}
+/*END PREVIEW ELEMENT*/
 .pagin_box {
   text-align: center;
   font-size: 20px;
@@ -269,25 +303,12 @@ html, body {
 }
 .btn.btn-del {
   font-size: 10px;
-  
   font-weight: bold;
   text-decoration: none;
   user-select: none;
   outline: none; background-color: #98FB98;
   border-radius: 0px;
   color: #5F9EA0;
-}
-
-table.event_list td {
-  width: 20%; margin: 0;
-  padding: 1px 0px 1px 0px;
-  text-align: left;
-  font-family: 'Candal', sans-serif;
-}
-table.event_list th {
-  width: 5%;
-  font-family: 'Candal', sans-serif;
-  font-weight: bold;
 }
 #sortable1, #sortable2 {
     border: 2px solid #5F9EA0;
@@ -331,6 +352,9 @@ table.event_list th {
   .event_el {
     width: 90%
   }
+  .event_header {
+    width: 90%;
+  }
 }
 /*MEDIA WIDTH <1320*/
 @media (max-width: 1320px){
@@ -340,6 +364,9 @@ table.event_list th {
   }
   .event_el {
     width: 96%
+  }
+  .event_header {
+    width: 96%;
   }
 }
 /*MEDIA WIDTH <1200*/
@@ -354,8 +381,8 @@ table.event_list th {
   .event_el {
     width: 100%
   }
-  .event_desc {
-    max-width: 280px;
+  .event_header {
+    width: 100%;
   }
 }
 /*MEDIA WIDTH <1100px*/
@@ -382,6 +409,9 @@ table.event_list th {
     max-width: 300px;
   }
   .event_el {
-    width: 100%
+    width: 100%;
+  }
+  .event_header {
+    width: 100%;
   }
 }

@@ -55,14 +55,22 @@
 .sub_header
   Your events
 - @events.each do |e|
+  .event_header
+    = link_to e.name, event_path(e)
   .event_el
-    .event_name
-      = link_to e.name, event_path(e)
-    .event_date
-      = e.date
-      = e.time.strftime("%H:%M")
-    .event_desc
-      = e.description
+    .wrapper_1
+      .some_block
+        .event_date
+          = e.date
+          = e.time.strftime("%H:%M")
+        .event_desc
+          = e.description
+      .wrapper_2
+        .event_adr
+          location is here
+        .event_tags
+          - e.tags.each do |t|
+            = t.name
     .event_img
       = image_tag(e.photo.url(:thumb))
 .pagin_box
