@@ -9,6 +9,7 @@
 html, body { 
   background-color: #E0FFFF;
   height: 100%;
+  font-family: 'Candal', sans-serif;
 }
 
 /*Layout control panel*/
@@ -38,7 +39,6 @@ html, body {
   padding: 1.0%;
   color: #fff;
   text-align: center;
-  font-family: 'Candal', sans-serif;
   font-weight: bold;
 }
 .control_panel a {
@@ -106,7 +106,6 @@ html, body {
   width: 100%;
   background-color: #5F9EA0;
   text-align: center;
-  font-family: 'Candal', sans-serif;
   font-weight: bold;
   margin-left: auto;
   margin-right: auto;
@@ -115,6 +114,7 @@ html, body {
 /*Contents' elements style*/
 .user_avatar {
   min-width: 300px;
+  min-height: 300px;
   width: 30%;
   height: 400px;
   float: left;
@@ -130,58 +130,52 @@ html, body {
   padding: 10px 0px 30px 0px;
 }
 .col-1 {
-  font-family: 'Candal', sans-serif;
-  font-weight: bold;
-  text-align: left;
   min-width: 100px;
   width: 30%;
   float: left;
   padding: 5px 0px 0px 0px;
+  font-weight: bold;
+  text-align: left;
 }
 .col-2 {
-  font-family: 'Candal', sans-serif;
-  text-align: left;
   min-width: 200px;
   width: 70%;
   min-height: 25px;
   float: left;
   padding: 5px 0px 0px 15px;
+  text-align: left;
   word-wrap: break-word;
 }
 .sub_header {
   width: 100%;
+  padding: 15px 0px 15px 0px;
   text-align: center;
-  font-family: 'Candal', sans-serif;
   font-weight: bold;
   font-size: 35px;
-  padding: 15px 0px 15px 0px;
 }
 .divider {
   width: 100%;
-  background-color: #E0FFFF;
   height: 20px;
   display: flex;
+  background-color: #E0FFFF;
 }
 .divider_f {
   width: 100%;
-  background-color: #E0FFFF;
   height: 40px;
   bottom: 0px;
   margin-bottom: -50px;
+  background-color: #E0FFFF;
 }
 /*EVENT PREVIEW ELEMENT*/
 .event_header {
   width: 85%;
-  font-family: 'Candal', sans-serif;
-  font-size: 24px;
   margin: 0px auto 10px auto;
+  font-size: 24px;
 }
 .event_el {
   width: 85%;
-  height: 123px;
-  max-height: 123px;
-  font-family: 'Candal', sans-serif;
-  font-size: 18px;
+  height: 126px;
+  max-height: 126px;
   margin: 0px auto 10px auto;
   border-width: 3px;
   border-color: #5F9EA0;
@@ -190,71 +184,102 @@ html, body {
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex;  
+  display: flex;
+  font-size: 18px;
   text-align: center;
 }
 .wrapper_1 {
   order: 1;
+  display: flex;
   width: 100%;
   float: left;
 }
 .wrapper_2 {
+  order: 2;
   display: flex;
+  flex-direction: column;
+  width: 100%;
 }
-.event_date {
-  float: left;
-  width: 120px;
-  height: 85px;
-  text-align: center;
-  padding-top: 7px;
+.wrapper_3 {
+  order: 2;
+  display: flex;
+  flex-direction: row;
+}
+.event_img {
+  order: 2;
+  min-width: 123px;
+  min-height: 123px;
+  width: 123px;
+  height: 123px;
+  float: right;
   border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-color: #5F9EA0;
+  border-style: outset;
+}
+.auth_img {
+  order: 1;
+  min-width: 123px;
+  min-height: 123px;
+  width: 123px;
+  height: 123px;
+  float: left;
+  border-top: 0px;
+  border-left: 0px;
   border-color: #5F9EA0;
   border-style: outset;
 }
 .event_desc {
+  order: 1;
   min-width: 200px;
   width: auto;
   height: 85px;
-  font-size: 18px;
-  padding-top: 7px;
-  border-right: 0px;
+  border-left: 0px;
   border-top: 0px;
+  border-bottom: 0px;
   border-color: #5F9EA0;
   border-style: outset;
   overflow-y: hidden;
   text-overflow: ellipsis;
+  font-size: 18px;
 }
-.event_img {
-  order: 2;
-  float: right;
-  min-width: 120px;
-  width: 120px;
-  min-height: 120px;
-  height: 120px;
-  margin-top: -3px;
-  border-top: 0px;
+.event_date {
+  order: 1;
+  min-width: 180px;
+  width: 200px;
+  height: 35px;
+  max-height: 35px;
+  float: left;
   border-color: #5F9EA0;
+  border-bottom: 0px;
+  border-left: 0px;
   border-style: outset;
+  text-align: center;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
 }
 .event_adr {
-  order: 1;
-  float: left;
-  min-width: 300px;
-  max-width: 400px;
+  order: 2;
+  width: 100%;
   height: 35px;
   max-height: 35px;
   border-color: #5F9EA0;
+  border-bottom: 0px;
+  border-left: 0px;
   border-style: outset;
   overflow-y: hidden;
   text-overflow: ellipsis;
 }
 .event_tags {
-  order: 2;
-  float: left;
+  order: 3;
   width: 100%;
   height: 35px;
   max-height: 35px;
+  float: left;
   border-color: #5F9EA0;
+  border-bottom: 0px;
+  border-left: 0px;
   border-style: outset;
   overflow-y: hidden;
   text-overflow: ellipsis;
@@ -265,66 +290,62 @@ html, body {
   font-size: 20px;
 }
 .col-sm-1 {
-  font-family: 'Candal', sans-serif;
   font-weight: bold;
   text-align: left;
 }
 .user_edit {
   position: static;
-  text-align: center;
   margin: 20px 0px 5px 0px;
+  text-align: center;
 }
 .btn.btn-confirm {
-  font-size: 20px;
-  font-family: 'Candal', sans-serif;
-  font-weight: bold;
-  text-decoration: none;
-  user-select: none;
-  outline: none;
+  width: auto;
   padding: 4px 30px 4px 30px;
   background-color: #5F9EA0;
   border-radius: 0px;
   color: #98FB98;
-  width: auto;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  user-select: none;
+  outline: none;
 }
 .btn.btn-confirm:hover {
   background-color: #98FB98;
   color: black;
 }
 .btn.btn-add {
+  border-radius: 0px;
+  color: #98FB98;
   font-size: 10px;
-  font-family: 'Candal', sans-serif;
   font-weight: bold;
   text-decoration: none;
   user-select: none;
   outline: none; background-color: #5F9EA0;
-  border-radius: 0px;
-  color: #98FB98;
 }
 .btn.btn-del {
+  border-radius: 0px;
+  color: #5F9EA0;
   font-size: 10px;
   font-weight: bold;
   text-decoration: none;
   user-select: none;
   outline: none; background-color: #98FB98;
-  border-radius: 0px;
-  color: #5F9EA0;
 }
 #sortable1, #sortable2 {
-    border: 2px solid #5F9EA0;
-    width: 142px;
     min-height: 85px;
+    width: 142px;
+    border: 2px solid #5F9EA0;
     list-style-type: none;
-    margin: 0;
-    padding: 5px 0 0 0;
+    margin: 0px 10px 0px 0px;
+    padding: 5px 0px 0px 0px;
     float: left;
-    margin-right: 10px;
 }
 #sortable1 li, #sortable2 li {
-    margin: 0 5px 5px 5px;
-    font-size: 1.2em;
     width: 120px;
     border: 1px solid #5F9EA0;
+    margin: 0px 5px 5px 5px;
+    font-size: 1.2em;
 }
 /*MEDIA WIDTH > 1920px*/
 @media (min-width: 1920px){
