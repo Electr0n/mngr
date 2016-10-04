@@ -53,24 +53,26 @@
         = t.name
 .divider
 .sub_header
-  Your events
+  All events
 - @events.each do |e|
   .event_header
     = link_to e.name, event_path(e)
   .event_el
     .wrapper_1
-      .some_block
-        .event_date
-          = e.date
-          = e.time.strftime("%H:%M")
+      .auth_img
+        Photo here 120x120
+      .wrapper_2
         .event_desc
           = e.description
-      .wrapper_2
-        .event_adr
-          location is here
-        .event_tags
-          - e.tags.each do |t|
-            = t.name
+        .wrapper_3
+          .event_date
+            = e.date
+            = e.time.strftime("%H:%M")
+          .event_adr
+            location is here
+          .event_tags
+            - e.tags.each do |t|
+              = t.name
     .event_img
       = image_tag(e.photo.url(:thumb))
 .pagin_box
