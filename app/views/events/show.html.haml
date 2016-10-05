@@ -33,6 +33,7 @@
     %br
     %br
 = image_tag(@event.photo.url(:thumb))
+= image_tag(@event.owners.first.avatar.url(:thumb))
 %br
 %br
 = if current_user.events.include?(@event) then                              |

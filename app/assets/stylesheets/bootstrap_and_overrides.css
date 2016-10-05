@@ -66,6 +66,7 @@ html, body {
   padding-bottom: 40px
 }
 .content {
+  min-height: 715px;
   width: 60%;
   margin: 0 auto;
   text-align: left;
@@ -127,7 +128,7 @@ html, body {
   width: 60%;
   float: left;
   left: 300px;
-  padding: 10px 0px 30px 0px;
+  padding: 10px 0px 30px 15px;
 }
 .col-1 {
   min-width: 100px;
@@ -347,6 +348,12 @@ html, body {
     margin: 0px 5px 5px 5px;
     font-size: 1.2em;
 }
+/*FORMS*/
+.hello_form {
+  width: 350px;
+  margin: 0 auto;
+  padding-top: 60px;
+}
 /*MEDIA WIDTH > 1920px*/
 @media (min-width: 1920px){
   .content {
@@ -395,6 +402,7 @@ html, body {
   /*CONTENT*/
   .user_info {
     max-width: 340px;
+    padding-left: 5px;
   }
   .col-1 {
     min-width: 70px;
