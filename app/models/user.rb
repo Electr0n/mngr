@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :twitter, :vkontakte]
 
-  has_and_belongs_to_many :events
+  has_and_belongs_to_many :events, join_table: 'events_users', class_name: 'Event'
+  has_and_belongs_to_many :products, join_table: 'owners_products', class_name: 'Event'
   has_and_belongs_to_many :tags
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => 
-    "100x100#" }, :default_url => "/images/:style/missing.png"
+    "120x120#" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   acts_as_commontator

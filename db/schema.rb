@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407083229) do
+ActiveRecord::Schema.define(version: 20161005085847) do
 
   create_table "commontator_comments", force: :cascade do |t|
     t.string   "creator_type",      limit: 255
@@ -98,6 +98,14 @@ ActiveRecord::Schema.define(version: 20160407083229) do
 
   add_index "events_users", ["event_id"], name: "index_events_users_on_event_id", using: :btree
   add_index "events_users", ["user_id"], name: "index_events_users_on_user_id", using: :btree
+
+  create_table "owners_products", id: false, force: :cascade do |t|
+    t.integer "user_id",  limit: 4
+    t.integer "event_id", limit: 4
+  end
+
+  add_index "owners_products", ["event_id"], name: "index_owners_products_on_event_id", using: :btree
+  add_index "owners_products", ["user_id"], name: "index_owners_products_on_user_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string "name", limit: 255

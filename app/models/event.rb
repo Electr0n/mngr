@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
 
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, join_table: 'events_users', class_name: 'User'
+  has_and_belongs_to_many :owners, join_table: 'owners_products', class_name: 'User'
   has_and_belongs_to_many :tags
 
   has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => 

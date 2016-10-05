@@ -60,7 +60,7 @@
   .event_el
     .wrapper_1
       .auth_img
-        Photo here 120x120
+        = image_tag(e.owners.first.avatar.url(:thumb))
       .wrapper_2
         .event_desc
           = e.description
