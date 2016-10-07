@@ -15,10 +15,6 @@
       .col-sm-10
         = e.time_select :time, class: 'form-control'
     .form-group.line
-      = e.label :description, class: "col-sm-2 control-label margin_label"
-      .col-sm-10
-        = e.text_area :description, class: 'form-control'
-    .form-group.line
       = e.label :gender, class: 'col-sm-2 control-label margin_label'
       .col-sm-10
         = radio_button("event", "gender", "Male")
@@ -28,19 +24,23 @@
         = radio_button("event", "gender", "NA")
         = label_tag :gender, "Not sure"
     .form-group.line
-      = e.label :number, class: 'col-sm-2 control-label margin_label'
-      .col-sm-10
-        = e.number_field :number, class: 'form-control'
-    .form-group.line
       = e.label :age, class: 'col-sm-2 control-label margin_label'
       .col-sm-2
         = e.number_field :agemin, class: 'form-control'
       .col-sm-2
         = e.number_field :agemax, class: 'form-control'
     .form-group.line
+      = e.label :number, class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = e.number_field :number, class: 'form-control margin_area'
+    .form-group.line
+      = e.label :description, class: "col-sm-2 control-label margin_label"
+      .col-sm-10
+        = e.text_area :description, class: 'form-control margin_area'
+    .form-group.line
       = e.label :photo, class: "col-sm-1"
       .col-sm-10.margin_file
-        = e.file_field :photo
+        = e.file_field :photo, class: 'margin_area'
     .form-group.line
       = e.label :place, class: 'col-sm-2 control-label margin_label'
       / Set height and width with CSS
