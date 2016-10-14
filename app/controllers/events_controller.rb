@@ -2,6 +2,7 @@ class EventsController < ApplicationController
 
   before_action :find_event, only: [:edit, :show, :update, :destroy, :join, 
     :unfollow]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :unfollow]
 
   def index
     @events = Event.all.page(params[:page]).per(10)
@@ -14,7 +15,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      current_user.events << @event
+      current_user.products << @event
       redirect_to @event
     else
       render 'new'
@@ -27,24 +28,36 @@ class EventsController < ApplicationController
 
   def edit
     # action find_event
-    @tags = Tag.all    
+    if current_user.products.include? @event
+      @tags = Tag.all
+    else
+      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
+    end
   end
 
   def update
-    # action find_event  
-    @event.update_attributes(event_params)
-    @event.tags = Tag.where(name: tags_params[:tags].split(','))
-    if @event.errors.empty?
-      redirect_to event_path(@event)
+    # action find_event
+    if current_user.products.include? @event  
+      @event.update_attributes(event_params)
+      @event.tags = Tag.where(name: tags_params[:tags].split(','))
+      if @event.errors.empty?
+        redirect_to event_path(@event)
+      else
+        render "edit"
+      end
     else
-      render "edit"
+      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
     end
   end
 
   def destroy
-    # action find_event  
-    @event.destroy
-    redirect_to user_path(current_user)
+    # action find_event 
+    if current_user.products.include? @event 
+      @event.destroy
+      redirect_to user_path(current_user)
+    else
+      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
+    end
   end
 
   def event_params

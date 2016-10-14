@@ -1,1 +1,25 @@
 // include registrtion and session controllers
+.hello_form
+  %h2 Sign up
+  = form_for  @user do |f|
+    = devise_error_messages!
+    .form-group.line
+      = f.label :email, class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = f.email_field :email, placeholder: "Email", class: 'form-control'
+    .form-group.line
+      = f.label :password, class: 'col-sm-2 control-label margin_label'
+      - if @validatable
+        %em
+          (#{@minimum_password_length} characters minimum)
+      .col-sm-10
+        = f.password_field :password, placeholder: "Enter your password here", autocomplete: "off", class: 'form-control'
+    .form-group.line
+      = f.label :password_confirmation, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = f.password_field :password_confirmation, placeholder: "Repeat your password", autocomplete: "off", class: ' form-control'
+    .form-group.line
+      .col-sm-offset-2.col-sm-10
+        = f.submit "Sign up", class: 'btn btn-default'
+.hello_form.sign_with
+  = render "devise/shared/links"

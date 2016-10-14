@@ -26,11 +26,11 @@
   .col-1
     Country:
   .col-2
-    = @user.country_
+    = @user.country_ unless @user.country.nil?
   .col-1
     City:
   .col-2
-    = @user.city_
+    = @user.city_ unless @user.city.nil?
   .col-1
     Phone:
   .col-2
