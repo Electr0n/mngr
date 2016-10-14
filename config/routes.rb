@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { 
     users: "users", 
     omniauth_callbacks: "omniauth_callbacks", 
-    registration: "users"}
+    registrations: "users"
+    }
 
   resources :users do
     get :subregion_options
