@@ -19,12 +19,12 @@ class User < ActiveRecord::Base
         user.email = auth.uid+"@"+auth.provider+".com"
         user.password = Devise.friendly_token[0,20]
         if auth.provider != 'twitter'
-          user.name = auth.info.first_name
-          user.surname = auth.info.last_name
+          user.name = auth.extra.raw_info.first_name
+          user.surname = auth.extra.raw_info.last_name
         else
           fullname      = auth.info.name.split(' ')
-          user.name     = fullname[1]
-          user.surname  = fullname[0]
+          user.name     = fullname[0]
+          user.surname  = fullname[1]
         end
         # user.image = auth.info.image # assuming the user model has an image
       end
