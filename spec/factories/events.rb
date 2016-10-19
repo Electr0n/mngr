@@ -13,4 +13,11 @@ FactoryGirl.define do
   	agemax 50
   	number nil
   end
+  factory :birth_event, class: Event do
+    name "birthday"
+    agemin 20
+    agemax 20
+    number 20
+    #association(:user)
+  end
 end

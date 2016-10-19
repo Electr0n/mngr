@@ -298,7 +298,7 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe "Logic" do
-    context "for SIGNED IN users" do
+    context "for SIGNED users" do
       let(:user) {u = create(:user)}
       before {sign_in user}
       
@@ -414,6 +414,65 @@ RSpec.describe EventsController, type: :controller do
         u = create(:user)
         expect{get :unfollow, id: e.id}.to change(u.events,:count).by(0)
       end
+    end
+  end
+
+  describe "permited attributes" do
+    let(:user) {u = create(:user)}
+    before {sign_in user}
+    let(:event) {e = create(:event)}
+    it "should update name" do
+      event.name = "Alibaba"
+      expect(event.name).to eq("Alibaba")
+    end
+    it "should update date" do
+      event.date = "29 Dec 2018"
+      expect(event.date.strftime('%F') ).to eq("2018-12-29")
+    end
+    it "should update time" do
+      event.time = "21:34"
+      expect(event.time.strftime("%H:%M") ).to eq("21:34")
+    end
+    it "should update description" do
+      event.description = "description is here"
+      expect(event.description).to eq("description is here")
+    end
+    it "should update gender" do
+      event.gender = "Female"
+      expect(event.gender).to eq("Female")
+    end
+    it "should update agemax" do
+      event.agemax = "18"
+      expect(event.agemax).to eq(18)
+    end
+    it "should update agemin" do
+      event.agemin = "18"
+      expect(event.agemin).to eq(18)
+    end
+    it "should update avatar" do
+      event.photo = File.open("#{Rails.root}/public/favicon.ico")
+      expect(event.photo_file_name).to eq("favicon.ico")
+    end
+    it "should update number" do
+      event.number = 30
+      expect(event.number).to eq(30)
+    end
+    it "should update location" do
+      event.location = "Zybitskaya"
+      expect(event.location).to eq("Zybitskaya")
+    end
+    it "should update longitude" do
+      event.longitude = 0.0
+      expect(event.longitude).to eq(0.0)
+    end
+    it "should update latitude" do
+      event.latitude = 0.0
+      expect(event.latitude).to eq(0.0)
+    end
+    it "should update latitude" do
+      e = build(:birth_event)
+      post :create, event: e.attributes
+      expect(Event.count).to eq(1)
     end
   end
 end
