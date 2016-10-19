@@ -1,4 +1,5 @@
 FactoryGirl.define do
+  # valid event
   factory :event do
     name "valid_event"
     agemin 10
@@ -13,11 +14,17 @@ FactoryGirl.define do
   	agemax 50
   	number nil
   end
-  factory :birth_event, class: Event do
+  factory :filled_event, class: Event do
     name "birthday"
+    date "10 Dec 2030"
+    time "21:34"
+    description "Description is here"
+    gender "female"
     agemin 20
     agemax 20
     number 20
-    #association(:user)
+    location "Suharevskaya str"
+    latitude 0.0
+    longitude 0.0
   end
 end

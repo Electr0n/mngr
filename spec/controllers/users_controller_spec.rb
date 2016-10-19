@@ -4,7 +4,7 @@ RSpec.describe UsersController, type: :controller do
   
   describe "response status" do
     
-    context "if USER SIGNED IN." do
+    context "if USER SIGNED." do
       let(:user) {u = create(:user)}
       before {sign_in user}
       it "Index action responds status 200" do
@@ -61,7 +61,7 @@ RSpec.describe UsersController, type: :controller do
       end
     end
 
-    context "if USER NOT SIGNED IN." do
+    context "if USER NOT SIGNED." do
       it "Index action responds status 302" do
         get :index
         expect(response.status).to eq(302)
@@ -118,7 +118,7 @@ RSpec.describe UsersController, type: :controller do
   
   describe "template rendering." do
 
-    context "if USER SIGNED IN." do
+    context "if USER SIGNED." do
       let(:user) {u = create(:user)}
       before {sign_in user}
       it "Index action should render index template" do
@@ -175,7 +175,7 @@ RSpec.describe UsersController, type: :controller do
       end
     end
 
-    context "if USER NOT SIGNED IN." do
+    context "if USER NOT SIGNED." do
       it "Index action should redirect to sign in page" do
         get :index
         expect(response).to redirect_to new_user_session_path
@@ -233,7 +233,7 @@ RSpec.describe UsersController, type: :controller do
 
     context "Action update" do
       
-      context "if USER SIGNED IN" do
+      context "if USER SIGNED" do
       
         let(:user) {u = create(:user)}
         before {sign_in user}
@@ -269,7 +269,7 @@ RSpec.describe UsersController, type: :controller do
         end
       end
 
-      context "if USER NOT SIGNED IN" do
+      context "if USER NOT SIGNED" do
         it "shouldn't update user" do
           u = create(:user)
           put :update, id: u.id, user: attributes_for(:user, name: "ALIBABA", tags: "Sport")
@@ -289,7 +289,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context "Destroy action:" do
-      context "if user SIGNED IN" do
+      context "if user SIGNED" do
         let(:user) {u = create(:user)}
         before {sign_in user}
         it "shouldn't destroy any users for user!=current_user" do
@@ -300,7 +300,7 @@ RSpec.describe UsersController, type: :controller do
           expect{delete :destroy, id: user.id}.to change(User,:count).by(-1)
         end
       end
-      context "if user NOT SIGNED IN" do
+      context "if user NOT SIGNED" do
         it "shouldn't destroy eny users" do
           u1 = create(:user)
           expect{delete :destroy, id: u1.id}.to change(User,:count).by(0)

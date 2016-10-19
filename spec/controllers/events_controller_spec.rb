@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
   describe "Action responses" do
-    context "if user SIGNED IN" do
+    context "if user SIGNED" do
       let(:user) {u = create(:user)}
       before {sign_in user}
       
@@ -106,7 +106,7 @@ RSpec.describe EventsController, type: :controller do
       end
     end
     
-    context "if user NOT SIGNED IN" do
+    context "if user NOT SIGNED" do
       it "Index action responds 200" do
         get :index
         expect(response.status).to eq(200)
@@ -150,7 +150,7 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe "template rendering" do
-    context "if user SIGNED IN" do
+    context "if user SIGNED" do
       let(:user) {u = create(:user)}
       before {sign_in user}
       
@@ -254,7 +254,7 @@ RSpec.describe EventsController, type: :controller do
       end
     end
     
-    context "if user NOT SIGNED IN" do
+    context "if user NOT SIGNED" do
       it "Index action render index template" do
         get :index
         expect(response).to render_template :index
@@ -470,9 +470,26 @@ RSpec.describe EventsController, type: :controller do
       expect(event.latitude).to eq(0.0)
     end
     it "should update latitude" do
-      e = build(:birth_event)
-      post :create, event: e.attributes
-      expect(Event.count).to eq(1)
+      e1 = create(:filled_event)
+      e2 = create(:event)
+      # put :update, id: e2.id, event: attributes_for(
+      #   :event,
+      #   name: "birthday",
+      #   date: "10 Dec 2030",
+      #   time: "21:34",
+      #   description: "Description is here",
+      #   gender: "female",
+      #   agemin: '20',
+      #   agemax: '20',
+      #   number: '20',
+      #   location: "Suharevskaya str",
+      #   latitude: '0.0',
+      #   longitude: '0.0'
+      #   )
+      put :update, id: e2.id, event: attributes_for(:event, name: "hello", tags: "Sport")
+      e2.reload
+      binding.pry
+      expect(Event.last).to eq(e1)
     end
   end
 end
