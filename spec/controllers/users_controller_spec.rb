@@ -368,4 +368,43 @@ RSpec.describe UsersController, type: :controller do
       expect(user.city).to eq("HM")
     end
   end
+
+  describe "permited attributes" do
+    let(:user) {u = create(:user)}
+    before {sign_in user}
+    it "should update user params" do
+      t = create(:tag)
+      put :update, id: user.id, user: attributes_for(
+        :user,
+        name:     "realy_valid",
+        surname:  "RLYRLY",
+        email:    "hoho@haha.com",
+        password: "asdzxc",
+        bday:     "1992-12-29",
+        gender:   "female",
+        age:      "40",
+        phone:    "291363913",
+        country:  "BY",
+        city:     "HM",
+        hobby:    "something",
+        about:    "interesting",
+        role:     "admin",
+        tags:     "Sport"
+        )
+      user.reload
+      expect(User.last.name).to eq("realy_valid")
+      expect(User.last.surname).to eq("RLYRLY")
+      expect(User.last.email).to eq("hoho@haha.com")
+      expect(User.last.bday.strftime('%F')).to eq("1992-12-29")
+      expect(User.last.gender).to eq("female")
+      expect(User.last.age).to eq(40)
+      expect(User.last.phone).to eq(291363913)
+      expect(User.last.country).to eq("BY")
+      expect(User.last.city).to eq("HM")
+      expect(User.last.hobby).to eq("something")
+      expect(User.last.about).to eq("interesting")
+      expect(User.last.role).to eq("admin")
+      expect(User.last.tags.last.name).to eq("Sport")
+    end
+  end
 end

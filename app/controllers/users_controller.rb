@@ -82,7 +82,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :surname, :email, :bday, :gender, :age,:phone, :hobby, :about, :password, :password_confirmation, :avatar, :country, :city)
+    params.require(:user).permit(:name, :surname, :email, :bday, :gender, :age,:phone, :hobby, :about, :password, :password_confirmation, :avatar, :country, :city, :role)
   end
 
   def tags_params
