@@ -456,5 +456,10 @@ RSpec.describe EventsController, type: :controller do
       expect(Event.last.longitude).to eq(e1.longitude)
       expect(Event.last.tags).to eq(e1.tags)
     end
+    it "should update photo" do
+      e = create(:event)
+      e.photo = File.open("#{Rails.root}/public/favicon.ico")
+      expect(e.photo_file_name).to eq("favicon.ico")
+    end
   end
 end
