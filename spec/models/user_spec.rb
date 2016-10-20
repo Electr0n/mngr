@@ -44,17 +44,17 @@ RSpec.describe User, type: :model do
     describe "Tags-Users" do
       it "User should have many tags" do
         u = create(:user)
-        e1 = create(:tag)
-        e2 = create(:tag)
-        u.tags << [e1, e2]
+        t1 = create(:tag)
+        t2 = create(:tag)
+        u.tags << [t1, t2]
         expect(u.tags.count).to eq(2)
       end
       it "Several users can have same event" do
         u1 = create(:user)
         u2 = create(:user)
-        e = create(:tag)
-        u1.tags << e
-        u2.tags << e
+        t = create(:tag)
+        u1.tags << t
+        u2.tags << t
         expect(u1.tags.count).to eq(1)
         expect(u2.tags.count).to eq(1)
       end
@@ -87,66 +87,6 @@ RSpec.describe User, type: :model do
       u = create(:user)
       u.password = ""
       expect(u.valid?).to be false
-    end
-  end
-
-  describe "permited attributes" do
-    let(:user) {u = create(:user)}
-    it "should update name" do
-      user.name = "Alibaba"
-      expect(user.name).to eq("Alibaba")
-    end
-    it "should update surname" do
-      user.surname = "Alibaba"
-      expect(user.surname).to eq("Alibaba")
-    end
-    it "should update email" do
-      user.email = "Go@home.yanki"
-      expect(user.email).to eq("Go@home.yanki")
-    end
-    it "should update birthday" do
-      user.bday = "29 Dec 1992"
-      expect(user.bday.strftime('%F') ).to eq("1992-12-29")
-    end
-    it "should update gender" do
-      user.gender = "Male"
-      expect(user.gender).to eq("Male")
-    end
-    it "should update age" do
-      user.age = "18"
-      expect(user.age).to eq(18)
-    end
-    it "should update phone" do
-      user.phone = 291363912
-      expect(user.phone).to eq(291363912)
-    end
-    it "should update hobby" do
-      user.hobby = "I love crocodiles"
-      expect(user.hobby).to eq("I love crocodiles")
-    end
-    it "should update about" do
-      user.about = "I'm programmer"
-      expect(user.about).to eq("I'm programmer")
-    end
-    it "should update password" do
-      user.password = "Alibaba"
-      expect(user.password).to eq("Alibaba")
-    end
-    it "should update password confirmation" do
-      user.password_confirmation = "Alibaba"
-      expect(user.password_confirmation).to eq("Alibaba")
-    end
-    it "should update avatar" do
-      user.avatar = File.open("#{Rails.root}/public/favicon.ico")
-      expect(user.avatar_file_name).to eq("favicon.ico")
-    end
-    it "should update country" do
-      user.country = "BY"
-      expect(user.country).to eq("BY")
-    end
-    it "should update city" do
-      user.city = "HM"
-      expect(user.city).to eq("HM")
     end
   end
 
@@ -250,6 +190,11 @@ RSpec.describe User, type: :model do
         User.from_omniauth(auth_hash)
         expect(User.count).to eq(1)
       end
+      it "Shouldn't create duplicate user if already exist" do
+        User.from_omniauth(auth_hash)
+        User.from_omniauth(auth_hash)
+        expect(User.count).to eq(1)
+      end
       it "should create user with described fields" do
         u = User.from_omniauth(auth_hash)
         expect(u.name).to eq("Vasya")
@@ -279,6 +224,11 @@ RSpec.describe User, type: :model do
         User.from_omniauth(auth_hash)
         expect(User.count).to eq(1)
       end
+      it "Shouldn't create duplicate user if already exist" do
+        User.from_omniauth(auth_hash)
+        User.from_omniauth(auth_hash)
+        expect(User.count).to eq(1)
+      end
       it "should create same user" do
         u = User.from_omniauth(auth_hash)
         expect(u.name).to eq("alibaba")
@@ -299,6 +249,11 @@ RSpec.describe User, type: :model do
         }
       })
       it "should create new user with described fields" do
+        User.from_omniauth(auth_hash)
+        expect(User.count).to eq(1)
+      end
+      it "Shouldn't create duplicate user if already exist" do
+        User.from_omniauth(auth_hash)
         User.from_omniauth(auth_hash)
         expect(User.count).to eq(1)
       end

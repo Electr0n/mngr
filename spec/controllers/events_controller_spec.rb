@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
   describe "Action responses" do
-    context "if user SIGNED IN" do
+    context "if user SIGNED" do
       let(:user) {u = create(:user)}
       before {sign_in user}
       
@@ -106,7 +106,7 @@ RSpec.describe EventsController, type: :controller do
       end
     end
     
-    context "if user NOT SIGNED IN" do
+    context "if user NOT SIGNED" do
       it "Index action responds 200" do
         get :index
         expect(response.status).to eq(200)
@@ -150,7 +150,7 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe "template rendering" do
-    context "if user SIGNED IN" do
+    context "if user SIGNED" do
       let(:user) {u = create(:user)}
       before {sign_in user}
       
@@ -254,7 +254,7 @@ RSpec.describe EventsController, type: :controller do
       end
     end
     
-    context "if user NOT SIGNED IN" do
+    context "if user NOT SIGNED" do
       it "Index action render index template" do
         get :index
         expect(response).to render_template :index
@@ -298,7 +298,7 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe "Logic" do
-    context "for SIGNED IN users" do
+    context "for SIGNED users" do
       let(:user) {u = create(:user)}
       before {sign_in user}
       
@@ -414,6 +414,47 @@ RSpec.describe EventsController, type: :controller do
         u = create(:user)
         expect{get :unfollow, id: e.id}.to change(u.events,:count).by(0)
       end
+    end
+  end
+
+  describe "permited attributes" do
+    let(:user) {u = create(:user)}
+    before {sign_in user}
+    let(:event) {e = create(:event)}
+    it "should update event params" do
+      t = create(:tag)
+      e1 = create(:filled_event)
+      e2 = create(:event)
+      e1.tags << t
+      user.products << e2
+      put :update, id: e2.id, event: attributes_for(
+        :event,
+        name:         "birthday",
+        date:         "10 Dec 2030",
+        time:         "21:34",
+        description:  "Description is here",
+        gender:       "female",
+        agemin:       '20',
+        agemax:       '20',
+        number:       '20',
+        location:     "Suharevskaya str",
+        latitude:     '0.0',
+        longitude:    '0.0',
+        tags:         "Sport"
+        )
+      e2.reload
+      expect(Event.last.name).to eq(e1.name)
+      expect(Event.last.date).to eq(e1.date)
+      expect(Event.last.time).to eq(e1.time)
+      expect(Event.last.description).to eq(e1.description)
+      expect(Event.last.gender).to eq(e1.gender)
+      expect(Event.last.agemin).to eq(e1.agemin)
+      expect(Event.last.agemax).to eq(e1.agemax)
+      expect(Event.last.number).to eq(e1.number)
+      expect(Event.last.location).to eq(e1.location)
+      expect(Event.last.latitude).to eq(e1.latitude)
+      expect(Event.last.longitude).to eq(e1.longitude)
+      expect(Event.last.tags).to eq(e1.tags)
     end
   end
 end
