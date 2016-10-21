@@ -9,10 +9,10 @@ FactoryGirl.define do
   end
   # invalid event
   factory :_event, class: Event do
-  	name "invalid_event"
-  	agemin 10
-  	agemax 50
-  	number nil
+    name "invalid_event"
+    agemin 10
+    agemax 50
+    number nil
   end
   factory :filled_event, class: Event do
     name "birthday"

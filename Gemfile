@@ -22,6 +22,7 @@ gem 'active_link_to'
 gem 'pry'
 gem 'kaminari'
 gem 'capybara'
+gem "cancan"
 
 ###########
 
