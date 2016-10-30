@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-	describe "Associations" do
+  describe "Associations" do
     describe "Events-Users" do
       it "Event should have many user" do
         u1 = create(:user)
@@ -61,23 +61,23 @@ RSpec.describe Event, type: :model do
     end
 
     describe "validations" do
-    	it "shouldn't be valid: too short name" do
-    		e = create(:event)
-    		e.name = "oops"
-    		expect(e.valid?).to be false
-    	end
-    	it "shouldn't be valid: too long name" do
-    		e = create(:event)
-    		e.name = "it's should be greater than 100 symbols to be not valid if I want this validation name longest test work fine"
-    		expect(e.valid?).to be false
-    	end
-    	it "shouldn't be valid: agemin, agemax, number should be greater 0" do
-    		e = create(:event)
-    		e.agemax = -2
-    		e.agemin = -1
-    		e.number = "idk"
-    		expect(e.valid?).to be false
-    	end
+      it "shouldn't be valid: too short name" do
+        e = create(:event)
+        e.name = "oops"
+        expect(e.valid?).to be false
+      end
+      it "shouldn't be valid: too long name" do
+        e = create(:event)
+        e.name = "it's should be greater than 100 symbols to be not valid if I want this validation name longest test work fine"
+        expect(e.valid?).to be false
+      end
+      it "shouldn't be valid: agemin, agemax, number should be greater 0" do
+        e = create(:event)
+        e.agemax = -2
+        e.agemin = -1
+        e.number = "idk"
+        expect(e.valid?).to be false
+      end
     end
   end
 end

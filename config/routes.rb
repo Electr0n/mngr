@@ -10,10 +10,11 @@ Rails.application.routes.draw do
 
   resources :users do
     get :subregion_options
+    get :del_request, on: :member
   end
   resources :events do
-    get :join,      on: :member
-    get :unfollow,  on: :member
+    get :join,        on: :member
+    get :unfollow,    on: :member
   end
   resources :tags do
   end

@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
 
   before_action :find_event, only: [:edit, :show, :update, :destroy, :join, 
-    :unfollow]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :unfollow]
+    :unfollow, :del_request]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :unfollow, :del_request]
 
   def index
     @events = Event.all.page(params[:page]).per(10)
@@ -13,12 +13,16 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
-    if @event.save
-      current_user.products << @event
-      redirect_to @event
+    if can? :create, @event
+      @event = Event.new(event_params)
+      if @event.save
+        current_user.products << @event
+        redirect_to @event
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
     end
   end
 
@@ -62,7 +66,7 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :date, :time, :description, :gender, 
-      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude)
+      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude, :del_flag)
   end
 
   def tags_params
@@ -90,6 +94,15 @@ class EventsController < ApplicationController
       redirect_to(:back)
     else
       redirect_to (current_user)
+    end
+  end
+
+  def del_request
+    if can? :del_request, @event
+      @event.del_flag = true
+      render file: "#{Rails.root}/public/system/events/deleted.html" if @event.save
+    else
+      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
     end
   end
 

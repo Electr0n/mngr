@@ -3,6 +3,25 @@ require "rails_helper"
 RSpec.describe User, type: :model do 
 
   describe "Associations" do
+    describe 'Roles-Users' do
+      it 'User should have many roles' do
+        u = create(:user)
+        r1 = create(:role_admin)
+        r2 = create(:role_user)
+        u.roles << [r1, r2]
+        expect(u.roles.count).to eq(2)
+      end
+      it 'Users can have same role' do
+        u1 = create(:user)
+        u2 = create(:petya_user)
+        r = create(:role_admin)
+        u1.roles << r
+        u2.roles << r
+        expect(u1.roles.count).to eq(1)
+        expect(u2.roles.count).to eq(1)
+      end
+    end
+
     describe "Events-Users" do
       it "User should have many events" do
         u = create(:user)

@@ -1,3 +1,16 @@
+r1 = Role.create(
+  name: 'superadmin'
+  )
+r2 = Role.create(
+  name: 'admin'
+  )
+r3 = Role.create(
+  name: 'moderator'
+  )
+r4 = Role.create(
+  name: 'user'
+  )
+
 u1 = User.create(
   email: 'electron@gmail.com',
   name: 'Eugene',
@@ -7,8 +20,7 @@ u1 = User.create(
   bday: "29 Dec 1992",
   country: 'BY',
   city: 'HM',
-  phone: "291363912",
-  role: 'admin')
+  phone: "291363912")
 u2 = User.create(
   email: 'skulleton@gmail.com',
   name: 'Eugene',
@@ -18,8 +30,7 @@ u2 = User.create(
   bday: "9 Jan 1992",
   country: 'BY',
   city: 'HM',
-  phone: "293407694",
-  role: 'admin')
+  phone: "293407694")
 u3 = User.create(
   email: 'ivanov@yandex.ru',
   name: 'Albert',
@@ -29,8 +40,7 @@ u3 = User.create(
   bday: "14 Mar 1879",
   country: 'BY',
   city: 'HM',
-  phone: '0',
-  role: 'user')
+  phone: '0')
 u4 = User.create(
   email: 'facebook@tut.by',
   name: 'Mark',
@@ -40,8 +50,7 @@ u4 = User.create(
   bday: "14 May 1984",
   country: 'BY',
   city: 'HM',
-  phone: "291234567",
-  role: 'user')
+  phone: "291234567")
 u5 = User.create(
   email: 'boobs@xxx.com',
   name: 'Pomela',
@@ -51,8 +60,7 @@ u5 = User.create(
   bday: "1 Jul 1967",
   country: 'BY',
   city: 'HM',
-  phone: "0",
-  role: 'user')
+  phone: "0")
 u6 = User.create(
   email: 'arsenal@gmail.com',
   name: 'Arsene',
@@ -62,8 +70,7 @@ u6 = User.create(
   bday: "22 Oct 1949",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u7 = User.create(
   email: 'dicap@gmail.com',
   name: 'Leonardo',
@@ -73,8 +80,7 @@ u7 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u8 = User.create(
   email: 'vishenka@gmail.com',
   name: 'Zina',
@@ -84,8 +90,7 @@ u8 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u9 = User.create(
   email: 'loshadka@gmail.com',
   name: 'Horse',
@@ -95,8 +100,7 @@ u9 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u10 = User.create(
   email: 'evrei@gmail.com',
   name: 'Edik',
@@ -106,8 +110,7 @@ u10 = User.create(
   bday: "11 Nov 1994",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u11 = User.create(
   email: 'zver@gmail.com',
   name: 'Noname',
@@ -117,8 +120,7 @@ u11 = User.create(
   bday: "19 Jan 1979",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u12 = User.create(
   email: 'kartoha@gmail.com',
   name: 'Belarus',
@@ -128,8 +130,7 @@ u12 = User.create(
   bday: "11 Dec 1989",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u13 = User.create(
   email: 'slut@gmail.com',
   name: 'Ira',
@@ -139,8 +140,7 @@ u13 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u14 = User.create(
   email: 'medved@gmail.com',
   name: 'Zolushka',
@@ -150,8 +150,7 @@ u14 = User.create(
   bday: "11 Nov 1874",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u15 = User.create(
   email: 'sharik@gmail.com',
   name: 'Tuzik',
@@ -161,8 +160,7 @@ u15 = User.create(
   bday: "11 Nov 1956",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u16 = User.create(
   email: 'uto4ka@gmail.com',
   name: 'Sony',
@@ -172,8 +170,7 @@ u16 = User.create(
   bday: "21 May 2011",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u17 = User.create(
   email: 'korovka@gmail.com',
   name: 'Kristina',
@@ -183,8 +180,7 @@ u17 = User.create(
   bday: "12 Sep 1984",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u18 = User.create(
   email: 'kovrik@gmail.com',
   name: 'Mishka',
@@ -194,8 +190,7 @@ u18 = User.create(
   bday: "08 Feb 1674",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u19 = User.create(
   email: 'kutuzov11@gmail.com',
   name: 'Semen',
@@ -205,8 +200,7 @@ u19 = User.create(
   bday: "14 Aug 2004",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u20 = User.create(
   email: 'krokodil@gmail.com',
   name: 'Sasha',
@@ -216,8 +210,7 @@ u20 = User.create(
   bday: "18 Dec 1989",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u21 = User.create(
   email: '4ipsoed@gmail.com',
   name: 'Andrey',
@@ -227,8 +220,7 @@ u21 = User.create(
   bday: "18 Dec 1984",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u22 = User.create(
   email: 'ru4ka@gmail.com',
   name: 'Peter',
@@ -238,8 +230,7 @@ u22 = User.create(
   bday: "01 Nov 2000",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u23 = User.create(
   email: 'kepka@gmail.com',
   name: '50',
@@ -249,8 +240,7 @@ u23 = User.create(
   bday: "11 Nov 1964",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u24 = User.create(
   email: 'govorun@gmail.com',
   name: 'Eminem',
@@ -260,8 +250,7 @@ u24 = User.create(
   bday: "11 Nov 1988",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 u25 = User.create(
   email: 'jjjjzae@gmail.com',
   name: 'Vovan',
@@ -271,8 +260,7 @@ u25 = User.create(
   bday: "19 Nov 1996",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
-  role: 'user')
+  phone: "293614521")
 
 e1 = Event.create(
   name: 'birthday',
@@ -549,6 +537,11 @@ e25 = Event.create(
   agemax: '0', 
   latitude: '62.3452',
   longitude: '20.3452')
+
+r1.users << [u1, u2]
+r2.users << [u1, u2]
+r3.users << [u1, u3, u4, u5, u6]
+r4.users << [u1, u7, u8, u9, u10, u11, u12, u13, u14, u15, u16, u17, u18, u19, u20, u21, u22, u23, u24, u25]
 
 u1.events << [e1, e3, e5, e6, e8, e9, e15, e11, e10, e19, e20, e21, e23]
 u2.events << [e2, e1, e25]

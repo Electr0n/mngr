@@ -26,5 +26,6 @@ FactoryGirl.define do
     location "Suharevskaya str"
     latitude 0.0
     longitude 0.0
+    del_flag 'true'
   end
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
-  before_action :find_user, only: [:show, :edit, :update, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :destroy, :del_request]
 
   def index
     @users = User.search(params[:name], params[:surname], params[:gender], 
@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @user.roles << Role.where(name: 'user').first
       sign_in @user
       flash[:success] = "URA URA I VSE TAKOE"
       redirect_to user_path(@user)
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
 
   def update
     # find_user action
-    if current_user == @user
+    if can? :update, @user
       @user.update_attributes(user_params)
       @user.tags = Tag.where(name: tags_params[:tags].split(','))
       if @user.errors.empty?
@@ -46,7 +47,7 @@ class UsersController < ApplicationController
 
   def edit
     # find_user action
-    if current_user == @user
+    if can? :edit, @user
       @tags = Tag.all
     else
       render file: "#{Rails.root}/public/403.html", layout: false, status: 403
@@ -55,13 +56,22 @@ class UsersController < ApplicationController
 
   def show
     # find_user action
-    @events = @user.events.all.page(params[:page]).per(10)
+    @events = @user.events.all.page(params[:page]).per(10) if can? :show, @user
   end
 
   def destroy
-    if current_user == @user
+    if can? :destroy, @user
       @user.destroy
       render "index"
+    else
+      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
+    end
+  end
+
+  def del_request
+    if can? :del_request, @user
+      @user.del_flag = true
+      render file: "#{Rails.root}/public/system/users/deleted.html" if @user.save
     else
       render file: "#{Rails.root}/public/403.html", layout: false, status: 403
     end
@@ -82,7 +92,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :surname, :email, :bday, :gender, :age,:phone, :hobby, :about, :password, :password_confirmation, :avatar, :country, :city, :role)
+    params.require(:user).permit(:name, :surname, :email, :bday, :gender, :age,:phone, :hobby, :about, :del_flag, :password, :password_confirmation, :avatar, :country, :city)
   end
 
   def tags_params

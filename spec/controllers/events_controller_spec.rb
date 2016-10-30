@@ -4,7 +4,11 @@ RSpec.describe EventsController, type: :controller do
   describe "Action responses" do
     context "if user SIGNED" do
       let(:user) {u = create(:user)}
-      before {sign_in user}
+      let(:role) {r = create(:role_user)}
+      before {
+        user.roles << role
+        sign_in user
+      }
       
       it "New action responds 200" do
         get :new
@@ -12,10 +16,33 @@ RSpec.describe EventsController, type: :controller do
       end
       
       context "Create action" do
-        it "for valid event responds status 302" do
-          e = build(:event)
-          post :create, event: e.attributes
-          expect(response.status).to eq(302)
+        context "for valid event" do
+          it "if USER responds status 302" do
+            e = build(:event)
+            post :create, event: e.attributes
+            expect(response.status).to eq(302)
+          end
+          it "if SUPERADMIN responds status 302" do
+            r = create(:role_superadmin)
+            user.roles << r
+            e = build(:event)
+            post :create, event: e.attributes
+            expect(response.status).to eq(302)
+          end
+          it "if ADMIN responds status 302" do
+            r = create(:role_admin)
+            user.roles << r
+            e = build(:event)
+            post :create, event: e.attributes
+            expect(response.status).to eq(302)
+          end
+          it "if MODERATOR responds status 302" do
+            r = create(:role_moderator)
+            user.roles << r
+            e = build(:event)
+            post :create, event: e.attributes
+            expect(response.status).to eq(302)
+          end
         end
         it "for invalid event responds status 200" do
           e = build(:_event)
@@ -440,6 +467,7 @@ RSpec.describe EventsController, type: :controller do
         location:     "Suharevskaya str",
         latitude:     '0.0',
         longitude:    '0.0',
+        del_flag:     'true', 
         tags:         "Sport"
         )
       e2.reload
@@ -454,6 +482,7 @@ RSpec.describe EventsController, type: :controller do
       expect(Event.last.location).to eq(e1.location)
       expect(Event.last.latitude).to eq(e1.latitude)
       expect(Event.last.longitude).to eq(e1.longitude)
+      expect(Event.last.del_flag).to eq(e1.del_flag)
       expect(Event.last.tags).to eq(e1.tags)
     end
     it "should update photo" do
