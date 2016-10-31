@@ -3,20 +3,35 @@ require "rails_helper"
 RSpec.describe User, type: :model do 
 
   describe "Associations" do
+    let(:u1) {create(:user)}
+    let(:u2) {create(:filled_user)}
+    let(:e1) {create(:event)}
+    let(:e2) {create(:filled_event)}
+    let(:t1) {create(:tag_films)}
+    let(:t2) {create(:tag)}
+    let(:r1) {create(:role_user)}
+    let(:r2) {create(:role_admin)}
+    describe 'Roles-Users' do
+      it 'User should have many roles' do
+        u1.roles << [r1, r2]
+        expect(u1.roles.count).to eq(2)
+      end
+      it 'Users can have same role' do
+        u1.roles << r1
+        u2.roles << r1
+        expect(u1.roles.count).to eq(1)
+        expect(u2.roles.count).to eq(1)
+      end
+    end
+
     describe "Events-Users" do
       it "User should have many events" do
-        u = create(:user)
-        e1 = create(:event)
-        e2 = create(:event)
-        u.events << [e1, e2]
-        expect(u.events.count).to eq(2)
+        u1.events << [e1, e2]
+        expect(u1.events.count).to eq(2)
       end
       it "Several users can have same event" do
-        u1 = create(:user)
-        u2 = create(:user)
-        e = create(:event)
-        u1.events << e
-        u2.events << e
+        u1.events << e1
+        u2.events << e1
         expect(u1.events.count).to eq(1)
         expect(u2.events.count).to eq(1)
       end
@@ -24,18 +39,12 @@ RSpec.describe User, type: :model do
 
     describe "Owner-Products" do
       it "User(as owner) should have many events (as products)" do
-        u = create(:user)
-        e1 = create(:event)
-        e2 = create(:event)
-        u.products << [e1, e2]
-        expect(u.products.count).to eq(2)
+        u1.products << [e1, e2]
+        expect(u1.products.count).to eq(2)
       end
       it "Several users(as owners) can have same event (as product)" do
-        u1 = create(:user)
-        u2 = create(:user)
-        e = create(:event)
-        u1.products << e
-        u2.products << e
+        u1.products << e1
+        u2.products << e1
         expect(u1.products.count).to eq(1)
         expect(u2.products.count).to eq(1)
       end
@@ -43,18 +52,12 @@ RSpec.describe User, type: :model do
 
     describe "Tags-Users" do
       it "User should have many tags" do
-        u = create(:user)
-        t1 = create(:tag)
-        t2 = create(:tag)
-        u.tags << [t1, t2]
-        expect(u.tags.count).to eq(2)
+        u1.tags << [t1, t2]
+        expect(u1.tags.count).to eq(2)
       end
       it "Several users can have same event" do
-        u1 = create(:user)
-        u2 = create(:user)
-        t = create(:tag)
-        u1.tags << t
-        u2.tags << t
+        u1.tags << t1
+        u2.tags << t1
         expect(u1.tags.count).to eq(1)
         expect(u2.tags.count).to eq(1)
       end
@@ -62,18 +65,17 @@ RSpec.describe User, type: :model do
   end
 
   describe "validations" do
+
+    let(:u) {create(:user)}
     it "Shouldn't be valid without email" do
-      u = create(:user)
       u.email = nil
       expect(u.valid?).to be false
     end
     it "Shouldn't be valid with wrong type of email" do
-      u = create(:user)
       u.email = "hohohaha.com"
       expect(u.valid?).to be false
     end
     it "Shouldn't be valid with wrong type of email" do
-      u = create(:user)
       u.email = "hohohaha@com"
       expect(u.valid?).to be false
     end
@@ -84,14 +86,13 @@ RSpec.describe User, type: :model do
       expect(u2.valid?).to be false
     end
     it "Shouldn't be valid without password" do
-      u = create(:user)
       u.password = ""
       expect(u.valid?).to be false
     end
   end
 
   describe "advansed methods" do
-    let(:user) {u = create(:user)}
+    let(:user) {create(:user)}
     it "should return full country name" do
       user.country = "BY"
       expect(user.country_).to eq("Belarus")
@@ -104,68 +105,44 @@ RSpec.describe User, type: :model do
   end
 
   describe "search" do
-    let(:user) {u = create(:filled_user)}
+    let(:u1) {create(:filled_user)}
+    let(:u2) {create(:petya_user)}
+    let(:u3) {create(:vasya_user)}
+    let(:u4) {create(:kolya_user)}
+    let(:u5) {create(:user)}
+    before(:each) do
+      @u1 = create(:filled_user)
+      @u2 = create(:petya_user)
+      @u3 = create(:vasya_user)
+      @u4 = create(:kolya_user)
+      @u5 = create(:user)
+    end
     it "should find all users with <valid> in name" do
-      u1 = create(:filled_user)
-      u2 = create(:petya_user)
-      u3 = create(:vasya_user)
-      u4 = create(:kolya_user)
-      u5 = create(:user)
       f = User.search('valid', '', '', '', '', '', '')
       expect(f.count).to eq(4)
     end
     it "should find all users with <kin> in surname" do
-      u1 = create(:filled_user)
-      u2 = create(:petya_user)
-      u3 = create(:vasya_user)
-      u4 = create(:kolya_user)
-      u5 = create(:user)
       f = User.search('v', 'kin', '', '', '', '', '')
       expect(f.count).to eq(3)
     end
     it "should find all users users with <male> in gender" do
-      u1 = create(:filled_user)
-      u2 = create(:petya_user)
-      u3 = create(:vasya_user)
-      u4 = create(:kolya_user)
-      u5 = create(:user)
       f = User.search('', '', 'male', '', '', '', '')
       expect(f.include?(u4)).to be false
       expect(f.count).to eq(3)
     end
     it "should find all users users with <1992> in year" do
-      u1 = create(:filled_user)
-      u2 = create(:petya_user)
-      u3 = create(:vasya_user)
-      u4 = create(:kolya_user)
-      u5 = create(:user)
       f = User.search('', '', 'male', '1992', '', '', '')
       expect(f.count).to eq(2)
     end
     it "should find all users users with <december> in month" do
-      u1 = create(:filled_user)
-      u2 = create(:petya_user)
-      u3 = create(:vasya_user)
-      u4 = create(:kolya_user)
-      u5 = create(:user)
       f = User.search('', '', '', '', '12', '', '')
       expect(f.count).to eq(4)
     end
     it "should find all users users with <BY> in country" do
-      u1 = create(:filled_user)
-      u2 = create(:petya_user)
-      u3 = create(:vasya_user)
-      u4 = create(:kolya_user)
-      u5 = create(:user)
       f = User.search('valid', '', 'male', '1992', '', 'BY', '')
       expect(f.count).to eq(2)
     end
     it "should find all users users with <HM> in city" do
-      u1 = create(:filled_user)
-      u2 = create(:petya_user)
-      u3 = create(:vasya_user)
-      u4 = create(:kolya_user)
-      u5 = create(:user)
       f = User.search('', '', 'female', '', '', '', 'HM')
       expect(f.count).to eq(1)
     end

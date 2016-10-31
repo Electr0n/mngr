@@ -3,8 +3,15 @@ require 'rails_helper'
 RSpec.describe EventsController, type: :controller do
   describe "Action responses" do
     context "if user SIGNED" do
-      let(:user) {u = create(:user)}
-      before {sign_in user}
+      let(:user)            {create(:user)}
+      let(:role_user)       {create(:role_user)}
+      let(:role_superadmin) {create(:role_superadmin)}
+      let(:role_admin)      {create(:role_admin)}
+      let(:role_moderator)  {create(:role_moderator)}
+      before {
+        user.roles << role_user
+        sign_in user
+      }
       
       it "New action responds 200" do
         get :new
@@ -25,36 +32,72 @@ RSpec.describe EventsController, type: :controller do
       end
 
       context "Edit action" do
-        it "responds status 200 if current_user is owner of event" do
-          e = create(:event)
+        let(:e) {create(:event)}
+        it "responds status 200 if USER is owner of event" do
           user.products << e
           get :edit, id: e.id
           expect(response.status).to eq(200)
         end
-        it "response status 403 if current_user have no permissions" do
-          e = create(:event)
+        it "response status 403 if USER have is not owner" do
           get :edit, id: e.id
           expect(response.status).to eq(403)
+        end
+        it "response status 200 if SUPERADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
+          get :edit, id: e.id
+          expect(response.status).to eq(200)
+        end
+        it "response status 200 if ADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_admin
+          get :edit, id: e.id
+          expect(response.status).to eq(200)
+        end
+        it "response status 200 if MODERATOR" do
+          user.roles.delete(role_user)
+          user.roles << role_moderator
+          get :edit, id: e.id
+          expect(response.status).to eq(200)
         end
       end
 
       context "Update action" do
-        it "responds status 302 if valid data" do
-          e = create(:event)
+        let(:e) {create(:event)}
+        it "responds status 302 if USER is owner" do
           user.products << e
           put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
           e.reload
           expect(response.status).to eq(302)
         end
+        it "responds status 302 if SUPERADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
+          put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+          e.reload
+          expect(response.status).to eq(302)
+        end
+        it "responds status 302 if ADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_admin
+          put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+          e.reload
+          expect(response.status).to eq(302)
+        end
+        it "responds status 302 if MODERATOR" do
+          user.roles.delete(role_user)
+          user.roles << role_moderator
+          put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+          e.reload
+          expect(response.status).to eq(302)
+        end
         it "response status 200 if invalid data" do
-          e = create(:event)
           user.products << e
           put :update, id: e.id, event: attributes_for(:event, name: nil, tags: "Sport")
           e.reload
           expect(response.status).to eq(200)
         end
-        it "responds status 403 if current_user have no permissions" do
-          e = create(:event)
+        it "responds status 403 if USER is not owner" do
           put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
           e.reload
           expect(response.status).to eq(403)
@@ -62,28 +105,80 @@ RSpec.describe EventsController, type: :controller do
       end
 
       context "Destroy action" do
-        it "responds status 302 if user have permissions" do
-          e = create(:event)
+        let(:e) {create(:event)}
+        it "responds status 403 if USER is owner" do
           user.products << e
+          delete :destroy, id: e.id
+          expect(response.status).to eq(403)
+        end
+        it "responds status 403 if USER is not owner" do
+          delete :destroy, id: e.id
+          expect(response.status).to eq(403)
+        end
+        it "responds status 302 if SUPERADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
           delete :destroy, id: e.id
           expect(response.status).to eq(302)
         end
-        it "responds status 403 if user have no permissions" do
-          e = create(:event)
+        it "responds status 403 if ADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_admin
+          delete :destroy, id: e.id
+          expect(response.status).to eq(403)
+        end
+        it "responds status 403 if MODERATOR" do
+          user.roles.delete(role_user)
+          user.roles << role_moderator
           delete :destroy, id: e.id
           expect(response.status).to eq(403)
         end
       end
 
+      context "del_request" do
+        let(:e) {create(:event)}
+        it "responds status 200 if USER is owner" do
+          user.products << e
+          get :del_request, id: e.id
+          e.reload
+          expect(response.status).to eq(200)
+        end
+        it "responds status 403 if USER is not owner" do
+          get :del_request, id: e.id
+          e.reload
+          expect(response.status).to eq(403)
+        end
+        it "responds status 200 if USER is SUPERADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
+          get :del_request, id: e.id
+          e.reload
+          expect(response.status).to eq(200)
+        end
+        it "responds status 200 if USER is ADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_admin
+          get :del_request, id: e.id
+          e.reload
+          expect(response.status).to eq(200)
+        end
+        it "responds status 200 if USER is MODERATOR" do
+          user.roles.delete(role_user)
+          user.roles << role_moderator
+          get :del_request, id: e.id
+          e.reload
+          expect(response.status).to eq(200)
+        end
+      end
+
       context "Join action" do
+        let(:e) {create(:event)}
         it "responds 302 if user wanna join" do
-          e = create(:event)
           @request.env['HTTP_REFERER'] = 'http://localhost:3000'
           get :join, id: e.id
           expect(response.status).to eq(302)
         end
         it "responds 302 if user already joined" do
-          e = create(:event)
           user.events << e
           get :join, id: e.id
           expect(response.status).to eq(302)
@@ -91,15 +186,14 @@ RSpec.describe EventsController, type: :controller do
       end
 
       context "Unfollow action" do
+        let(:e) {create(:event)}
         it "responds 302 if user wanna unfollow" do
-          e = create(:event)
           user.events << e
           @request.env['HTTP_REFERER'] = 'http://localhost:3000'
           get :unfollow, id: e.id
           expect(response.status).to eq(302)
         end
         it "responds 302 if user not joined yet" do
-          e = create(:event)
           get :unfollow, id: e.id
           expect(response.status).to eq(302)
         end 
@@ -107,6 +201,7 @@ RSpec.describe EventsController, type: :controller do
     end
     
     context "if user NOT SIGNED" do
+      let(:e) {create(:event)}
       it "Index action responds 200" do
         get :index
         expect(response.status).to eq(200)
@@ -116,33 +211,28 @@ RSpec.describe EventsController, type: :controller do
         expect(response.status).to eq(302)
       end
       it "Create action responds 302" do
-        e = build(:event)
-        post :create, event: e.attributes
+        _e = build(:event)
+        post :create, event: _e.attributes
         expect(response.status).to eq(302)
       end
       it "Show action responds 200" do
-        e = create(:event)
         get :show, id: e.id
         expect(response.status).to eq(200)
       end
       it "Update action responds 302" do
-        e = create(:event)
         put :update, id: e.id, event: attributes_for(:event, name: "Pryatki")
         e.reload
         expect(response.status).to eq(302)
       end
       it "Destroy action responds 302" do
-        e = create(:event)
         delete :destroy, id: e.id
         expect(response.status).to eq(302)
       end
       it "Join action responds 302" do
-        e = create(:event)
         get :join, id: e.id
         expect(response.status).to eq(302)
       end
       it "Unfollow action responds 302" do
-        e = create(:event)
         get :unfollow, id: e.id
         expect(response.status).to eq(302)
       end
@@ -152,8 +242,15 @@ RSpec.describe EventsController, type: :controller do
   describe "template rendering" do
     context "if user SIGNED" do
       let(:user) {u = create(:user)}
-      before {sign_in user}
-      
+      let(:role_user)       {create(:role_user)}
+      let(:role_superadmin) {create(:role_superadmin)}
+      let(:role_admin)      {create(:role_admin)}
+      let(:role_moderator)  {create(:role_moderator)}
+      before {
+        user.roles << role_user
+        sign_in user
+      }
+
       it "New action should render new template" do
         get :new
         expect(response).to render_template :new
@@ -173,65 +270,155 @@ RSpec.describe EventsController, type: :controller do
       end
 
       context "Edit action" do
-        it "render edit page if current_user is owner of event" do
-          e = create(:event)
+        let(:e) {create(:event)}
+        it "render edit page if USER is owner of event" do
           user.products << e
           get :edit, id: e.id
           expect(response).to render_template :edit
         end
-        it "render 403 page if current_user have no permissions" do
-          e = create(:event)
+        it "render 403 page if USER is not owner" do
           get :edit, id: e.id
           expect(response).to render_template file: "#{Rails.root}/public/403.html"
+        end
+        it "render edit page if SUPERADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
+          get :edit, id: e.id
+          expect(response).to render_template :edit
+        end
+        it "render edit page if ADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_admin
+          get :edit, id: e.id
+          expect(response).to render_template :edit
+        end
+        it "render edit page if MODERATOR" do
+          user.roles.delete(role_user)
+          user.roles << role_moderator
+          get :edit, id: e.id
+          expect(response).to render_template :edit
         end
       end
 
       context "Update action" do
-        it "redirect to even't page if valid data" do
-          e = create(:event)
-          user.products << e
-          put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
-          e.reload
-          expect(response).to redirect_to event_path(e)
+        let(:e) {create(:event)}
+        context "for valid data" do
+          it "redirect to event's page if USER is owner" do
+            user.products << e
+            put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+            e.reload
+            expect(response).to redirect_to event_path(e)
+          end
+          it "render 403 page if USER is not owner" do
+            put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+            e.reload
+            expect(response).to render_template file: "#{Rails.root}/public/403.html"
+          end
+          it "redirect_to event's page if SUPERADMIN" do
+            user.roles.delete(role_user)
+            user.roles << role_superadmin
+            put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+            e.reload
+            expect(response).to redirect_to event_path(e)
+          end
+          it "redirect_to event's page if ADMIN" do
+            user.roles.delete(role_user)
+            user.roles << role_admin
+            put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+            e.reload
+            expect(response).to redirect_to event_path(e)
+          end
+          it "redirect_to event's page if MODERATOR" do
+            user.roles.delete(role_user)
+            user.roles << role_moderator
+            put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+            e.reload
+            expect(response).to redirect_to event_path(e)
+          end
         end
         it "render edit page if invalid data" do
-          e = create(:event)
           user.products << e
           put :update, id: e.id, event: attributes_for(:event, name: nil, tags: "Sport")
           e.reload
           expect(response).to render_template :edit
         end
-        it "render 403 page if current_user have no permissions" do
-          e = create(:event)
-          put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
-          e.reload
+      end
+
+      context "Destroy action" do
+        let(:e) {create(:event)}
+        it "render 403 page if USER owner" do
+          user.products << e
+          delete :destroy, id: e.id
+          expect(response).to render_template file: "#{Rails.root}/public/403.html"
+        end
+        it "redirect_to user's page for SUPERADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
+          delete :destroy, id: e.id
+          expect(response).to redirect_to user_path(user)
+        end
+        it "render 403 page if ADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_admin
+          delete :destroy, id: e.id
+          expect(response).to render_template file: "#{Rails.root}/public/403.html"
+        end
+        it "render 403 page if MODERATOR" do
+          user.roles.delete(role_user)
+          user.roles << role_moderator
+          delete :destroy, id: e.id
+          expect(response).to render_template file: "#{Rails.root}/public/403.html"
+        end
+        it "render 403 page if user have no permissions" do
+          delete :destroy, id: e.id
           expect(response).to render_template file: "#{Rails.root}/public/403.html"
         end
       end
 
-      context "Destroy action" do
-        it "redirect to user's page if user have permissions" do
-          e = create(:event)
+      context "del_request" do
+        let(:e) {create(:event)}
+        it "render deleted template if USER is owner" do
           user.products << e
-          delete :destroy, id: e.id
-          expect(response).to redirect_to user_path(user)
+          get :del_request, id: e.id
+          e.reload
+          expect(response).to render_template file: "#{Rails.root}/public/system/events/deleted.html"
         end
-        it "render 403 page if user have no permissions" do
-          e = create(:event)
-          delete :destroy, id: e.id
+        it "render 403 page if USER is not owner" do
+          get :del_request, id: e.id
+          e.reload
           expect(response).to render_template file: "#{Rails.root}/public/403.html"
+        end
+        it "render deleted template if SUPERADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
+          get :del_request, id: e.id
+          e.reload
+          expect(response).to render_template file: "#{Rails.root}/public/system/events/deleted.html"
+        end
+        it "render deleted template if ADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_admin
+          get :del_request, id: e.id
+          e.reload
+          expect(response).to render_template file: "#{Rails.root}/public/system/events/deleted.html"
+        end
+        it "render deleted template if MODERATOR" do
+          user.roles.delete(role_user)
+          user.roles << role_moderator
+          get :del_request, id: e.id
+          e.reload
+          expect(response).to render_template file: "#{Rails.root}/public/system/events/deleted.html"
         end
       end
 
       context "Join action" do
+        let(:e) {create(:event)}
         it "redirect_to user's page if user wanna join" do
-          e = create(:event)
           @request.env['HTTP_REFERER'] = 'http://localhost:3000'
           get :join, id: e.id
           expect(response).to redirect_to :back
         end
         it "redirect_to back if user already joined" do
-          e = create(:event)
           user.events << e
           get :join, id: e.id
           expect(response).to redirect_to user_path(user)
@@ -239,15 +426,14 @@ RSpec.describe EventsController, type: :controller do
       end
 
       context "Unfollow action" do
+        let(:e) {create(:event)}
         it "redirect to back if user wanna unfollow" do
-          e = create(:event)
           user.events << e
           @request.env['HTTP_REFERER'] = 'http://localhost:3000'
           get :unfollow, id: e.id
           expect(response).to redirect_to :back
         end
         it "redirect to user's page if user not joined yet" do
-          e = create(:event)
           get :unfollow, id: e.id
           expect(response).to redirect_to user_path(user)
         end 
@@ -255,6 +441,7 @@ RSpec.describe EventsController, type: :controller do
     end
     
     context "if user NOT SIGNED" do
+      let(:e) {create(:event)}
       it "Index action render index template" do
         get :index
         expect(response).to render_template :index
@@ -264,33 +451,28 @@ RSpec.describe EventsController, type: :controller do
         expect(response).to redirect_to new_user_session_path
       end
       it "Create action redirect to sign in page" do
-        e = build(:event)
-        post :create, event: e.attributes
+        _e = build(:event)
+        post :create, event: _e.attributes
         expect(response).to redirect_to new_user_session_path
       end
       it "Show action render event's page" do
-        e = create(:event)
         get :show, id: e.id
         expect(response).to render_template :show
       end
       it "Update action redirect_to to sign in page" do
-        e = create(:event)
         put :update, id: e.id, event: attributes_for(:event, name: "Pryatki")
         e.reload
         expect(response).to redirect_to new_user_session_path
       end
       it "Destroy action redirect_to to sign in page" do
-        e = create(:event)
         delete :destroy, id: e.id
         expect(response).to redirect_to new_user_session_path
       end
       it "Join action redirect_to to sign in page" do
-        e = create(:event)
         get :join, id: e.id
         expect(response).to redirect_to new_user_session_path
       end
       it "Unfollow action redirect_to to sign in page" do
-        e = create(:event)
         get :unfollow, id: e.id
         expect(response).to redirect_to new_user_session_path
       end
@@ -300,8 +482,15 @@ RSpec.describe EventsController, type: :controller do
   describe "Logic" do
     context "for SIGNED users" do
       let(:user) {u = create(:user)}
-      before {sign_in user}
-      
+      let(:role_user)       {create(:role_user)}
+      let(:role_superadmin) {create(:role_superadmin)}
+      let(:role_admin)      {create(:role_admin)}
+      let(:role_moderator)  {create(:role_moderator)}
+      before {
+        user.roles << role_user
+        sign_in user
+      }
+
       context "Create action" do
         it "should save new event if valid" do
           e = build(:event)
@@ -318,59 +507,123 @@ RSpec.describe EventsController, type: :controller do
       end
 
       context "Update action" do
-        context "if user have permissions" do
+        let(:e) {create(:event)}
+        context "if USER is owner" do
+          before {user.products << e}
           it "with valid data should update event" do
-            e = create(:event)
-            user.products << e
             put :update, id: e.id, event: attributes_for(:event, name: "newname", tags: "Sport")
             e.reload
             expect(Event.last.name).to eq("newname")
           end
           it "with not valid data shouldn't update event" do
-            e = create(:event)
-            user.products << e
             put :update, id: e.id, event: attributes_for(:event, name: nil, tags: "Sport")
             e.reload
             expect(Event.last.name).to eq("valid_event")
           end
         end
-        context "if user have no permissions" do
-          it "with valid data shouldn't update event" do
-            e = create(:event)
-            put :update, id: e.id, event: attributes_for(:event, name: "Newname", tags: "Sport")
+        it "if USER is not owner" do
+          e = create(:event)
+          put :update, id: e.id, event: attributes_for(:event, name: "Newname", tags: "Sport")
+          e.reload
+          expect(Event.last.name).to eq("valid_event")
+        end
+        it "should update any event if SUPERADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
+          put :update, id: e.id, event: attributes_for(:event, name: "newname", tags: "Sport")
             e.reload
-            expect(Event.last.name).to eq("valid_event")
-          end
-          it "with not valid data shouldn't update event" do
-            e = create(:event)
-            put :update, id: e.id, event: attributes_for(:event, name: nil, tags: "Sport")
+            expect(Event.last.name).to eq("newname")
+        end
+        it "should update any event if ADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_admin
+          put :update, id: e.id, event: attributes_for(:event, name: "newname", tags: "Sport")
             e.reload
-            expect(Event.last.name).to eq("valid_event")
-          end
+            expect(Event.last.name).to eq("newname")
+        end
+        it "should update any event if MODERATOR" do
+          user.roles.delete(role_user)
+          user.roles << role_moderator
+          put :update, id: e.id, event: attributes_for(:event, name: "newname", tags: "Sport")
+            e.reload
+            expect(Event.last.name).to eq("newname")
         end
       end
 
       context "destroy" do
-        it "should destroy event if user have permissions" do
+        it "shouldn't destroy event if USER is owner" do
           e = create(:event)
           user.products << e
+          expect{delete :destroy, id: e.id}.to change(Event,:count).by(0)
+        end
+        it "shouldn't destroy event if USER is not owner" do
+          e = create(:event)
+          expect{delete :destroy, id: e.id}.to change(Event,:count).by(0)
+        end
+        it "should destroy any event if SUPERADMIN" do
+          e = create(:event)
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
           expect{delete :destroy, id: e.id}.to change(Event,:count).by(-1)
         end
-        it "shouldn't destroy event if user have no permissions" do
+        it "should destroy any event if ADMIN" do
           e = create(:event)
+          user.roles.delete(role_user)
+          user.roles << role_admin
+          expect{delete :destroy, id: e.id}.to change(Event,:count).by(0)
+        end
+        it "should destroy any event if MODERATOR" do
+          e = create(:event)
+          user.roles.delete(role_user)
+          user.roles << role_moderator
           expect{delete :destroy, id: e.id}.to change(Event,:count).by(0)
         end
       end
 
+      context "del_request" do
+        let(:e) {create(:event)}
+        it "should set del_flag by true if USER is owner" do
+          user.products << e
+          get :del_request, id: e.id
+          e.reload
+          expect(e.del_flag).to eq(true)
+        end
+        it "shouldn't change del_flag if USER is not owner " do
+          get :del_request, id: e.id
+          e.reload
+          expect(e.del_flag).to eq(false)
+        end
+        it "should ser del_flag be true if SUPERADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
+          get :del_request, id: e.id
+          e.reload
+          expect(e.del_flag).to eq(true)
+        end
+        it "should ser del_flag be true if ADMIN" do
+          user.roles.delete(role_user)
+          user.roles << role_admin
+          get :del_request, id: e.id
+          e.reload
+          expect(e.del_flag).to eq(true)
+        end
+        it "should ser del_flag be true if MODERATOR" do
+          user.roles.delete(role_user)
+          user.roles << role_moderator
+          get :del_request, id: e.id
+          e.reload
+          expect(e.del_flag).to eq(true)
+        end
+      end
+
       context "Join action" do
+        let(:e) {create(:event)}
         it "shouldn't add duplicate events to user's events" do
-          e = create(:event)
           user.events << e
           get :join, id: e.id
           expect(user.events.count).to eq(1)
         end
         it "should add event to user's events" do
-          e = create(:event)
           @request.env['HTTP_REFERER'] = 'http://localhost:3000'
           get :join, id: e.id
           expect(user.events.count).to eq(1)
@@ -418,9 +671,12 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe "permited attributes" do
-    let(:user) {u = create(:user)}
-    before {sign_in user}
-    let(:event) {e = create(:event)}
+    let(:user) {create(:user)}
+    let(:role_user) {create(:role_user)}
+    before {
+      user.roles << role_user
+      sign_in user
+    }
     it "should update event params" do
       t = create(:tag)
       e1 = create(:filled_event)
@@ -440,6 +696,7 @@ RSpec.describe EventsController, type: :controller do
         location:     "Suharevskaya str",
         latitude:     '0.0',
         longitude:    '0.0',
+        del_flag:     'true', 
         tags:         "Sport"
         )
       e2.reload
@@ -454,6 +711,7 @@ RSpec.describe EventsController, type: :controller do
       expect(Event.last.location).to eq(e1.location)
       expect(Event.last.latitude).to eq(e1.latitude)
       expect(Event.last.longitude).to eq(e1.longitude)
+      expect(Event.last.del_flag).to eq(e1.del_flag)
       expect(Event.last.tags).to eq(e1.tags)
     end
     it "should update photo" do

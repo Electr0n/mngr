@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005085847) do
+ActiveRecord::Schema.define(version: 20161029094044) do
 
   create_table "commontator_comments", force: :cascade do |t|
     t.string   "creator_type",      limit: 255
@@ -73,11 +73,13 @@ ActiveRecord::Schema.define(version: 20161005085847) do
     t.datetime "photo_updated_at"
     t.float    "latitude",           limit: 24
     t.float    "longitude",          limit: 24
+    t.boolean  "del_flag",                       default: false, null: false
   end
 
   add_index "events", ["agemax"], name: "index_events_on_agemax", using: :btree
   add_index "events", ["agemin"], name: "index_events_on_agemin", using: :btree
   add_index "events", ["date"], name: "index_events_on_date", using: :btree
+  add_index "events", ["del_flag"], name: "index_events_on_del_flag", using: :btree
   add_index "events", ["gender"], name: "index_events_on_gender", using: :btree
   add_index "events", ["location"], name: "index_events_on_location", using: :btree
   add_index "events", ["name"], name: "index_events_on_name", using: :btree
@@ -107,6 +109,15 @@ ActiveRecord::Schema.define(version: 20161005085847) do
   add_index "owners_products", ["event_id"], name: "index_owners_products_on_event_id", using: :btree
   add_index "owners_products", ["user_id"], name: "index_owners_products_on_user_id", using: :btree
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name", limit: 255
+  end
+
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.integer "user_id", limit: 4
+    t.integer "role_id", limit: 4
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name", limit: 255
   end
@@ -120,18 +131,18 @@ ActiveRecord::Schema.define(version: 20161005085847) do
   add_index "tags_users", ["user_id"], name: "index_tags_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "",     null: false
-    t.string   "encrypted_password",     limit: 255, default: "",     null: false
+    t.string   "email",                  limit: 255, default: "",    null: false
+    t.string   "encrypted_password",     limit: 255, default: "",    null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,      null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.string   "name",                   limit: 255
     t.string   "surname",                limit: 255
     t.date     "bday"
@@ -142,21 +153,22 @@ ActiveRecord::Schema.define(version: 20161005085847) do
     t.string   "city",                   limit: 255
     t.string   "hobby",                  limit: 255
     t.string   "about",                  limit: 255
-    t.string   "role",                   limit: 255, default: "user", null: false
     t.integer  "denied_t",               limit: 4
-    t.boolean  "locked",                             default: false,  null: false
+    t.boolean  "locked",                             default: false, null: false
     t.string   "provider",               limit: 255
     t.string   "uid",                    limit: 255
     t.string   "avatar_file_name",       limit: 255
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size",       limit: 4
     t.datetime "avatar_updated_at"
+    t.boolean  "del_flag",                           default: false, null: false
   end
 
   add_index "users", ["age"], name: "index_users_on_age", using: :btree
   add_index "users", ["bday"], name: "index_users_on_bday", using: :btree
   add_index "users", ["city"], name: "index_users_on_city", using: :btree
   add_index "users", ["country"], name: "index_users_on_country", using: :btree
+  add_index "users", ["del_flag"], name: "index_users_on_del_flag", using: :btree
   add_index "users", ["denied_t"], name: "index_users_on_denied_t", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["gender"], name: "index_users_on_gender", using: :btree
@@ -164,7 +176,6 @@ ActiveRecord::Schema.define(version: 20161005085847) do
   add_index "users", ["locked"], name: "index_users_on_locked", using: :btree
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["role"], name: "index_users_on_role", using: :btree
   add_index "users", ["surname"], name: "index_users_on_surname", using: :btree
 
   create_table "votes", force: :cascade do |t|

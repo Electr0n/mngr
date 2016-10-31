@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
 
   before_action :find_event, only: [:edit, :show, :update, :destroy, :join, 
-    :unfollow]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :unfollow]
+    :unfollow, :del_request]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :unfollow, :del_request]
 
   def index
     @events = Event.all.page(params[:page]).per(10)
@@ -14,7 +14,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    if @event.save
+    if (can? :create, @event) && @event.save
       current_user.products << @event
       redirect_to @event
     else
@@ -28,7 +28,7 @@ class EventsController < ApplicationController
 
   def edit
     # action find_event
-    if current_user.products.include? @event
+    if can? :edit, @event
       @tags = Tag.all
     else
       render file: "#{Rails.root}/public/403.html", layout: false, status: 403
@@ -37,7 +37,7 @@ class EventsController < ApplicationController
 
   def update
     # action find_event
-    if current_user.products.include? @event  
+    if can? :update, @event  
       @event.update_attributes(event_params)
       @event.tags = Tag.where(name: tags_params[:tags].split(','))
       if @event.errors.empty?
@@ -52,7 +52,7 @@ class EventsController < ApplicationController
 
   def destroy
     # action find_event 
-    if current_user.products.include? @event 
+    if can? :destroy, @event 
       @event.destroy
       redirect_to user_path(current_user)
     else
@@ -62,7 +62,7 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :date, :time, :description, :gender, 
-      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude)
+      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude, :del_flag)
   end
 
   def tags_params
@@ -71,6 +71,15 @@ class EventsController < ApplicationController
 
   def find_event
     @event = Event.find(params[:id])
+  end
+
+  def del_request
+    if can? :del_request, @event
+      @event.del_flag = true
+      render file: "#{Rails.root}/public/system/events/deleted.html" if @event.save
+    else
+      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
+    end
   end
 
   def join
