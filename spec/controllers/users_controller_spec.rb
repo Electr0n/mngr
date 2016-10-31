@@ -5,10 +5,13 @@ RSpec.describe UsersController, type: :controller do
   describe "response status" do
     
     context "if USER SIGNED." do
-      let(:user) {u = create(:user)}
-      let(:role) {r = create(:role_user)}
+      let(:user)            {create(:user)}
+      let(:role_user)       {create(:role_user)}
+      let(:role_superadmin) {create(:role_superadmin)}
+      let(:role_admin)      {create(:role_admin)}
+      let(:role_moderator)  {create(:role_moderator)}
       before {
-        user.roles << role
+        user.roles << role_user
         sign_in user
       }
       it "Index action responds status 200" do
@@ -21,7 +24,7 @@ RSpec.describe UsersController, type: :controller do
       end
       
       context "Update action" do
-        it "if user!=current_user responds status 403" do
+        it "if USER!=current_user responds status 403" do
           u1 = create(:user)
           put :update, {id: u1.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
           u1.reload
@@ -35,8 +38,8 @@ RSpec.describe UsersController, type: :controller do
             expect(response.status).to eq(302)
           end
           it "if SUPERADMIN" do
-            r1 = create(:role_superadmin)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_superadmin
             u1 = create(:user)
             t = create(:tag)
             put :update, {id: u1.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
@@ -44,8 +47,8 @@ RSpec.describe UsersController, type: :controller do
             expect(response.status).to eq(302)
           end
           it "if ADMIN" do
-            r1 = create(:role_admin)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_admin
             u1 = create(:user)
             t = create(:tag)
             put :update, {id: u1.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
@@ -53,8 +56,8 @@ RSpec.describe UsersController, type: :controller do
             expect(response.status).to eq(302)
           end
           it "if MODERATOR" do
-            r1 = create(:role_moderator)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_moderator
             u1 = create(:user)
             t = create(:tag)
             put :update, {id: u1.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
@@ -80,23 +83,23 @@ RSpec.describe UsersController, type: :controller do
           expect(response.status).to eq(403)
         end
         it "for SUPERADMIN responds status 200" do
-          r1 = create(:role_superadmin)
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
           u1 = create(:user)
-          user.roles << r1
           get :edit, id: u1.id
           expect(response.status).to eq(200)
         end
         it "for ADMIN responds status 200" do
-          r1 = create(:role_admin)
+          user.roles.delete(role_user)
+          user.roles << role_admin
           u1 = create(:user)
-          user.roles << r1
           get :edit, id: u1.id
           expect(response.status).to eq(200)
         end
         it "for MODERATOR responds status 403" do
-          r1 = create(:role_moderator)
+          user.roles.delete(role_user)
+          user.roles << role_moderator
           u1 = create(:user)
-          user.roles << r1
           get :edit, id: u1.id
           expect(response.status).to eq(403)
         end
@@ -113,23 +116,23 @@ RSpec.describe UsersController, type: :controller do
           expect(response.status).to eq(403)
         end
         it "for SUPERADMIN responds status 200" do
-          r2 = create(:role_superadmin)
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
           u1 = create(:user)
-          user.roles << r2
           delete :destroy, id: u1.id
           expect(response.status).to eq(200)
         end
         it "for ADMIN responds status 403" do
-          r2 = create(:role_admin)
+          user.roles.delete(role_user)
+          user.roles << role_admin
           u1 = create(:user)
-          user.roles << r2
           delete :destroy, id: u1.id
           expect(response.status).to eq(403)
         end
         it "for MODERATOR responds status 403" do
-          r2 = create(:role_moderator)
+          user.roles.delete(role_user)
+          user.roles << role_moderator
           u1 = create(:user)
-          user.roles << r2
           delete :destroy, id: u1.id
           expect(response.status).to eq(403)
         end
@@ -142,22 +145,22 @@ RSpec.describe UsersController, type: :controller do
         end
         describe "for user!=current_user:" do
           it "role SUPERADMIN should responds status 200" do
-            r1 = create(:role_superadmin)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_superadmin
             u1 = create(:user)
             get :del_request, id: u1.id
             expect(response.status).to eq(200)
           end
           it "role ADMIN should responds status 200" do
-            r1 = create(:role_admin)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_admin
             u1 = create(:user)
             get :del_request, id: u1.id
             expect(response.status).to eq(200)
           end
           it "role MODERATOR should responds status 200" do
-            r1 = create(:role_moderator)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_moderator
             u1 = create(:user)
             get :del_request, id: u1.id
             expect(response.status).to eq(200)
@@ -189,7 +192,7 @@ RSpec.describe UsersController, type: :controller do
 
       context "Create action" do
         it "for valid user responds status 302" do
-          r = create(:role_user)
+          create(:role_user)
           post :create, user: {name: "Ivan", email: "ivan0v@ro.ru", password: "123qwe"}
           expect(response.status).to eq(302)
         end
@@ -230,10 +233,13 @@ RSpec.describe UsersController, type: :controller do
   describe "template rendering." do
 
     context "if USER SIGNED." do
-      let(:user) {u = create(:user)}
-      let(:role) {r = create(:role_user)}
+      let(:user)            {create(:user)}
+      let(:role_user)       {create(:role_user)}
+      let(:role_superadmin) {create(:role_superadmin)}
+      let(:role_admin)      {create(:role_admin)}
+      let(:role_moderator)  {create(:role_moderator)}
       before {
-        user.roles << role
+        user.roles << role_user
         sign_in user
       }
       it "Index action should render index template" do
@@ -276,23 +282,23 @@ RSpec.describe UsersController, type: :controller do
           expect(response).to render_template :edit
         end
         it "for SUPERADMIN should render edit template" do
-          r1 = create(:role_superadmin)
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
           u1 = create(:user)
-          user.roles << r1
           get :edit, id: u1.id
           expect(response).to render_template :edit
         end
         it "for ADMIN should render edit template" do
-          r1 = create(:role_admin)
+          user.roles.delete(role_user)
+          user.roles << role_admin
           u1 = create(:user)
-          user.roles << r1
           get :edit, id: u1.id
           expect(response).to render_template :edit
         end
         it "for MODERATOR should render 403 page" do
-          r1 = create(:role_moderator)
+          user.roles.delete(role_user)
+          user.roles << role_moderator
           u1 = create(:user)
-          user.roles << r1
           get :edit, id: u1.id
           expect(response).to render_template file: "#{Rails.root}/public/403.html"
         end
@@ -309,23 +315,23 @@ RSpec.describe UsersController, type: :controller do
           expect(response).to render_template file: "#{Rails.root}/public/403.html"
         end
         it "for SUPERADMIN render index template" do
-          r2 = create(:role_superadmin)
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
           u1 = create(:user)
-          user.roles << r2
           delete :destroy, id: u1.id
           expect(response).to render_template :index
         end
         it "for ADMIN should render 403" do
-          r2 = create(:role_admin)
+          user.roles.delete(role_user)
+          user.roles << role_admin
           u1 = create(:user)
-          user.roles << r2
           delete :destroy, id: u1.id
           expect(response).to render_template file: "#{Rails.root}/public/403.html"
         end
         it "for MODERATOR should render 403" do
-          r2 = create(:role_moderator)
+          user.roles.delete(role_user)
+          user.roles << role_moderator
           u1 = create(:user)
-          user.roles << r2
           delete :destroy, id: u1.id
           expect(response).to render_template file: "#{Rails.root}/public/403.html"
         end
@@ -338,22 +344,22 @@ RSpec.describe UsersController, type: :controller do
         end
         describe "for user!=current_user:" do
           it "role SUPERADMIN should render deleted page" do
-            r1 = create(:role_superadmin)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_superadmin
             u1 = create(:user)
             get :del_request, id: u1.id
             expect(response).to render_template file: "#{Rails.root}/public/system/users/deleted.html"
           end
           it "role ADMIN should render deleted page" do
-            r1 = create(:role_admin)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_admin
             u1 = create(:user)
             get :del_request, id: u1.id
             expect(response).to render_template file: "#{Rails.root}/public/system/users/deleted.html"
           end
           it "role MODERATOR should render deleted page" do
-            r1 = create(:role_moderator)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_moderator
             u1 = create(:user)
             get :del_request, id: u1.id
             expect(response).to render_template file: "#{Rails.root}/public/system/users/deleted.html"
@@ -385,7 +391,7 @@ RSpec.describe UsersController, type: :controller do
 
       context "Create action:" do
         it "for valid user should redirect to user's page" do
-          r = create(:role_user)
+          create(:role_user)
           post :create, user: {name: "Ivan", email: "ivan0v@ro.ru", password: "123qwe"}
           expect(response).to redirect_to assigns(:user)
         end
@@ -428,10 +434,13 @@ RSpec.describe UsersController, type: :controller do
       
       context "if USER SIGNED" do
       
-        let(:user) {u = create(:user)}
-        let(:role) {r = create(:role_user)}
+        let(:user)            {create(:user)}
+        let(:role_user)       {create(:role_user)}
+        let(:role_superadmin) {create(:role_superadmin)}
+        let(:role_admin)      {create(:role_admin)}
+        let(:role_moderator)  {create(:role_moderator)}
         before {
-          user.roles << role
+          user.roles << role_user
           sign_in user
         }
 
@@ -462,8 +471,8 @@ RSpec.describe UsersController, type: :controller do
             expect(user.tags.count).not_to eq(0)
           end
           it "as SUPERADMIN, should update user" do
-            r1 = create(:role_superadmin)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_superadmin
             u1 = create(:user)
             t = create(:tag)
             put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: "Sport")
@@ -473,8 +482,8 @@ RSpec.describe UsersController, type: :controller do
             expect(u1.tags.count).not_to eq(0)
           end
           it "as ADMIN, should update user" do
-            r1 = create(:role_admin)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_admin
             u1 = create(:user)
             t = create(:tag)
             put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: "Sport")
@@ -484,8 +493,8 @@ RSpec.describe UsersController, type: :controller do
             expect(u1.tags.count).not_to eq(0)
           end
           it "as MODERATOR, shouldn't update user" do
-            r1 = create(:role_moderator)
-            user.roles << r1
+            user.roles.delete(role_user)
+            user.roles << role_moderator
             u1 = create(:user)
             t = create(:tag)
             put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: "Sport")
@@ -524,10 +533,13 @@ RSpec.describe UsersController, type: :controller do
 
     context "Destroy action:" do
       context "if user SIGNED" do
-        let(:user) {u = create(:user)}
-        let(:role) {r = create(:role_user)}
+        let(:user)            {create(:user)}
+        let(:role_user)       {create(:role_user)}
+        let(:role_superadmin) {create(:role_superadmin)}
+        let(:role_admin)      {create(:role_admin)}
+        let(:role_moderator)  {create(:role_moderator)}
         before {
-          user.roles << role
+          user.roles << role_user
           sign_in user
         }
         it "shouldn't destroy any users for user!=current_user" do
@@ -538,21 +550,21 @@ RSpec.describe UsersController, type: :controller do
           expect{delete :destroy, id: user.id}.to change(User,:count).by(0)
         end
         it "for SUPERADMIN should destroy any user" do
-          r2 = create(:role_superadmin)
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
           u1 = create(:user)
-          user.roles << r2
           expect{delete :destroy, id: u1.id}.to change(User,:count).by(-1)
         end
         it "for ADMIN should not destroy any users" do
-          r2 = create(:role_admin)
+          user.roles.delete(role_user)
+          user.roles << role_admin
           u1 = create(:user)
-          user.roles << r2
           expect{delete :destroy, id: u1.id}.to change(User,:count).by(0)
         end
         it "for MODERATOR should not destroy any users" do
-          r2 = create(:role_moderator)
+          user.roles.delete(role_user)
+          user.roles << role_moderator
           u1 = create(:user)
-          user.roles << r2
           expect{delete :destroy, id: u1.id}.to change(User,:count).by(0)
         end
       end
@@ -566,10 +578,13 @@ RSpec.describe UsersController, type: :controller do
 
     context "del_request action" do
       context "if SIGNED" do
-        let(:user) {u = create(:user)}
-        let(:role) {r = create(:role_user)}
+        let(:user)            {create(:user)}
+        let(:role_user)       {create(:role_user)}
+        let(:role_superadmin) {create(:role_superadmin)}
+        let(:role_admin)      {create(:role_admin)}
+        let(:role_moderator)  {create(:role_moderator)}
         before {
-          user.roles << role
+          user.roles << role_user
           sign_in user
         }
         it "should not change del_flag for user!=current_user" do
@@ -584,25 +599,25 @@ RSpec.describe UsersController, type: :controller do
           expect(user.del_flag).to eq(true)
         end
         it "should set del_flag by true for SUPERADMIN" do
-          r2 = create(:role_superadmin)
+          user.roles.delete(role_user)
+          user.roles << role_superadmin
           u1 = create(:user)
-          user.roles << r2
           get :del_request, id: u1.id
           u1.reload
           expect(u1.del_flag).to eq(true)
         end
         it "should set del_flag by true for ADMIN" do
-          r2 = create(:role_admin)
+          user.roles.delete(role_user)
+          user.roles << role_admin
           u1 = create(:user)
-          user.roles << r2
           get :del_request, id: u1.id
           u1.reload
           expect(u1.del_flag).to eq(true)
         end
         it "should set del_flag by true for MODERATOR" do
-          r2 = create(:role_moderator)
+          user.roles.delete(role_user)
+          user.roles << role_moderator
           u1 = create(:user)
-          user.roles << r2
           get :del_request, id: u1.id
           u1.reload
           expect(u1.del_flag).to eq(true)
@@ -621,10 +636,10 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "permited attributes" do
-    let(:user) {u = create(:user)}
-    let(:role) {r = create(:role_user)}
+    let(:user)            {create(:user)}
+    let(:role_user)       {create(:role_user)}
     before {
-      user.roles << role
+      user.roles << role_user
       sign_in user
     }
     it "should update user params" do

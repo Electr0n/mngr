@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :events do
     get :join,        on: :member
     get :unfollow,    on: :member
+    get :del_request, on: :member
   end
   resources :tags do
   end

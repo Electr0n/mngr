@@ -11,7 +11,7 @@ class Ability
     if user.roles.find_by_name('moderator')
       can :read, [User, Event]
       can :del_request, User
-      can [:create, :edit, :update], Event
+      can [:create, :edit, :update, :del_request], Event
     end
     if user.roles.find_by_name('user')
       can :read, :all
@@ -19,8 +19,8 @@ class Ability
       can [:edit, :update, :del_request], User do |u|
         u == user
       end
-      can [:edit, :update], Event do |e|
-        user.events.include? e
+      can [:edit, :update, :del_request], Event do |e|
+        user.products.include? e
       end
     end
   end

@@ -13,16 +13,12 @@ class EventsController < ApplicationController
   end
 
   def create
-    if can? :create, @event
-      @event = Event.new(event_params)
-      if @event.save
-        current_user.products << @event
-        redirect_to @event
-      else
-        render 'new'
-      end
+    @event = Event.new(event_params)
+    if (can? :create, @event) && @event.save
+      current_user.products << @event
+      redirect_to @event
     else
-      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
+      render 'new'
     end
   end
 
@@ -32,7 +28,7 @@ class EventsController < ApplicationController
 
   def edit
     # action find_event
-    if current_user.products.include? @event
+    if can? :edit, @event
       @tags = Tag.all
     else
       render file: "#{Rails.root}/public/403.html", layout: false, status: 403
@@ -41,7 +37,7 @@ class EventsController < ApplicationController
 
   def update
     # action find_event
-    if current_user.products.include? @event  
+    if can? :update, @event  
       @event.update_attributes(event_params)
       @event.tags = Tag.where(name: tags_params[:tags].split(','))
       if @event.errors.empty?
@@ -56,7 +52,7 @@ class EventsController < ApplicationController
 
   def destroy
     # action find_event 
-    if current_user.products.include? @event 
+    if can? :destroy, @event 
       @event.destroy
       redirect_to user_path(current_user)
     else
@@ -77,6 +73,15 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def del_request
+    if can? :del_request, @event
+      @event.del_flag = true
+      render file: "#{Rails.root}/public/system/events/deleted.html" if @event.save
+    else
+      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
+    end
+  end
+
   def join
     # action find_event
     if current_user.events.include?(@event)
@@ -94,15 +99,6 @@ class EventsController < ApplicationController
       redirect_to(:back)
     else
       redirect_to (current_user)
-    end
-  end
-
-  def del_request
-    if can? :del_request, @event
-      @event.del_flag = true
-      render file: "#{Rails.root}/public/system/events/deleted.html" if @event.save
-    else
-      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
     end
   end
 
