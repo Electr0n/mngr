@@ -19,6 +19,6 @@ users       all      edit     read     read, edit self
 events      all      edit     edit     read, create, [edit, delete] if owner
 comments    all      edit     edit     read, create, [edit, delete] if owner
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+			GEMS docs
+Ransack (Search) https://github.com/activerecord-hackery/ransack
+	http://railscasts.com/episodes/370-ransack?autoplay=true

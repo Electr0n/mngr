@@ -11,6 +11,7 @@ ready = ->
 $(document).ready(ready)
 $(document).on('page:load', ready)
 
+
 $(document).ready ->
   $('select#country').change ->
     x = $(@).find(':selected').text().toLowerCase().replace(' ', '-')

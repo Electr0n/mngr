@@ -5,7 +5,9 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :unfollow, :del_request]
 
   def index
-    @events = Event.all.page(params[:page]).per(10)
+    @q = Event.ransack(params[:q])
+    @events = @q.result.page(params[:page]).per(10)
+    # @events = Event.all.page(params[:page]).per(10)
   end
 
   def new

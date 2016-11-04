@@ -36,7 +36,7 @@
 = image_tag(@event.owners.first.avatar.url(:thumb))
 %br
 %br
-= if current_user.events.include?(@event) then                              |
+= if !current_user.nil? && current_user.events.include?(@event) then        |
   link_to "unfollow", unfollow_event_path(@event), class: "btn btn-confirm" |
   else                                                                      |
   link_to "join", join_event_path(@event), class: "btn btn-confirm"         |

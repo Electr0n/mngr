@@ -1,39 +1,52 @@
 #cities{data: Carmen::Country.all.reduce({}) {|memo, e| memo.merge({ e.name.gsub(' ', '-') => e.subregions.map{|q| [q.code, q.name]} })}  }
-= form_tag users_path, :method => 'get' do
-  %p
-    = text_field_tag :name, params[:name], placeholder: " Name"
-    %br
-    = text_field_tag :surname, params[:surname], placeholder: " Surname"
-    %br
-    = radio_button_tag("gender", "Male")
-    = label_tag :gender, "Male"
-    = radio_button_tag("gender", "Female")
-    = label_tag :gender, "Female"
-    = radio_button_tag("gender", "", 1)
-    = label_tag :gender, "No matter"
-    %br
-    = select_year(''.to_i, start_year: 1940, end_year: 2015, :prompt => "nevermind")
-    %br
-    = select_month(''.to_i, :prompt => "nevermind")
-    %br
-    = country_select_tag :country, params[:country], :priority => %w(BY RU UA), prompt: 'Please select a country'
-    %br
-    = select_tag :city, prompt: 'Please select a city'
-    %br
+.hello_form
+  .sub_header
+    Search users
+  = form_tag users_path, :method => 'get' do
+    .form-group.line
+      = label_tag 'name', nil, class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = text_field_tag :name, params[:name], class: 'form-control'
+    .form-group.line
+      = label_tag 'surname', nil, class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = text_field_tag :surname, params[:surname], class: 'form-control'
+    .form-group.line
+      = label_tag 'gender', nil, class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = radio_button_tag("gender", "male")
+        = label_tag :gender, 'Male'
+        = radio_button_tag("gender", "female")
+        = label_tag :gender, 'Female'
+        = radio_button_tag("gender", "", 1)
+        = label_tag :gender, 'nvm'
+    .form-group.line
+      = label_tag 'birthday', nil, class: 'col-sm-2 control-label margin_label'
+      .col-sm-10.date-select
+        = select_year(''.to_i, start_year: 1940, end_year: 2016, :prompt => 'nvm')
+        = select_month(''.to_i, :prompt => 'nvm')
+    .form-group.line
+      = label_tag 'country', nil, class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = country_select_tag :country, params[:country], :priority => %w(BY RU UA), promt: 'Select country'
+    .form-group.line
+      = label_tag 'city', nil, class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = select_tag :city, promt: 'Select a city'
     = submit_tag "Search", :name => nil, :surname => nil, :gender => nil, :country => nil, :city => nil
-.sub_header
-  All users
-%table.event_list{:align => "left"}
-  %tr{:align => "center"}
-    %th Name:
-    %th Surname:
-    %th Email:
-  - @users.each do |u|
+  .sub_header
+    All users
+  %table.event_list{:align => "left"}
     %tr{:align => "center"}
-      %td= link_to u.name, user_path(u)
-      %td= u.surname
-      %td= u.email
-%br
-  = paginate @users
+      %th Name:
+      %th Surname:
+      %th Email:
+    - @users.each do |u|
+      %tr{:align => "center"}
+        %td= link_to u.name, user_path(u)
+        %td= u.surname
+        %td= u.email
   %br
-  = t('congradulation')
+    = paginate @users
+    %br
+    = t('congradulation')

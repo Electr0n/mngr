@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029094044) do
+ActiveRecord::Schema.define(version: 20161104142659) do
 
   create_table "commontator_comments", force: :cascade do |t|
     t.string   "creator_type",      limit: 255
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20161029094044) do
     t.string   "description",        limit: 255
     t.string   "gender",             limit: 255
     t.integer  "number",             limit: 4
-    t.integer  "agemin",             limit: 4
+    t.integer  "agemin",             limit: 4,   default: 0
     t.integer  "agemax",             limit: 4
     t.string   "location",           limit: 255
     t.datetime "created_at"
