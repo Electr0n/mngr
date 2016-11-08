@@ -6,6 +6,7 @@ class EventsController < ApplicationController
 
   def index
     @q = Event.ransack(params[:q])
+    # binding.pry
     @events = @q.result.page(params[:page]).per(10)
     # @events = Event.all.page(params[:page]).per(10)
   end
