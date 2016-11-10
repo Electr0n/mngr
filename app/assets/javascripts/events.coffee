@@ -1,3 +1,2 @@
 jQuery ->
-  $('form').on 'click', '.add_fields', (event) ->
-    event.preventDefault()
+  $(".js-example-tokenizer").select2(tags: true)

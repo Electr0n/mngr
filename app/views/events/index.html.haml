@@ -29,10 +29,10 @@
       = f.label :location_cont, 'Location: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
         = f.search_field :location_cont, class: 'form-control'
-    = f.fields_for :tags do |builder|
-      = render 'tag_fields', f: f
-      = link_to_add_fields 'add tag', f, :tags
-    / %button{:type => "button", :class => 'add_fields'} +
+    .form-group.line
+      = f.label :tags_name_in_all, 'Tags: ', class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = f.select :tags_name_in_all, options_from_collection_for_select(Tag.all, :name, :name), {}, { class: 'js-example-tokenizer', multiple: true }
     = f.submit
 .sub_header
   All events

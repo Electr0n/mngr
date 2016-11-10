@@ -23,3 +23,4 @@ comments    all      edit     edit     read, create, [edit, delete] if owner
 - Ransack (Search) https://github.com/activerecord-hackery/ransack
 	http://railscasts.com/episodes/370-ransack?autoplay=true
 - Carmen (Country/City) https://github.com/jim/carmen
+- select2 (Select-pipeline) https://github.com/argerim/select2-rails

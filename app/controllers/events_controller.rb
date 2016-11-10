@@ -5,8 +5,12 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :unfollow, :del_request]
 
   def index
+    if params[:q]
+      params[:q]['tags_name_in_all'].delete("") 
+    end
     @q = Event.ransack(params[:q])
-    @events = @q.result.page(params[:page]).per(10)
+    @events = @q.result(distinct: true).page(params[:page]).per(10)
+    binding.pry
   end
 
   def new

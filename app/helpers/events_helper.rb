@@ -24,23 +24,4 @@ module EventsHelper
     end
   end
 
-  def link_to_add_fields(name, f, association)
-    # binding.pry
-    new_object = Tag.new
-    id = new_object.object_id
-    # fields = f.fields_for(association, new_object, child_index: id) do |builder|
-    #   render("tag_fields", f: builder)
-    # end
-    fields = Tag.all
-    link_to(name, '#', class: 'add_fields', data: {fields: fields})
-  end
-
-  # def link_to_add_fields(name, f, type)
-  #   new_obj = f.object.send "build_#{type}"
-  #   id = "new_#{type}"
-  #   fields = f.send("#{type}_fields", new_obj, child_index: id) do |builder|
-  #     render("tag_field", f: builder)
-  #   end
-  #   link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
-  # end
 end
