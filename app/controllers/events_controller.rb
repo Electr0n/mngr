@@ -6,9 +6,7 @@ class EventsController < ApplicationController
 
   def index
     @q = Event.ransack(params[:q])
-    # binding.pry
     @events = @q.result.page(params[:page]).per(10)
-    # @events = Event.all.page(params[:page]).per(10)
   end
 
   def new
@@ -65,7 +63,7 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :date, :time, :description, :gender, 
-      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude, :del_flag)
+      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude, :del_flag, tags_attributes: [:id, :name])
   end
 
   def tags_params

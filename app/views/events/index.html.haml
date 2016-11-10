@@ -6,10 +6,10 @@
       = f.label :name_cont, 'Name: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
         = f.search_field :name_cont, class: 'form-control'
-    / .form-group.line
-    /   = f.label :date_eq, 'Date: ', class: 'col-sm-2 control-label margin_label'
-    /   .col-sm-10
-    /     = f.date_select(:date_eq, start_year: 2010, end_year: Time.now.year)
+    .form-group.line
+      = f.label :date_gteq, 'Date: ', class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = f.date_select(:date_gteq, start_year: Time.now.year, end_year: Time.now.year + 5)
     .form-group.line
       = f.label :gender_eq, 'Gender: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
@@ -29,9 +29,14 @@
       = f.label :location_cont, 'Location: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
         = f.search_field :location_cont, class: 'form-control'
+    = f.fields_for :tags do |builder|
+      = render 'tag_fields', f: f
+      = link_to_add_fields 'add tag', f, :tags
+    / %button{:type => "button", :class => 'add_fields'} +
     = f.submit
 .sub_header
   All events
+  = @events.count
 - @events.each do |e|
   .event_header
     = link_to e.name, event_path(e)

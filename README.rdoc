@@ -20,5 +20,6 @@ events      all      edit     edit     read, create, [edit, delete] if owner
 comments    all      edit     edit     read, create, [edit, delete] if owner
 
 			GEMS docs
-Ransack (Search) https://github.com/activerecord-hackery/ransack
+- Ransack (Search) https://github.com/activerecord-hackery/ransack
 	http://railscasts.com/episodes/370-ransack?autoplay=true
+- Carmen (Country/City) https://github.com/jim/carmen

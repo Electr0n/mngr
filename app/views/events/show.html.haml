@@ -15,12 +15,12 @@
     %td= @event.gender
   %tr
     %th Number:
-    %td= @event.number
+    %td= number_check
   %tr
     %th Age:
     %td
-      = @event.agemin
-      \- #{@event.agemax}
+      = agemin_check
+      = agemax_check
   %tr
     %th Tags:
     %td

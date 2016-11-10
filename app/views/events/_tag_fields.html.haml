@@ -1,0 +1,5 @@
+.form-group.line
+  = f.label :tags, 'Tags: ', class: 'col-sm-2 control-label margin_label'
+  .col-sm-10
+    = f.collection_select :tags_name_in, Tag.all, :name, :name, include_blank: true, class: 'form-control'
+  / = link_to_add_fields 'add tag', f, :tags
