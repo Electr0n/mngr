@@ -13,11 +13,11 @@
     .form-group.line
       = f.label :gender_eq, 'Gender: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        = f.radio_button :gender_eq, 'male'
-        = label_tag :gender_eq, 'Male'
         = f.radio_button :gender_eq, 'female'
+        = label_tag :gender_eq, 'Male'
+        = f.radio_button :gender_eq, 'male'
         = label_tag :gender_eq, 'Female'
-        = f.radio_button :gender_eq, 'NA'
+        = f.radio_button :gender_eq, ''
         = label_tag :gender_eq, 'nvm'
     .form-group.line
       = f.label :age, 'Age: ', class: 'col-sm-2 control-label margin_label'
@@ -30,10 +30,10 @@
       .col-sm-10
         = f.search_field :location_cont, class: 'form-control'
     .form-group.line
-      = f.label :tags_name_in_all, 'Tags: ', class: 'col-sm-2 control-label margin_label'
+      = f.label :tags_name_in, 'Tags: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        = f.select :tags_name_in_all, options_from_collection_for_select(Tag.all, :name, :name), {}, { class: 'js-example-tokenizer', multiple: true }
-    = f.submit
+        = f.select :tags_name_in, options_from_collection_for_select(Tag.all, :name, :name), {}, { class: 'js-example-tokenizer', multiple: true }
+    = f.submit class: "btn btn-confirm"
 .sub_header
   All events
   = @events.count

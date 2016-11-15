@@ -65,5 +65,15 @@ RSpec.describe Event, type: :model do
       e.number = "idk"
       expect(e.valid?).to be false
     end
+    it "shouldn't be valud: agemin, agemax should be less or equal 150" do
+      e.agemin = 160
+      e.agemax = 160
+      expect(e.valid?).to be false
+    end
+    it "shouldn't be valud: agemin should be less or equal than agemax" do
+      e.agemin = 50
+      e.agemax = 10
+      expect(e.valid?).to be false
+    end
   end
 end

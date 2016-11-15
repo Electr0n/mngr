@@ -2,25 +2,25 @@ module EventsHelper
   
   def agemax_check
     if @event.agemax >= 150
-      '- nvm'
+      false
     else
-      @event.agemax
+      true
     end
   end
 
   def agemin_check
-    if @event.agemin == 0
-      'nvm'
+    if @event.agemin < 0
+      false
     else
-      @event.agemin
+      true
     end
   end
 
   def number_check
     if @event.number >= 194673
-      'No matter'
+      false
     else
-      @event.number
+      true
     end
   end
 

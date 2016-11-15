@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20161104170743) do
     t.string   "gender",             limit: 255
     t.integer  "number",             limit: 4,   default: 194673, null: false
     t.integer  "agemin",             limit: 4,   default: 0,      null: false
-    t.integer  "agemax",             limit: 4,   default: 194673, null: false
+    t.integer  "agemax",             limit: 4,   default: 150,    null: false
     t.string   "location",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"

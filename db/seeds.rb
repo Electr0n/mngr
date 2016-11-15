@@ -270,7 +270,7 @@ e1 = Event.create(
   gender: "Female",
   number: '15',
   agemin: '0',
-  agemax: '194673',
+  agemax: '150',
   latitude: '52.3452',
   longitude: '27.3452')
 e2 = Event.create(
@@ -292,7 +292,7 @@ e3 = Event.create(
   gender: 'NA', 
   number: '10000', 
   agemin: '18', 
-  agemax: '194673', 
+  agemax: '150', 
   latitude: '87.3452',
   longitude: '65.3452')
 e4 = Event.create(
@@ -303,7 +303,7 @@ e4 = Event.create(
   gender: "NA", 
   number: '30', 
   agemin: '25', 
-  agemax: '194673',
+  agemax: '150',
   latitude: '12.3452', 
   longitude: '29.3452')
 e5 = Event.create(
@@ -314,7 +314,7 @@ e5 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '50', 
-  agemax: '194673', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e6 = Event.create(
@@ -402,7 +402,7 @@ e13 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '0', 
-  agemax: '194673', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e14 = Event.create(
@@ -413,7 +413,7 @@ e14 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '10', 
-  agemax: '194673', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e15 = Event.create(
@@ -424,7 +424,7 @@ e15 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '18', 
-  agemax: '194673', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e16 = Event.create(
@@ -435,7 +435,7 @@ e16 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '25', 
-  agemax: '194673', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e17 = Event.create(
@@ -446,7 +446,7 @@ e17 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '50', 
-  agemax: '194673', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e18 = Event.create(
