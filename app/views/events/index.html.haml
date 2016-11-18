@@ -9,7 +9,7 @@
     .form-group.line
       = f.label :date_gteq, 'Date: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        = f.date_select(:date_gteq, start_year: Time.now.year, end_year: Time.now.year + 5)
+        = f.date_select(:date_gteq, start_year: Time.now.year, end_year: Time.now.year + 5, include_blank: true, default: nil)
     .form-group.line
       = f.label :gender_eq, 'Gender: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10

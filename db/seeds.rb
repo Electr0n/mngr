@@ -281,7 +281,7 @@ e2 = Event.create(
   gender: 'NA',
   number: '194673',
   agemin: '10', 
-  agemax: '194637', 
+  agemax: '150', 
   latitude: '32.3452', 
   longitude: '47.3452')
 e3 = Event.create(

@@ -2,38 +2,45 @@
 .hello_form
   .sub_header
     Search users
-  = form_tag users_path, :method => 'get' do
+  = search_form_for @q do |f|
     .form-group.line
-      = label_tag 'name', nil, class: 'col-sm-2 control-label margin_label'
+      = f.label :name_cont, 'Name: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        = text_field_tag :name, params[:name], class: 'form-control'
+        = f.search_field :name_cont, class: 'form-control'
     .form-group.line
-      = label_tag 'surname', nil, class: 'col-sm-2 control-label margin_label'
+      = f.label :surname_cont, 'Surname: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        = text_field_tag :surname, params[:surname], class: 'form-control'
+        = f.text_field :surname_cont, class: 'form-control'
     .form-group.line
-      = label_tag 'gender', nil, class: 'col-sm-2 control-label margin_label'
+      = f.label :gender_eq, 'Gender: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        = radio_button_tag("gender", "male")
-        = label_tag :gender, 'Male'
-        = radio_button_tag("gender", "female")
-        = label_tag :gender, 'Female'
-        = radio_button_tag("gender", "", 1)
-        = label_tag :gender, 'nvm'
+        = f.radio_button :gender_eq, 'female'
+        = label_tag :gender_eq, 'Male'
+        = f.radio_button :gender_eq, 'male'
+        = label_tag :gender_eq, 'Female'
+        = f.radio_button :gender_eq, ''
+        = label_tag :gender_eq, 'nvm'
     .form-group.line
-      = label_tag 'birthday', nil, class: 'col-sm-2 control-label margin_label'
-      .col-sm-10.date-select
-        = select_year(''.to_i, start_year: 1940, end_year: 2016, :prompt => 'nvm')
-        = select_month(''.to_i, :prompt => 'nvm')
+      = f.label :bday_lteq, 'Age: ', class: 'col-sm-2 control-label margin_label'
+      .col-sm-2
+        = f.number_field :bday_lteq, class: 'form-control'
+      .col-sm-2
+        = f.number_field :bday_gteq, class: 'form-control'
     .form-group.line
-      = label_tag 'country', nil, class: 'col-sm-2 control-label margin_label'
+      = f.label :country, 'Country: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        = country_select_tag :country, params[:country], :priority => %w(BY RU UA), promt: 'Select country'
+        = f.country_select :country_in, priority: %w(BY RU UA), include_blank: true, default: nil
     .form-group.line
-      = label_tag 'city', nil, class: 'col-sm-2 control-label margin_label'
+      = f.label :city, class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        = select_tag :city, promt: 'Select a city'
-    = submit_tag "Search", :name => nil, :surname => nil, :gender => nil, :country => nil, :city => nil
+        = render partial: 'q_subregion_select', locals: {parent_region: f.object.country}
+    .form-group.line
+      = f.label :tags_name_in, 'Tags: ', class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = f.select :tags_name_in, options_from_collection_for_select(Tag.all, :name, :name), {}, { class: 'js-example-tokenizer', multiple: true }
+    = f.submit class: "btn btn-confirm"
+
+  /   = submit_tag "Search", :name => nil, :surname => nil, :gender => nil, :country => nil, :city => nil
   .sub_header
     All users
   %table.event_list{:align => "left"}
