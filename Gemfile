@@ -24,6 +24,9 @@ gem 'kaminari'
 gem 'capybara'
 gem 'cancan'
 gem 'ffaker'
+gem 'activeadmin', '~> 1.0.0.pre4'
+gem 'ransack'
+gem "select2-rails"
 
 ###########
 

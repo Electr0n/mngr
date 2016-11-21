@@ -4,9 +4,14 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy, :del_request]
 
   def index
-    @users = User.search(params[:name], params[:surname], params[:gender], 
-      params[:date].try(:[], :year), params[:date].try(:[], :month), 
-      params[:country], params[:city]).page(params[:page]).per(5)
+    if params[:q]
+      # change params with calculated birthday by min age
+      params[:q]['bday_lteq'] = (Time.now - params[:q]['bday_lteq'].to_i.years).to_s unless params[:q]['bday_lteq'].blank?
+      # change params woth calculated birthday by max age
+      params[:q]['bday_gteq'] = (Time.now - params[:q]['bday_gteq'].to_i.years).to_s unless params[:q]['bday_gteq'].blank?
+    end
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true).page(params[:page]).per(10)
   end
 
   def new
@@ -80,6 +85,11 @@ class UsersController < ApplicationController
   def subregion_options
     render partial: 'subregion_select'
   end
+
+  def city_search
+    render partial: 'q_subregion_select'
+  end
+
 
   protected
 

@@ -269,8 +269,8 @@ e1 = Event.create(
   description: "It will be fun!!!",
   gender: "Female",
   number: '15',
-  agemin: '18',
-  agemax: '30',
+  agemin: '0',
+  agemax: '150',
   latitude: '52.3452',
   longitude: '27.3452')
 e2 = Event.create(
@@ -279,9 +279,9 @@ e2 = Event.create(
   time: '22:00',
   description: "Skating all nigth, take ur friends",
   gender: 'NA',
-  number: '0',
-  agemin: '16', 
-  agemax: '90', 
+  number: '194673',
+  agemin: '10', 
+  agemax: '150', 
   latitude: '32.3452', 
   longitude: '47.3452')
 e3 = Event.create(
@@ -292,7 +292,7 @@ e3 = Event.create(
   gender: 'NA', 
   number: '10000', 
   agemin: '18', 
-  agemax: '0', 
+  agemax: '150', 
   latitude: '87.3452',
   longitude: '65.3452')
 e4 = Event.create(
@@ -302,8 +302,8 @@ e4 = Event.create(
   description: "Find your love",
   gender: "NA", 
   number: '30', 
-  agemin: '18', 
-  agemax: '0',
+  agemin: '25', 
+  agemax: '150',
   latitude: '12.3452', 
   longitude: '29.3452')
 e5 = Event.create(
@@ -313,8 +313,8 @@ e5 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '50', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e6 = Event.create(
@@ -324,8 +324,8 @@ e6 = Event.create(
   description: "OLD LADIES",
   gender: "NA",
   number: '500', 
-  agemin: '50', 
-  agemax: '0', 
+  agemin: '0', 
+  agemax: '50', 
   latitude: '62.3452',
   longitude: '20.3452')
 e7 = Event.create(
@@ -335,8 +335,8 @@ e7 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '10', 
+  agemax: '50', 
   latitude: '62.3452',
   longitude: '20.3452')
 e8 = Event.create(
@@ -347,7 +347,7 @@ e8 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '18', 
-  agemax: '0', 
+  agemax: '50', 
   latitude: '62.3452',
   longitude: '20.3452')
 e9 = Event.create(
@@ -357,8 +357,8 @@ e9 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '25', 
+  agemax: '50', 
   latitude: '62.3452',
   longitude: '20.3452')
 e10 = Event.create(
@@ -368,8 +368,8 @@ e10 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '0', 
+  agemax: '25', 
   latitude: '62.3452',
   longitude: '20.3452')
 e11 = Event.create(
@@ -379,8 +379,8 @@ e11 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '10', 
+  agemax: '25', 
   latitude: '62.3452',
   longitude: '20.3452')
 e12 = Event.create(
@@ -391,7 +391,7 @@ e12 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '18', 
-  agemax: '0', 
+  agemax: '25', 
   latitude: '62.3452',
   longitude: '20.3452')
 e13 = Event.create(
@@ -401,8 +401,8 @@ e13 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '0', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e14 = Event.create(
@@ -412,8 +412,8 @@ e14 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '10', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e15 = Event.create(
@@ -424,7 +424,7 @@ e15 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '18', 
-  agemax: '0', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e16 = Event.create(
@@ -434,8 +434,8 @@ e16 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '25', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e17 = Event.create(
@@ -445,8 +445,8 @@ e17 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '50', 
+  agemax: '150', 
   latitude: '62.3452',
   longitude: '20.3452')
 e18 = Event.create(
@@ -456,8 +456,8 @@ e18 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '0', 
+  agemax: '50', 
   latitude: '62.3452',
   longitude: '20.3452')
 e19 = Event.create(
@@ -467,8 +467,8 @@ e19 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '10', 
+  agemax: '50', 
   latitude: '62.3452',
   longitude: '20.3452')
 e20 = Event.create(
@@ -479,7 +479,7 @@ e20 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '18', 
-  agemax: '0', 
+  agemax: '50', 
   latitude: '62.3452',
   longitude: '20.3452')
 e21 = Event.create(
@@ -489,8 +489,8 @@ e21 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '25', 
+  agemax: '50', 
   latitude: '62.3452',
   longitude: '20.3452')
 e22 = Event.create(
@@ -500,8 +500,8 @@ e22 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '0', 
+  agemax: '25', 
   latitude: '62.3452',
   longitude: '20.3452')
 e23 = Event.create(
@@ -511,8 +511,8 @@ e23 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '10', 
+  agemax: '25', 
   latitude: '62.3452',
   longitude: '20.3452')
 e24 = Event.create(
@@ -523,7 +523,7 @@ e24 = Event.create(
   gender: "NA",
   number: '50', 
   agemin: '18', 
-  agemax: '0', 
+  agemax: '25', 
   latitude: '62.3452',
   longitude: '20.3452')
 e25 = Event.create(
@@ -533,8 +533,8 @@ e25 = Event.create(
   description: "Beer, Vodka and Meet",
   gender: "NA",
   number: '50', 
-  agemin: '18', 
-  agemax: '0', 
+  agemin: '0', 
+  agemax: '18', 
   latitude: '62.3452',
   longitude: '20.3452')
 

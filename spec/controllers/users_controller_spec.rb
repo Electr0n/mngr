@@ -172,6 +172,15 @@ RSpec.describe UsersController, type: :controller do
           end
         end
       end
+
+      it 'subregion_options should responds status 200' do
+        get :subregion_options, user_id: user.id
+        expect(response.status).to eq(200)
+      end
+      it 'city_search should responds status 200' do
+        get :city_search, user_id: user.id
+        expect(response.status).to eq(200)
+      end
     end
 
     context "if USER NOT SIGNED." do
@@ -370,6 +379,15 @@ RSpec.describe UsersController, type: :controller do
             expect(response).to render_template file: "#{Rails.root}/public/403.html"
           end
         end
+      end
+
+      it 'subregion_options should responds status 200' do
+        get :subregion_options, user_id: user.id
+        expect(response).to render_template partial: "_subregion_select"
+      end
+      it 'city_search should responds status 200' do
+        get :city_search, user_id: user.id
+        expect(response).to render_template partial: "_q_subregion_select"
       end
     end
 

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     }
 
   resources :users do
+    get :city_search
     get :subregion_options
     get :del_request, on: :member
   end

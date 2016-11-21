@@ -496,7 +496,7 @@ RSpec.describe EventsController, type: :controller do
           e = build(:event)
           expect{post :create, event: e.attributes}.to change(Event,:count).by(1)
         end
-        it "shouldn't save any evens if not valid" do
+        it "shouldn't save any event if not valid" do
           e = build(:_event)
           expect{post :create, event: e.attributes}.to change(Event,:count).by(0)
         end
@@ -667,6 +667,183 @@ RSpec.describe EventsController, type: :controller do
         u = create(:user)
         expect{get :unfollow, id: e.id}.to change(u.events,:count).by(0)
       end
+    end
+  end
+
+  describe 'search' do
+
+    let(:party_event)   {create(:party_event)}
+    let(:concert_event) {create(:concert_event)}
+    let(:box_event)     {create(:box_event)}
+    let(:dating_event)  {create(:dating_event)}
+    let(:football_event){create(:football_event)}
+    let(:beer_event)    {create(:beer_event)}
+    let(:sport_tag)     {create(:sport_tag)}
+    let(:dating_tag)    {create(:dating_tag)}
+    let(:music_tag)     {create(:music_tag)}
+    let(:party_tag)     {create(:party_tag)}
+    let(:drink_tag)     {create(:drink_tag)}
+    before {
+        party_event.tags    << [party_tag, drink_tag]
+        concert_event.tags  << [music_tag]
+        box_event.tags      << [sport_tag]
+        dating_event.tags   << [dating_tag]
+        football_event.tags << [sport_tag, drink_tag]
+        beer_event.tags     << [drink_tag]
+      }
+
+    it "it should find all events if empty form" do
+      data = {
+        "name_cont"=>"",
+        "date_gteq(1i)"=>"",
+        "date_gteq(2i)"=>"",
+        "date_gteq(3i)"=>"",
+        "gender_not_eq"=>"",
+        "agemax_gteq"=>"",
+        "agemin_lteq"=>"",
+        "location_cont"=>"",
+        "tags_name_in_all"=>[""]}
+      expect(Event.ransack(data).result(distinct: true).count).to eq(Event.all.count)
+    end
+    it "should return 2 events by name" do
+      data = {
+        "name_cont"=>"ee",
+        "date_gteq(1i)"=>"",
+        "date_gteq(2i)"=>"",
+        "date_gteq(3i)"=>"",
+        "gender_not_eq"=>"",
+        "agemax_gteq"=>"",
+        "agemin_lteq"=>"",
+        "location_cont"=>"",
+        "tags_name_in_all"=>[""]}
+      expect(Event.ransack(data).result(distinct: true).count).to eq(2)
+      expect(Event.ransack(data).result(distinct: true).sort).to eq([beer_event, dating_event].sort)
+    end
+    it "should return 4 events after 9/12/2018" do
+      data = {
+        "name_cont"=>"",
+        "date_gteq(1i)"=>"2018",
+        "date_gteq(2i)"=>"12",
+        "date_gteq(3i)"=>"9",
+        "gender_not_eq"=>"",
+        "agemax_gteq"=>"",
+        "agemin_lteq"=>"",
+        "location_cont"=>"",
+        "tags_name_in_all"=>[""]}
+      expect(Event.ransack(data).result(distinct: true).count).to eq(4)
+      expect(Event.ransack(data).result(distinct: true).sort).to eq([beer_event, dating_event, football_event, box_event].sort)
+    end
+    it "should return events where agemax > 60" do
+      data = {
+        "name_cont"=>"",
+        "date_gteq(1i)"=>"",
+        "date_gteq(2i)"=>"",
+        "date_gteq(3i)"=>"",
+        "gender_not_eq"=>"",
+        "agemax_gteq"=>"60",
+        "agemin_lteq"=>"",
+        "location_cont"=>"",
+        "tags_name_in_all"=>[""]}
+      expect(Event.ransack(data).result(distinct: true).count).to eq(4)
+      expect(Event.ransack(data).result(distinct: true).sort).to eq([beer_event, party_event, box_event, football_event].sort)
+    end
+    it "should return events where agemin < 17 " do
+      data = {
+        "name_cont"=>"",
+        "date_gteq(1i)"=>"",
+        "date_gteq(2i)"=>"",
+        "date_gteq(3i)"=>"",
+        "gender_not_eq"=>"",
+        "agemax_gteq"=>"",
+        "agemin_lteq"=>"17",
+        "location_cont"=>"",
+        "tags_name_in_all"=>[""]}
+      expect(Event.ransack(data).result(distinct: true).count).to eq(3)
+      expect(Event.ransack(data).result(distinct: true).sort).to eq([football_event, concert_event, party_event].sort)
+    end
+    it "should return events where location containt 'str'" do
+      data = {
+        "name_cont"=>"",
+        "date_gteq(1i)"=>"",
+        "date_gteq(2i)"=>"",
+        "date_gteq(3i)"=>"",
+        "gender_not_eq"=>"",
+        "agemax_gteq"=>"",
+        "agemin_lteq"=>"",
+        "location_cont"=>"str",
+        "tags_name_in_all"=>[""]}
+      expect(Event.ransack(data).result(distinct: true).count).to eq(4)
+      expect(Event.ransack(data).result(distinct: true).sort).to eq([football_event, concert_event, party_event, beer_event].sort)
+    end
+    it "should return events gender male" do
+      data = {
+        "name_cont"=>"",
+        "date_gteq(1i)"=>"",
+        "date_gteq(2i)"=>"",
+        "date_gteq(3i)"=>"",
+        "gender_not_eq"=>"female",
+        "agemax_gteq"=>"",
+        "agemin_lteq"=>"",
+        "location_cont"=>"",
+        "tags_name_in_all"=>[""]}
+      expect(Event.ransack(data).result(distinct: true).count).to eq(5)
+      expect(Event.ransack(data).result(distinct: true).sort).to eq([football_event, beer_event, concert_event, dating_event, box_event].sort)
+    end
+    it "should return events where tags in selected array" do
+      data = {
+        "name_cont"=>"",
+        "date_gteq(1i)"=>"",
+        "date_gteq(2i)"=>"",
+        "date_gteq(3i)"=>"",
+        "gender_not_eq"=>"",
+        "agemax_gteq"=>"",
+        "agemin_lteq"=>"",
+        "location_cont"=>"",
+        "tags_name_in"=>["sport", "drink"]}
+      expect(Event.ransack(data).result(distinct: true).count).to eq(4)
+      expect(Event.ransack(data).result(distinct: true).sort).to eq([football_event, beer_event, party_event, box_event].sort)
+    end
+    it "should return events where tags in selected array" do
+      data = {
+        "name_cont"=>"ee",
+        "date_gteq(1i)"=>"2016",
+        "date_gteq(2i)"=>"10",
+        "date_gteq(3i)"=>"10",
+        "gender_not_eq"=>"",
+        "agemax_gteq"=>"18",
+        "agemin_lteq"=>"80",
+        "location_cont"=>"str",
+        "tags_name_in"=>["sport", "drink"]}
+      expect(Event.ransack(data).result(distinct: true).count).to eq(1)
+      expect(Event.ransack(data).result(distinct: true)).to eq([beer_event])
+    end
+  end
+
+  describe 'Params init' do
+    let(:user) {create(:user)}
+    let(:event) {create(:event)}
+    let(:role_user) {create(:role_user)}
+    before {
+      user.roles << role_user
+      user.products << event
+      sign_in user
+    }
+    it "should update event with default values if fields(agemin, agemax, number) are blank" do
+      put :update, id: event.id, event: attributes_for(:event, name: "newname", agemin: '', agemax: '', number: '', tags: "Sport")
+      event.reload
+      expect(Event.last.agemax).to eq(150)
+      expect(Event.last.agemin).to eq(0)
+      expect(Event.last.number).to eq(194673)
+    end
+    it "should save event with default values if fields(agemin, agemax, number) are blank" do
+      e = build(:event)
+      e.agemin = ''
+      e.agemax = ''
+      e.number = ''
+      post :create, event: e.attributes
+      expect(Event.last.agemax).to eq(150)
+      expect(Event.last.agemin).to eq(0)
+      expect(Event.last.number).to eq(194673)
     end
   end
 

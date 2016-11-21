@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029094044) do
+ActiveRecord::Schema.define(version: 20161104170743) do
 
   create_table "commontator_comments", force: :cascade do |t|
     t.string   "creator_type",      limit: 255
@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(version: 20161029094044) do
     t.time     "time"
     t.string   "description",        limit: 255
     t.string   "gender",             limit: 255
-    t.integer  "number",             limit: 4
-    t.integer  "agemin",             limit: 4
-    t.integer  "agemax",             limit: 4
+    t.integer  "number",             limit: 4,   default: 194673, null: false
+    t.integer  "agemin",             limit: 4,   default: 0,      null: false
+    t.integer  "agemax",             limit: 4,   default: 150,    null: false
     t.string   "location",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20161029094044) do
     t.datetime "photo_updated_at"
     t.float    "latitude",           limit: 24
     t.float    "longitude",          limit: 24
-    t.boolean  "del_flag",                       default: false, null: false
+    t.boolean  "del_flag",                       default: false,  null: false
   end
 
   add_index "events", ["agemax"], name: "index_events_on_agemax", using: :btree

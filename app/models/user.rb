@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :products, join_table: 'owners_products', class_name: 'Event'
   has_and_belongs_to_many :roles
   has_and_belongs_to_many :tags
+  accepts_nested_attributes_for :tags
+  
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => 
     "120x120#" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
@@ -37,23 +39,6 @@ class User < ActiveRecord::Base
 
     def city_
       Carmen::Country.coded(country).subregions.coded(city).name
-    end
-
-    def self.search(name, surname, gender, year, month, country, city)
-      if name || surname || gender || year
-        @user = User.where("name LIKE ? AND surname LIKE ? AND gender LIKE ? 
-          AND extract(year  from bday) LIKE ? AND country LIKE ?", "%#{name}%", 
-          "%#{surname}%", "#{gender}%", "%#{year}%", "%#{country}%").all
-        if month != ""
-          @user = @user.where("extract(month  from bday) = ?", "#{month}").all
-        end
-        if country!= "" && city!= ""
-          @user = @user.where("city LIKE ?", "%#{city}%").all
-        end
-        return @user
-      else
-        User.all
-      end
     end
 
 end

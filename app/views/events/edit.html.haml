@@ -26,13 +26,22 @@
     .form-group.line
       = e.label :age, class: 'col-sm-2 control-label margin_label'
       .col-sm-2
-        = e.number_field :agemin, class: 'form-control'
+        - if agemin_check
+          = e.number_field :agemin, class: 'form-control'
+        - else
+          = e.number_field :agemin, value: "", class: 'form-control'
       .col-sm-2
-        = e.number_field :agemax, class: 'form-control'
+        - if agemax_check
+          = e.number_field :agemax, class: 'form-control'
+        - else
+          = e.number_field :agemax, value: "", class: 'form-control'
     .form-group.line
       = e.label :number, class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        = e.number_field :number, class: 'form-control margin_area'
+        - if number_check
+          = e.number_field :number, class: 'form-control margin_area'
+        - else
+          = e.number_field :number, value: "", class: 'form-control margin_area'
     .form-group.line
       = e.label :description, class: "col-sm-2 control-label margin_label"
       .col-sm-10

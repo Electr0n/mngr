@@ -5,14 +5,19 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :unfollow, :del_request]
 
   def index
-    @events = Event.all.page(params[:page]).per(10)
+    if params[:q]
+      params[:q]['tags_name_in'].delete("") 
+    end
+    @q = Event.ransack(params[:q])
+    @events = @q.result(distinct: true).page(params[:page]).per(10)
   end
 
   def new
     @event = Event.new
   end
 
-  def create
+  def create 
+    params_init if event_params
     @event = Event.new(event_params)
     if (can? :create, @event) && @event.save
       current_user.products << @event
@@ -37,7 +42,8 @@ class EventsController < ApplicationController
 
   def update
     # action find_event
-    if can? :update, @event  
+    if can? :update, @event
+      params_init
       @event.update_attributes(event_params)
       @event.tags = Tag.where(name: tags_params[:tags].split(','))
       if @event.errors.empty?
@@ -62,7 +68,7 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :date, :time, :description, :gender, 
-      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude, :del_flag)
+      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude, :del_flag, tags_attributes: [:id, :name])
   end
 
   def tags_params
@@ -80,6 +86,12 @@ class EventsController < ApplicationController
     else
       render file: "#{Rails.root}/public/403.html", layout: false, status: 403
     end
+  end
+
+  def params_init
+    params[:event][:agemax] = 150 if params[:event][:agemax].blank?
+    params[:event][:agemin] = 0 if params[:event][:agemin].blank?
+    params[:event][:number] = 194673 if params[:event][:number].blank?
   end
 
   def join

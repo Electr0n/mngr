@@ -1,39 +1,59 @@
 #cities{data: Carmen::Country.all.reduce({}) {|memo, e| memo.merge({ e.name.gsub(' ', '-') => e.subregions.map{|q| [q.code, q.name]} })}  }
-= form_tag users_path, :method => 'get' do
-  %p
-    = text_field_tag :name, params[:name], placeholder: " Name"
-    %br
-    = text_field_tag :surname, params[:surname], placeholder: " Surname"
-    %br
-    = radio_button_tag("gender", "Male")
-    = label_tag :gender, "Male"
-    = radio_button_tag("gender", "Female")
-    = label_tag :gender, "Female"
-    = radio_button_tag("gender", "", 1)
-    = label_tag :gender, "No matter"
-    %br
-    = select_year(''.to_i, start_year: 1940, end_year: 2015, :prompt => "nevermind")
-    %br
-    = select_month(''.to_i, :prompt => "nevermind")
-    %br
-    = country_select_tag :country, params[:country], :priority => %w(BY RU UA), prompt: 'Please select a country'
-    %br
-    = select_tag :city, prompt: 'Please select a city'
-    %br
-    = submit_tag "Search", :name => nil, :surname => nil, :gender => nil, :country => nil, :city => nil
-.sub_header
-  All users
-%table.event_list{:align => "left"}
-  %tr{:align => "center"}
-    %th Name:
-    %th Surname:
-    %th Email:
-  - @users.each do |u|
+.hello_form
+  .sub_header
+    Search users
+  = search_form_for @q do |f|
+    .form-group.line
+      = f.label :name_cont, 'Name: ', class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = f.search_field :name_cont, class: 'form-control'
+    .form-group.line
+      = f.label :surname_cont, 'Surname: ', class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = f.text_field :surname_cont, class: 'form-control'
+    .form-group.line
+      = f.label :gender_eq, 'Gender: ', class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = f.radio_button :gender_eq, 'female'
+        = label_tag :gender_eq, 'Male'
+        = f.radio_button :gender_eq, 'male'
+        = label_tag :gender_eq, 'Female'
+        = f.radio_button :gender_eq, ''
+        = label_tag :gender_eq, 'nvm'
+    .form-group.line
+      = f.label :bday_lteq, 'Age: ', class: 'col-sm-2 control-label margin_label'
+      .col-sm-2
+        = f.number_field :bday_lteq, class: 'form-control'
+      .col-sm-2
+        = f.number_field :bday_gteq, class: 'form-control'
+    .form-group.line
+      = f.label :country, 'Country: ', class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = f.country_select :country_in, priority: %w(BY RU UA), include_blank: true, default: nil
+    .form-group.line
+      = f.label :city, class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = render partial: 'q_subregion_select', locals: {parent_region: f.object.country}
+    .form-group.line
+      = f.label :tags_name_in, 'Tags: ', class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = f.select :tags_name_in, options_from_collection_for_select(Tag.all, :name, :name), {}, { class: 'js-example-tokenizer', multiple: true }
+    = f.submit class: "btn btn-confirm"
+
+  /   = submit_tag "Search", :name => nil, :surname => nil, :gender => nil, :country => nil, :city => nil
+  .sub_header
+    All users
+  %table.event_list{:align => "left"}
     %tr{:align => "center"}
-      %td= link_to u.name, user_path(u)
-      %td= u.surname
-      %td= u.email
-%br
-  = paginate @users
+      %th Name:
+      %th Surname:
+      %th Email:
+    - @users.each do |u|
+      %tr{:align => "center"}
+        %td= link_to u.name, user_path(u)
+        %td= u.surname
+        %td= u.email
   %br
-  = t('congradulation')
+    = paginate @users
+    %br
+    = t('congradulation')
