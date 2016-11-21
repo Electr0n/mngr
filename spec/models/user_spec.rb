@@ -104,50 +104,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "search" do
-    let(:u1) {create(:filled_user)}
-    let(:u2) {create(:petya_user)}
-    let(:u3) {create(:vasya_user)}
-    let(:u4) {create(:kolya_user)}
-    let(:u5) {create(:user)}
-    before(:each) do
-      @u1 = create(:filled_user)
-      @u2 = create(:petya_user)
-      @u3 = create(:vasya_user)
-      @u4 = create(:kolya_user)
-      @u5 = create(:user)
-    end
-    it "should find all users with <valid> in name" do
-      f = User.search('valid', '', '', '', '', '', '')
-      expect(f.count).to eq(4)
-    end
-    it "should find all users with <kin> in surname" do
-      f = User.search('v', 'kin', '', '', '', '', '')
-      expect(f.count).to eq(3)
-    end
-    it "should find all users users with <male> in gender" do
-      f = User.search('', '', 'male', '', '', '', '')
-      expect(f.include?(u4)).to be false
-      expect(f.count).to eq(3)
-    end
-    it "should find all users users with <1992> in year" do
-      f = User.search('', '', 'male', '1992', '', '', '')
-      expect(f.count).to eq(2)
-    end
-    it "should find all users users with <december> in month" do
-      f = User.search('', '', '', '', '12', '', '')
-      expect(f.count).to eq(4)
-    end
-    it "should find all users users with <BY> in country" do
-      f = User.search('valid', '', 'male', '1992', '', 'BY', '')
-      expect(f.count).to eq(2)
-    end
-    it "should find all users users with <HM> in city" do
-      f = User.search('', '', 'female', '', '', '', 'HM')
-      expect(f.count).to eq(1)
-    end
-  end
-
   describe "omniauth" do
     describe "vk" do
       auth_hash = OmniAuth::AuthHash.new({

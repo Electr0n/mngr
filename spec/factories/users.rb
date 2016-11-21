@@ -11,7 +11,6 @@ FactoryGirl.define do
     password "123qwe"
     bday "1992-12-29"
     gender "Male"
-    age 40
     phone "291363913"
     country "BY"
     city "HM"
@@ -25,7 +24,6 @@ FactoryGirl.define do
     password "123qwe"
     bday "1992-12-29"
     gender "Male"
-    age 40
     phone "291363913"
     country "BY"
     city "HM"
@@ -39,7 +37,6 @@ FactoryGirl.define do
     password "123qwe"
     bday "1994-12-29"
     gender "Male"
-    age 40
     phone "291363913"
     country "BY"
     city "HM"
@@ -53,7 +50,6 @@ FactoryGirl.define do
     password "123qwe"
     bday "1990-12-29"
     gender "Female"
-    age 40
     phone "291363913"
     country "BY"
     city "HM"

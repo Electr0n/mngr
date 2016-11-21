@@ -41,21 +41,4 @@ class User < ActiveRecord::Base
       Carmen::Country.coded(country).subregions.coded(city).name
     end
 
-    def self.search(name, surname, gender, year, month, country, city)
-      if name || surname || gender || year
-        @user = User.where("name LIKE ? AND surname LIKE ? AND gender LIKE ? 
-          AND extract(year  from bday) LIKE ? AND country LIKE ?", "%#{name}%", 
-          "%#{surname}%", "#{gender}%", "%#{year}%", "%#{country}%").all
-        if month != ""
-          @user = @user.where("extract(month  from bday) = ?", "#{month}").all
-        end
-        if country!= "" && city!= ""
-          @user = @user.where("city LIKE ?", "%#{city}%").all
-        end
-        return @user
-      else
-        User.all
-      end
-    end
-
 end
