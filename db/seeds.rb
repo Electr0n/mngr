@@ -20,7 +20,9 @@ u1 = User.create(
   bday: "29 Dec 1992",
   country: 'BY',
   city: 'HM',
-  phone: "291363912")
+  phone: "291363912",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u2 = User.create(
   email: 'skulleton@gmail.com',
   name: 'Eugene',
@@ -30,7 +32,9 @@ u2 = User.create(
   bday: "9 Jan 1992",
   country: 'BY',
   city: 'HM',
-  phone: "293407694")
+  phone: "293407694",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u3 = User.create(
   email: 'ivanov@yandex.ru',
   name: 'Albert',
@@ -40,7 +44,9 @@ u3 = User.create(
   bday: "14 Mar 1879",
   country: 'BY',
   city: 'HM',
-  phone: '0')
+  phone: '0',
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u4 = User.create(
   email: 'facebook@tut.by',
   name: 'Mark',
@@ -50,7 +56,9 @@ u4 = User.create(
   bday: "14 May 1984",
   country: 'BY',
   city: 'HM',
-  phone: "291234567")
+  phone: "291234567",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u5 = User.create(
   email: 'boobs@xxx.com',
   name: 'Pomela',
@@ -60,7 +68,9 @@ u5 = User.create(
   bday: "1 Jul 1967",
   country: 'BY',
   city: 'HM',
-  phone: "0")
+  phone: "0",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u6 = User.create(
   email: 'arsenal@gmail.com',
   name: 'Arsene',
@@ -70,7 +80,9 @@ u6 = User.create(
   bday: "22 Oct 1949",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u7 = User.create(
   email: 'dicap@gmail.com',
   name: 'Leonardo',
@@ -80,7 +92,9 @@ u7 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u8 = User.create(
   email: 'vishenka@gmail.com',
   name: 'Zina',
@@ -90,7 +104,9 @@ u8 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u9 = User.create(
   email: 'loshadka@gmail.com',
   name: 'Horse',
@@ -100,7 +116,9 @@ u9 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u10 = User.create(
   email: 'evrei@gmail.com',
   name: 'Edik',
@@ -110,7 +128,9 @@ u10 = User.create(
   bday: "11 Nov 1994",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u11 = User.create(
   email: 'zver@gmail.com',
   name: 'Noname',
@@ -120,7 +140,9 @@ u11 = User.create(
   bday: "19 Jan 1979",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u12 = User.create(
   email: 'kartoha@gmail.com',
   name: 'Belarus',
@@ -130,7 +152,9 @@ u12 = User.create(
   bday: "11 Dec 1989",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u13 = User.create(
   email: 'slut@gmail.com',
   name: 'Ira',
@@ -140,7 +164,9 @@ u13 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u14 = User.create(
   email: 'medved@gmail.com',
   name: 'Zolushka',
@@ -150,7 +176,9 @@ u14 = User.create(
   bday: "11 Nov 1874",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u15 = User.create(
   email: 'sharik@gmail.com',
   name: 'Tuzik',
@@ -160,7 +188,9 @@ u15 = User.create(
   bday: "11 Nov 1956",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u16 = User.create(
   email: 'uto4ka@gmail.com',
   name: 'Sony',
@@ -170,7 +200,9 @@ u16 = User.create(
   bday: "21 May 2011",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u17 = User.create(
   email: 'korovka@gmail.com',
   name: 'Kristina',
@@ -180,7 +212,9 @@ u17 = User.create(
   bday: "12 Sep 1984",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u18 = User.create(
   email: 'kovrik@gmail.com',
   name: 'Mishka',
@@ -190,7 +224,9 @@ u18 = User.create(
   bday: "08 Feb 1674",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u19 = User.create(
   email: 'kutuzov11@gmail.com',
   name: 'Semen',
@@ -200,7 +236,9 @@ u19 = User.create(
   bday: "14 Aug 2004",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u20 = User.create(
   email: 'krokodil@gmail.com',
   name: 'Sasha',
@@ -210,7 +248,9 @@ u20 = User.create(
   bday: "18 Dec 1989",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u21 = User.create(
   email: '4ipsoed@gmail.com',
   name: 'Andrey',
@@ -220,7 +260,9 @@ u21 = User.create(
   bday: "18 Dec 1984",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u22 = User.create(
   email: 'ru4ka@gmail.com',
   name: 'Peter',
@@ -230,7 +272,9 @@ u22 = User.create(
   bday: "01 Nov 2000",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u23 = User.create(
   email: 'kepka@gmail.com',
   name: '50',
@@ -240,7 +284,9 @@ u23 = User.create(
   bday: "11 Nov 1964",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u24 = User.create(
   email: 'govorun@gmail.com',
   name: 'Eminem',
@@ -250,7 +296,9 @@ u24 = User.create(
   bday: "11 Nov 1988",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u25 = User.create(
   email: 'jjjjzae@gmail.com',
   name: 'Vovan',
@@ -260,7 +308,9 @@ u25 = User.create(
   bday: "19 Nov 1996",
   country: 'BY',
   city: 'HM',
-  phone: "293614521")
+  phone: "293614521",
+  hobby: 'Lorem ipsum dolor sit amet.',
+  about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 
 e1 = Event.create(
   name: 'birthday',
@@ -271,6 +321,7 @@ e1 = Event.create(
   number: '15',
   agemin: '0',
   agemax: '150',
+  location: 'Suharevskaya str',
   latitude: '52.3452',
   longitude: '27.3452')
 e2 = Event.create(
@@ -282,6 +333,7 @@ e2 = Event.create(
   number: '194673',
   agemin: '10', 
   agemax: '150', 
+  location: 'Suharevskaya str',
   latitude: '32.3452', 
   longitude: '47.3452')
 e3 = Event.create(
@@ -293,6 +345,7 @@ e3 = Event.create(
   number: '10000', 
   agemin: '18', 
   agemax: '150', 
+  location: 'Suharevskaya str',
   latitude: '87.3452',
   longitude: '65.3452')
 e4 = Event.create(
@@ -304,6 +357,7 @@ e4 = Event.create(
   number: '30', 
   agemin: '25', 
   agemax: '150',
+  location: 'Park Cheluskincev',
   latitude: '12.3452', 
   longitude: '29.3452')
 e5 = Event.create(
@@ -315,6 +369,7 @@ e5 = Event.create(
   number: '50', 
   agemin: '50', 
   agemax: '150', 
+  location: 'Park Cheluskincev',
   latitude: '62.3452',
   longitude: '20.3452')
 e6 = Event.create(
@@ -326,6 +381,7 @@ e6 = Event.create(
   number: '500', 
   agemin: '0', 
   agemax: '50', 
+  location: 'Independence square',
   latitude: '62.3452',
   longitude: '20.3452')
 e7 = Event.create(
@@ -337,6 +393,7 @@ e7 = Event.create(
   number: '50', 
   agemin: '10', 
   agemax: '50', 
+  location: 'Independence square',
   latitude: '62.3452',
   longitude: '20.3452')
 e8 = Event.create(
@@ -348,6 +405,7 @@ e8 = Event.create(
   number: '50', 
   agemin: '18', 
   agemax: '50', 
+  location: 'Independence square',
   latitude: '62.3452',
   longitude: '20.3452')
 e9 = Event.create(
@@ -359,6 +417,7 @@ e9 = Event.create(
   number: '50', 
   agemin: '25', 
   agemax: '50', 
+  location: 'Independence square',
   latitude: '62.3452',
   longitude: '20.3452')
 e10 = Event.create(
@@ -370,6 +429,7 @@ e10 = Event.create(
   number: '50', 
   agemin: '0', 
   agemax: '25', 
+  location: 'Suharevskaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e11 = Event.create(
@@ -381,6 +441,7 @@ e11 = Event.create(
   number: '50', 
   agemin: '10', 
   agemax: '25', 
+  location: 'Suharevskaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e12 = Event.create(
@@ -392,6 +453,7 @@ e12 = Event.create(
   number: '50', 
   agemin: '18', 
   agemax: '25', 
+  location: 'Suharevskaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e13 = Event.create(
@@ -403,6 +465,7 @@ e13 = Event.create(
   number: '50', 
   agemin: '0', 
   agemax: '150', 
+  location: 'Zybickaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e14 = Event.create(
@@ -414,6 +477,7 @@ e14 = Event.create(
   number: '50', 
   agemin: '10', 
   agemax: '150', 
+  location: 'Zybickaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e15 = Event.create(
@@ -425,6 +489,7 @@ e15 = Event.create(
   number: '50', 
   agemin: '18', 
   agemax: '150', 
+  location: 'Zybickaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e16 = Event.create(
@@ -436,6 +501,7 @@ e16 = Event.create(
   number: '50', 
   agemin: '25', 
   agemax: '150', 
+  location: 'Independence square',
   latitude: '62.3452',
   longitude: '20.3452')
 e17 = Event.create(
@@ -447,6 +513,7 @@ e17 = Event.create(
   number: '50', 
   agemin: '50', 
   agemax: '150', 
+  location: 'Independence square',
   latitude: '62.3452',
   longitude: '20.3452')
 e18 = Event.create(
@@ -458,6 +525,7 @@ e18 = Event.create(
   number: '50', 
   agemin: '0', 
   agemax: '50', 
+  location: 'Independence square',
   latitude: '62.3452',
   longitude: '20.3452')
 e19 = Event.create(
@@ -469,6 +537,7 @@ e19 = Event.create(
   number: '50', 
   agemin: '10', 
   agemax: '50', 
+  location: 'Suharevskaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e20 = Event.create(
@@ -480,6 +549,7 @@ e20 = Event.create(
   number: '50', 
   agemin: '18', 
   agemax: '50', 
+  location: 'Suharevskaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e21 = Event.create(
@@ -491,6 +561,7 @@ e21 = Event.create(
   number: '50', 
   agemin: '25', 
   agemax: '50', 
+  location: 'Suharevskaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e22 = Event.create(
@@ -502,6 +573,7 @@ e22 = Event.create(
   number: '50', 
   agemin: '0', 
   agemax: '25', 
+  location: 'Suharevskaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e23 = Event.create(
@@ -513,6 +585,7 @@ e23 = Event.create(
   number: '50', 
   agemin: '10', 
   agemax: '25', 
+  location: 'Zybickaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e24 = Event.create(
@@ -524,6 +597,7 @@ e24 = Event.create(
   number: '50', 
   agemin: '18', 
   agemax: '25', 
+  location: 'Zybickaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 e25 = Event.create(
@@ -535,6 +609,7 @@ e25 = Event.create(
   number: '50', 
   agemin: '0', 
   agemax: '18', 
+  location: 'Zybickaya str',
   latitude: '62.3452',
   longitude: '20.3452')
 

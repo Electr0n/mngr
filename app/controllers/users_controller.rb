@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     # find_user action
     if can? :update, @user
       @user.update_attributes(user_params)
-      @user.tags = Tag.where(name: tags_params[:tags].split(','))
+      @user.tags = Tag.where(name: tags_params[:tags]).uniq
       if @user.errors.empty?
         sign_in(@user, :bypass => true)
         redirect_to user_path(@user)
@@ -102,11 +102,11 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :surname, :email, :bday, :gender, :age,:phone, :hobby, :about, :del_flag, :password, :password_confirmation, :avatar, :country, :city)
+    params.require(:user).permit(:name, :surname, :email, :bday, :gender, :phone, :hobby, :about, :del_flag, :password, :password_confirmation, :avatar, :country, :city)
   end
 
   def tags_params
-    params.require(:user).permit(:tags)
+    params.require(:user).permit(tags: [])
   end
 
 end

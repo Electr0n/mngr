@@ -32,7 +32,7 @@
     .form-group.line
       = f.label :tags_name_in, 'Tags: ', class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        = f.select :tags_name_in, options_from_collection_for_select(Tag.all, :name, :name), {}, { class: 'js-example-tokenizer', multiple: true }
+        = f.select :tags_name_in, options_from_collection_for_select(Tag.all, :name, :name), {}, { class: 'js-example-tokenizer form-control margin_area', multiple: true }
     = f.submit class: "btn btn-confirm"
 .sub_header
   All events

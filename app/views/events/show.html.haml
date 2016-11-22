@@ -19,21 +19,11 @@
   .col-1
     Number:
   .col-2
-    - if number_check
-      = @event.number
-    - else
-      Doesn't matter
+    = number(@event.number)
   .col-1
     Age:
   .col-2
-    - if agemin_check
-      = @event.agemin
-    - else
-      From 0
-    - if agemax_check
-      = @event.agemax
-    - else
-      to 100+
+    = age_range(@event.agemin, @event.agemax)
   .col-1
     Description:
   .col-2
@@ -41,11 +31,7 @@
   .col-1
     Tags:
   .col-2
-    - if @event.tags.empty?
-      No tags
-    - else
-      - @event.tags.each do |t|
-        = t.name
+    = tags_list(@event.tags)
 - if !current_user.nil? && current_user.events.include?(@event)
   = link_to "unfollow", unfollow_event_path(@event), class: "btn btn-confirm"
 - else

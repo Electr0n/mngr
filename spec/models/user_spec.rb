@@ -92,15 +92,23 @@ RSpec.describe User, type: :model do
   end
 
   describe "advansed methods" do
-    let(:user) {create(:user)}
+    let(:user) {create(:filled_user)}
+    
     it "should return full country name" do
-      user.country = "BY"
       expect(user.country_).to eq("Belarus")
     end
     it "should return full city name" do
-      user.country = "BY"
-      user.city = "HM"
       expect(user.city_).to eq("Horad Minsk")
+    end
+
+    context 'age' do
+      it 'should calculate age' do
+        expect(user.age).to eq(Time.now.year - user.bday.year)
+      end
+      it 'should return nil if bday.nil?' do
+        u = create(:user)
+        expect(u.age).to be nil
+      end
     end
   end
 

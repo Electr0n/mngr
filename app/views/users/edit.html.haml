@@ -56,34 +56,8 @@
       .col-sm-10
         = f.file_field :avatar
     .form-group.line
-    :javascript
-      $(function() {
-        $( "#sortable1, #sortable2" ).sortable({
-          connectWith: ".connectedSortable"
-        }).disableSelection();
-        $(function() {
-          $('.edit_user').submit(function() {
-              tag_list = document.getElementById("sortable1");
-              var element = tag_list.children;
-              var tags = [];
-              for (var i = 0; i < element.length; i++) {
-                tags += element[i].innerHTML;
-                tags += ",";
-              }
-              document.getElementById("user_tags").value = tags;
-              return true;
-            });
-        });
-      });
-    .form-group.line
       = f.label :tags, class: 'col-sm-2 control-label margin_label'
-      .col-sm-11
-        %ul#sortable1.connectedSortable
-          - @user.tags.each do |t|
-            %li.ui-state-default #{t.name}
-        %ul#sortable2.connectedSortable
-          - (@tags-@user.tags).each do |t|
-            %li.ui-state-highlight #{t.name}
-        = f.hidden_field :tags
+      .col-sm-10
+        = f.select :tags, options_from_collection_for_select(Tag.all, :name, :name, @user.tags.collect { |t| t.name }), {}, { class: 'js-example-tokenizer form-control margin_area', multiple: true }
     .pagin_box
       = f.submit "Update", class: "btn btn-confirm"

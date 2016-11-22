@@ -41,4 +41,13 @@ class User < ActiveRecord::Base
       Carmen::Country.coded(country).subregions.coded(city).name
     end
 
+    def age
+      unless bday.nil?
+        age = Time.now.year - bday.year
+        (bday + age.year) > Date.today ? age = age - 1 : age
+      else
+        nil
+      end
+    end
+
 end

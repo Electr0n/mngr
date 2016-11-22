@@ -26,14 +26,14 @@ RSpec.describe UsersController, type: :controller do
       context "Update action" do
         it "if USER!=current_user responds status 403" do
           u1 = create(:user)
-          put :update, {id: u1.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
+          put :update, {id: u1.id, user: attributes_for(:user, name: "newname")}
           u1.reload
           expect(response.status).to eq(403)
         end
         describe "for valid data responds status 302" do
           it "if USER=current_user" do
             t = create(:tag)
-            put :update, {id: user.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
+            put :update, {id: user.id, user: attributes_for(:user, name: "newname")}
             user.reload
             expect(response.status).to eq(302)
           end
@@ -42,7 +42,7 @@ RSpec.describe UsersController, type: :controller do
             user.roles << role_superadmin
             u1 = create(:user)
             t = create(:tag)
-            put :update, {id: u1.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
+            put :update, {id: u1.id, user: attributes_for(:user, name: "newname")}
             u1.reload
             expect(response.status).to eq(302)
           end
@@ -51,7 +51,7 @@ RSpec.describe UsersController, type: :controller do
             user.roles << role_admin
             u1 = create(:user)
             t = create(:tag)
-            put :update, {id: u1.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
+            put :update, {id: u1.id, user: attributes_for(:user, name: "newname")}
             u1.reload
             expect(response.status).to eq(302)
           end
@@ -60,13 +60,13 @@ RSpec.describe UsersController, type: :controller do
             user.roles << role_moderator
             u1 = create(:user)
             t = create(:tag)
-            put :update, {id: u1.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
+            put :update, {id: u1.id, user: attributes_for(:user, name: "newname")}
             u1.reload
             expect(response.status).to eq(403)
           end          
         end
         it "for invalid data responds status 302" do
-          put :update, {id: user.id, user: attributes_for(:user, email: nil, tags: "Sport")}
+          put :update, {id: user.id, user: attributes_for(:user, email: nil)}
           user.reload
           expect(response.status).to eq(302)
         end
@@ -263,18 +263,18 @@ RSpec.describe UsersController, type: :controller do
       context "Update action" do
         it "for user!==current_user should render to 403 page" do
           u1 = create(:user)
-          put :update, {id: u1.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
+          put :update, {id: u1.id, user: attributes_for(:user, name: "newname")}
           u1.reload
           expect(response).to render_template file: "#{Rails.root}/public/403.html"
         end
         it "for user==current_user should redirect to user's page" do
           t = create(:tag)
-          put :update, {id: user.id, user: attributes_for(:user, name: "newname", tags: "Sport")}
+          put :update, {id: user.id, user: attributes_for(:user, name: "newname")}
           user.reload
           expect(response).to redirect_to user_path(user)
         end
         it "for valid data should redirect to user's edit page" do
-          put :update, {id: user.id, user: attributes_for(:user, email: nil, tags: "Sport")}
+          put :update, {id: user.id, user: attributes_for(:user, email: nil)}
           user.reload
           expect(response).to redirect_to edit_user_path(user)
         end
@@ -464,7 +464,7 @@ RSpec.describe UsersController, type: :controller do
 
         context "but input invalid data" do
           it "shouldn't update user" do
-            put :update, id: user.id, user: attributes_for(:user, name: "ALIBABA", email: nil, tags: "Sport")
+            put :update, id: user.id, user: attributes_for(:user, name: "ALIBABA", email: nil)
             user.reload
             expect(user.name).not_to eq("ALIBABA")
             expect(user.email).not_to eq(nil)
@@ -473,49 +473,60 @@ RSpec.describe UsersController, type: :controller do
         end
 
         context "and trying to update profile with valid data" do
+          
+          let(:t) {create(:tag)}
+          before {
+            t
+          }
+
           it "shouldn't update user for USER!=current_user" do
-            t = create(:tag)
             u1 = create(:user)
-            put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA", tags: "Sport")
+            put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA")
             u1.reload
             expect(u1.name).not_to eq("ALIBABA")
           end
+
           it "should update user" do
-            t = create(:tag)
-            put :update, id: user.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: "Sport")
+            put :update, id: user.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: ["Sport"])
             user.reload
             expect(user.name).to eq("ALIBABA")
             expect(user.email).to eq("itshould@update.com")
             expect(user.tags.count).not_to eq(0)
           end
+
+          it "should update user's tags with uniq data" do
+            put :update, id: user.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: ["Sport", "Sport", "Sport", ""])
+            user.reload
+            expect(user.tags.count).to eq(1)
+          end
+
           it "as SUPERADMIN, should update user" do
             user.roles.delete(role_user)
             user.roles << role_superadmin
             u1 = create(:user)
-            t = create(:tag)
-            put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: "Sport")
+            put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: ["Sport"])
             u1.reload
             expect(u1.name).to eq("ALIBABA")
             expect(u1.email).to eq("itshould@update.com")
             expect(u1.tags.count).not_to eq(0)
           end
+
           it "as ADMIN, should update user" do
             user.roles.delete(role_user)
             user.roles << role_admin
             u1 = create(:user)
-            t = create(:tag)
-            put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: "Sport")
+            put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: ["Sport"])
             u1.reload
             expect(u1.name).to eq("ALIBABA")
             expect(u1.email).to eq("itshould@update.com")
             expect(u1.tags.count).not_to eq(0)
           end
+
           it "as MODERATOR, shouldn't update user" do
             user.roles.delete(role_user)
             user.roles << role_moderator
             u1 = create(:user)
-            t = create(:tag)
-            put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: "Sport")
+            put :update, id: u1.id, user: attributes_for(:user, name: "ALIBABA", email: "itshould@update.com", tags: ["Sport"])
             u1.reload
             expect(u1.name).not_to eq("ALIBABA")
             expect(u1.email).not_to eq("itshould@update.com")
@@ -527,7 +538,7 @@ RSpec.describe UsersController, type: :controller do
       context "if USER NOT SIGNED" do
         it "shouldn't update user" do
           u = create(:user)
-          put :update, id: u.id, user: attributes_for(:user, name: "ALIBABA", tags: "Sport")
+          put :update, id: u.id, user: attributes_for(:user, name: "ALIBABA")
           u.reload
           expect(u.name).not_to eq("ALIBABA")
         end
@@ -670,14 +681,13 @@ RSpec.describe UsersController, type: :controller do
         password: "asdzxc",
         bday:     "1992-12-29",
         gender:   "female",
-        age:      "40",
         phone:    "291363913",
         country:  "BY",
         city:     "HM",
         hobby:    "something",
         about:    "interesting",
         del_flag: "true",
-        tags:     "Sport"
+        tags:     ["Sport"]
         )
       user.reload
       expect(User.last.name).to eq("realy_valid")
@@ -685,7 +695,6 @@ RSpec.describe UsersController, type: :controller do
       expect(User.last.email).to eq("hoho@haha.com")
       expect(User.last.bday.strftime('%F')).to eq("1992-12-29")
       expect(User.last.gender).to eq("female")
-      expect(User.last.age).to eq(40)
       expect(User.last.phone).to eq(291363913)
       expect(User.last.country).to eq("BY")
       expect(User.last.city).to eq("HM")

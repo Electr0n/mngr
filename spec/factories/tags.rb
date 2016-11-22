@@ -7,18 +7,18 @@ FactoryGirl.define do
   end
 
   factory :dating_tag, class: Tag do
-    name "dating"
+    name "Dating"
   end
   factory :sport_tag, class: Tag do
-    name "sport"
+    name "Sport"
   end
   factory :music_tag, class: Tag do
-    name "music"
+    name "Music"
   end
   factory :party_tag, class: Tag do
-    name "party"
+    name "Party"
   end
   factory :drink_tag, class: Tag do
-    name "drink"
+    name "Drink"
   end
 end
