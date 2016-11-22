@@ -26,19 +26,19 @@
     .form-group.line
       = e.label :age, class: 'col-sm-2 control-label margin_label'
       .col-sm-2
-        - if agemin_check
+        - if age_min?(@event.agemin)
           = e.number_field :agemin, class: 'form-control'
         - else
           = e.number_field :agemin, value: "", class: 'form-control'
       .col-sm-2
-        - if agemax_check
+        - if age_max?(@event.agemax)
           = e.number_field :agemax, class: 'form-control'
         - else
           = e.number_field :agemax, value: "", class: 'form-control'
     .form-group.line
       = e.label :number, class: 'col-sm-2 control-label margin_label'
       .col-sm-10
-        - if number_check
+        - if number?(@event.number)
           = e.number_field :number, class: 'form-control margin_area'
         - else
           = e.number_field :number, value: "", class: 'form-control margin_area'
@@ -88,5 +88,9 @@
           });
         }
       %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3tpHZzNzF1JWKOruUBy3PrOksKDRvII&callback=initMap"}
+    .form-group.line
+      = e.label :tags, class: 'col-sm-2 control-label margin_label'
+      .col-sm-10
+        = e.select :tags, options_from_collection_for_select(Tag.all, :name, :name, @event.tags.collect { |t| t.name }), {}, { class: 'js-example-tokenizer form-control margin_area', multiple: true }
     .pagin_box
       = e.submit "Save", class: "btn btn-confirm"
