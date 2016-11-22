@@ -22,7 +22,7 @@
   .col-1
     Age:
   .col-2
-    = users_age
+    = age(@user.bday)
   .col-1
     Gender:
   .col-2
@@ -49,12 +49,8 @@
     = @user.about
   .col-1
     Tags:
-  - if @user.tags.empty?
-    No tags
-  - else
-    .col-2
-      - @user.tags.each do |t|
-        = t.name
+  .col-2
+    = tags_list(@user.tags)
 .divider
 .sub_header
   All events
@@ -73,10 +69,9 @@
             = e.date
             = e.time.strftime("%H:%M")
           .event_adr
-            location is here
+            = e.location
           .event_tags
-            - e.tags.each do |t|
-              = t.name
+            = tags_list(e.tags)
     .event_img
       = image_tag(e.photo.url(:thumb))
 .pagin_box

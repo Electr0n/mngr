@@ -66,39 +66,39 @@ RSpec.describe EventsController, type: :controller do
         let(:e) {create(:event)}
         it "responds status 302 if USER is owner" do
           user.products << e
-          put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: "Prytki")
           e.reload
           expect(response.status).to eq(302)
         end
         it "responds status 302 if SUPERADMIN" do
           user.roles.delete(role_user)
           user.roles << role_superadmin
-          put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: "Prytki")
           e.reload
           expect(response.status).to eq(302)
         end
         it "responds status 302 if ADMIN" do
           user.roles.delete(role_user)
           user.roles << role_admin
-          put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: "Prytki")
           e.reload
           expect(response.status).to eq(302)
         end
         it "responds status 302 if MODERATOR" do
           user.roles.delete(role_user)
           user.roles << role_moderator
-          put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: "Prytki")
           e.reload
           expect(response.status).to eq(302)
         end
         it "response status 200 if invalid data" do
           user.products << e
-          put :update, id: e.id, event: attributes_for(:event, name: nil, tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: nil)
           e.reload
           expect(response.status).to eq(200)
         end
         it "responds status 403 if USER is not owner" do
-          put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: "Prytki")
           e.reload
           expect(response.status).to eq(403)
         end
@@ -305,40 +305,40 @@ RSpec.describe EventsController, type: :controller do
         context "for valid data" do
           it "redirect to event's page if USER is owner" do
             user.products << e
-            put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+            put :update, id: e.id, event: attributes_for(:event, name: "Prytki")
             e.reload
             expect(response).to redirect_to event_path(e)
           end
           it "render 403 page if USER is not owner" do
-            put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+            put :update, id: e.id, event: attributes_for(:event, name: "Prytki")
             e.reload
             expect(response).to render_template file: "#{Rails.root}/public/403.html"
           end
           it "redirect_to event's page if SUPERADMIN" do
             user.roles.delete(role_user)
             user.roles << role_superadmin
-            put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+            put :update, id: e.id, event: attributes_for(:event, name: "Prytki")
             e.reload
             expect(response).to redirect_to event_path(e)
           end
           it "redirect_to event's page if ADMIN" do
             user.roles.delete(role_user)
             user.roles << role_admin
-            put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+            put :update, id: e.id, event: attributes_for(:event, name: "Prytki")
             e.reload
             expect(response).to redirect_to event_path(e)
           end
           it "redirect_to event's page if MODERATOR" do
             user.roles.delete(role_user)
             user.roles << role_moderator
-            put :update, id: e.id, event: attributes_for(:event, name: "Prytki", tags: "Sport")
+            put :update, id: e.id, event: attributes_for(:event, name: "Prytki")
             e.reload
             expect(response).to redirect_to event_path(e)
           end
         end
         it "render edit page if invalid data" do
           user.products << e
-          put :update, id: e.id, event: attributes_for(:event, name: nil, tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: nil)
           e.reload
           expect(response).to render_template :edit
         end
@@ -511,40 +511,47 @@ RSpec.describe EventsController, type: :controller do
         context "if USER is owner" do
           before {user.products << e}
           it "with valid data should update event" do
-            put :update, id: e.id, event: attributes_for(:event, name: "newname", tags: "Sport")
+            put :update, id: e.id, event: attributes_for(:event, name: "newname")
             e.reload
             expect(Event.last.name).to eq("newname")
           end
+          it "should update event's tags with uniq data" do
+            create(:sport_tag)
+            create(:music_tag)
+            put :update, id: e.id, event: attributes_for(:event, name: "newname", tags: ["Sport", "", "Music", "Music"])
+            e.reload
+            expect(Event.last.tags.count).to eq(2)
+          end
           it "with not valid data shouldn't update event" do
-            put :update, id: e.id, event: attributes_for(:event, name: nil, tags: "Sport")
+            put :update, id: e.id, event: attributes_for(:event, name: nil)
             e.reload
             expect(Event.last.name).to eq("valid_event")
           end
         end
         it "if USER is not owner" do
           e = create(:event)
-          put :update, id: e.id, event: attributes_for(:event, name: "Newname", tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: "Newname")
           e.reload
           expect(Event.last.name).to eq("valid_event")
         end
         it "should update any event if SUPERADMIN" do
           user.roles.delete(role_user)
           user.roles << role_superadmin
-          put :update, id: e.id, event: attributes_for(:event, name: "newname", tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: "newname")
             e.reload
             expect(Event.last.name).to eq("newname")
         end
         it "should update any event if ADMIN" do
           user.roles.delete(role_user)
           user.roles << role_admin
-          put :update, id: e.id, event: attributes_for(:event, name: "newname", tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: "newname")
             e.reload
             expect(Event.last.name).to eq("newname")
         end
         it "should update any event if MODERATOR" do
           user.roles.delete(role_user)
           user.roles << role_moderator
-          put :update, id: e.id, event: attributes_for(:event, name: "newname", tags: "Sport")
+          put :update, id: e.id, event: attributes_for(:event, name: "newname")
             e.reload
             expect(Event.last.name).to eq("newname")
         end
@@ -649,7 +656,7 @@ RSpec.describe EventsController, type: :controller do
     context "for not SIGNED users" do
       it "Update action shouldn't update event" do
         e = create(:event)
-        put :update, id: e.id, event: attributes_for(:event, name: nil, tags: "Sport")
+        put :update, id: e.id, event: attributes_for(:event, name: nil, tags: ["Sport"])
         e.reload
         expect(Event.last.name).to eq("valid_event")
       end
@@ -829,7 +836,7 @@ RSpec.describe EventsController, type: :controller do
       sign_in user
     }
     it "should update event with default values if fields(agemin, agemax, number) are blank" do
-      put :update, id: event.id, event: attributes_for(:event, name: "newname", agemin: '', agemax: '', number: '', tags: "Sport")
+      put :update, id: event.id, event: attributes_for(:event, name: "newname", agemin: '', agemax: '', number: '', tags: ["Sport"])
       event.reload
       expect(Event.last.agemax).to eq(150)
       expect(Event.last.agemin).to eq(0)
@@ -874,7 +881,7 @@ RSpec.describe EventsController, type: :controller do
         latitude:     '0.0',
         longitude:    '0.0',
         del_flag:     'true', 
-        tags:         "Sport"
+        tags:         ["Sport"]
         )
       e2.reload
       expect(Event.last.name).to eq(e1.name)

@@ -9,7 +9,7 @@ FactoryGirl.define do
     surname "RLYRLY"
     sequence(:email) { |i| "filled#{i}@email.com" }
     password "123qwe"
-    bday "1992-12-29"
+    bday "1992-01-01"
     gender "Male"
     phone "291363913"
     country "BY"

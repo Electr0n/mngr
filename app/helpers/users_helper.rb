@@ -11,10 +11,17 @@ module UsersHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def users_age
-    age = Time.now.year - @user.bday.year
-    if (@user.bday + age.year) > Date.today
-      age = age - 1
+  def age(bday)
+    unless bday.nil?
+      age = Time.now.year - bday.year
+      (bday + age.year) > Date.today ? age = age - 1 : age
+    else
+      ' - '
     end
   end
+
+  def tags_list(tags)
+    tags.any? ? tags.collect{|t| t.name}.join(", ") : 'No tags'
+  end
+  
 end

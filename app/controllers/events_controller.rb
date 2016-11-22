@@ -45,7 +45,7 @@ class EventsController < ApplicationController
     if can? :update, @event
       params_init
       @event.update_attributes(event_params)
-      @event.tags = Tag.where(name: tags_params[:tags].split(','))
+      @event.tags = Tag.where(name: tags_params[:tags]).uniq
       if @event.errors.empty?
         redirect_to event_path(@event)
       else
@@ -68,11 +68,11 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:name, :date, :time, :description, :gender, 
-      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude, :del_flag, tags_attributes: [:id, :name])
+      :number, :agemin, :agemax, :location, :photo, :latitude, :longitude, :del_flag)
   end
 
   def tags_params
-    params.require(:event).permit(:tags)
+    params.require(:event).permit(tags: [])
   end
 
   def find_event
