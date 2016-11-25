@@ -346,8 +346,8 @@ e3 = Event.create(
   agemin: '18', 
   agemax: '150', 
   location: 'Suharevskaya str',
-  latitude: '87.3452',
-  longitude: '65.3452')
+  latitude: '67.3452',
+  longitude: '25.3452')
 e4 = Event.create(
   name: 'speed dating', 
   date: '20 mar 2016', 
@@ -358,7 +358,7 @@ e4 = Event.create(
   agemin: '25', 
   agemax: '150',
   location: 'Park Cheluskincev',
-  latitude: '12.3452', 
+  latitude: '51.3452', 
   longitude: '29.3452')
 e5 = Event.create(
   name: 'office party', 
@@ -370,8 +370,8 @@ e5 = Event.create(
   agemin: '50', 
   agemax: '150', 
   location: 'Park Cheluskincev',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '53.3452',
+  longitude: '25.9534')
 e6 = Event.create(
   name: 'Kirkorov Filip', 
   date: '25 jul 2017', 
@@ -382,8 +382,8 @@ e6 = Event.create(
   agemin: '0', 
   agemax: '50', 
   location: 'Independence square',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '52.3452',
+  longitude: '24.9534')
 e7 = Event.create(
   name: 'Drift', 
   date: '29 jul 2016', 
@@ -394,8 +394,8 @@ e7 = Event.create(
   agemin: '10', 
   agemax: '50', 
   location: 'Independence square',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '55.3452',
+  longitude: '27.9534')
 e8 = Event.create(
   name: 'Sad i ogorod', 
   date: '25 jun 2016', 
@@ -406,8 +406,8 @@ e8 = Event.create(
   agemin: '18', 
   agemax: '50', 
   location: 'Independence square',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '56.3452',
+  longitude: '21.9534')
 e9 = Event.create(
   name: 'Seminar po veterinarii', 
   date: '15 aug 2016', 
@@ -418,8 +418,8 @@ e9 = Event.create(
   agemin: '25', 
   agemax: '50', 
   location: 'Independence square',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '59.3452',
+  longitude: '24.9534')
 e10 = Event.create(
   name: 'Bajdarki', 
   date: '20 sep 2016', 
@@ -430,8 +430,8 @@ e10 = Event.create(
   agemin: '0', 
   agemax: '25', 
   location: 'Suharevskaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '51.3452',
+  longitude: '24.9534')
 e11 = Event.create(
   name: 'Voleyball', 
   date: '11 oct 2016', 
@@ -442,8 +442,8 @@ e11 = Event.create(
   agemin: '10', 
   agemax: '25', 
   location: 'Suharevskaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '54.3452',
+  longitude: '24.9534')
 e12 = Event.create(
   name: 'Office copetition', 
   date: '09 nov 2016', 
@@ -454,8 +454,8 @@ e12 = Event.create(
   agemin: '18', 
   agemax: '25', 
   location: 'Suharevskaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '51.3452',
+  longitude: '21.9534')
 e13 = Event.create(
   name: 'Color fest', 
   date: '13 dec 2016', 
@@ -466,8 +466,8 @@ e13 = Event.create(
   agemin: '0', 
   agemax: '150', 
   location: 'Zybickaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '53.3452',
+  longitude: '23.9534')
 e14 = Event.create(
   name: 'ComiCon', 
   date: '14 jan 2016', 
@@ -478,8 +478,8 @@ e14 = Event.create(
   agemin: '10', 
   agemax: '150', 
   location: 'Zybickaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '55.3452',
+  longitude: '23.9534')
 e15 = Event.create(
   name: 'Belarussian satelite start', 
   date: '17 feb 2016', 
@@ -490,8 +490,8 @@ e15 = Event.create(
   agemin: '18', 
   agemax: '150', 
   location: 'Zybickaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '52.0000',
+  longitude: '27.0000')
 e16 = Event.create(
   name: 'Slavyansky Bazar', 
   date: '18 feb 2016', 
@@ -502,8 +502,8 @@ e16 = Event.create(
   agemin: '25', 
   agemax: '150', 
   location: 'Independence square',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '52.0000',
+  longitude: '21.0000')
 e17 = Event.create(
   name: 'Camping', 
   date: '19 mar 2016', 
@@ -514,8 +514,8 @@ e17 = Event.create(
   agemin: '50', 
   agemax: '150', 
   location: 'Independence square',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '52.0000',
+  longitude: '26.9534')
 e18 = Event.create(
   name: 'A State Of Trance 2016', 
   date: '28 may 2016', 
@@ -526,8 +526,8 @@ e18 = Event.create(
   agemin: '0', 
   agemax: '50', 
   location: 'Independence square',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '53.3452',
+  longitude: '27.0000')
 e19 = Event.create(
   name: 'Dance study', 
   date: '16 apr 2016', 
@@ -538,8 +538,8 @@ e19 = Event.create(
   agemin: '10', 
   agemax: '50', 
   location: 'Suharevskaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '54.0000',
+  longitude: '27.9534')
 e20 = Event.create(
   name: 'Mashrooms party', 
   date: '25 jun 2016', 
@@ -550,8 +550,8 @@ e20 = Event.create(
   agemin: '18', 
   agemax: '50', 
   location: 'Suharevskaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '52.3452',
+  longitude: '27.1241')
 e21 = Event.create(
   name: 'Eurotour', 
   date: '29 jul 2016', 
@@ -562,8 +562,8 @@ e21 = Event.create(
   agemin: '25', 
   agemax: '50', 
   location: 'Suharevskaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '52.2572',
+  longitude: '27.2143')
 e22 = Event.create(
   name: 'Run baby run!', 
   date: '28 oct 2016', 
@@ -574,8 +574,8 @@ e22 = Event.create(
   agemin: '0', 
   agemax: '25', 
   location: 'Suharevskaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '55.3452',
+  longitude: '22.2134')
 e23 = Event.create(
   name: 'Games', 
   date: '27 dec 2016', 
@@ -586,8 +586,8 @@ e23 = Event.create(
   agemin: '10', 
   agemax: '25', 
   location: 'Zybickaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '53.3452',
+  longitude: '25.8735')
 e24 = Event.create(
   name: 'Football', 
   date: '22 Aug 2016', 
@@ -598,8 +598,8 @@ e24 = Event.create(
   agemin: '18', 
   agemax: '25', 
   location: 'Zybickaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '53.3452',
+  longitude: '23.0534')
 e25 = Event.create(
   name: 'October fest', 
   date: '25 jul 2016', 
@@ -610,8 +610,8 @@ e25 = Event.create(
   agemin: '0', 
   agemax: '18', 
   location: 'Zybickaya str',
-  latitude: '62.3452',
-  longitude: '20.3452')
+  latitude: '52.3152',
+  longitude: '22.4134')
 
 r1.users << [u1, u2]
 r2.users << [u1, u2]

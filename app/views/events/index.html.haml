@@ -34,6 +34,7 @@
       .col-sm-10
         = f.select :tags_name_in, options_from_collection_for_select(Tag.all, :name, :name), {}, { class: 'js-example-tokenizer form-control margin_area', multiple: true }
     = f.submit class: "btn btn-confirm"
+  = render partial: 'events_map'
 .sub_header
   All events
   = @events.count

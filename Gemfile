@@ -10,7 +10,7 @@ gem 'omniauth'
 gem	'omniauth-facebook'
 gem	'omniauth-vkontakte'
 gem 'omniauth-twitter'
-gem "twitter-bootstrap-rails"
+gem 'twitter-bootstrap-rails'
 gem 'paperclip', '~> 4.3'
 gem 'haml', '~> 4.0', '>= 4.0.7'
 gem 'carmen-rails'
@@ -26,7 +26,8 @@ gem 'cancan'
 gem 'ffaker'
 gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'ransack'
-gem "select2-rails"
+gem 'select2-rails'
+gem 'gmaps4rails'
 
 ###########
 

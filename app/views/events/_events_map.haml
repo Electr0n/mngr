@@ -1,0 +1,4 @@
+.div{:style => "width: 600px; margin-top: 30px;"}
+  #map{:style => "width: 600px; height: 400px;"}
+  :javascript
+    buildMap(#{raw @hash.to_json});

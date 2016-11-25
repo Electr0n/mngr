@@ -26,4 +26,9 @@ module EventsHelper
     tags.any? ? tags.collect{|t| t.name}.join(", ") : 'No tags'
   end
 
+  def position_init(event)
+    event.latitude.nil?   ? event.latitude  = 53.7098 : event.latitude
+    event.longitude.nil?  ? event.longitude = 27.9534 : event.longitude
+  end
+
 end

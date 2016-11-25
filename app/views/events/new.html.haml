@@ -52,42 +52,13 @@
         = e.file_field :photo, class: 'margin_area'
     .form-group.line
       = e.label :place, class: 'col-sm-2 control-label margin_label'
+      - position_init(@event)
+      = render partial: 'change_event_pos'
       / Set height and width with CSS
       .col-sm-1
         = e.hidden_field :latitude, class: 'form-control'
       .col-sm-1
         = e.hidden_field :longitude, class: 'form-control'
-      .sign_with#googleMap{:style => "height:300px;width:450px;"}
-      / Add Google Maps
-
-      :javascript
-        var map;
-        function initMap() {
-          var myCenter = {lat: 53.900892, lng: 27.558735};
-          document.getElementById("event_latitude").value = 53.900892;
-          document.getElementById("event_longitude").value = 27.558735;
-          map = new google.maps.Map(document.getElementById('googleMap'), {
-            center: myCenter,
-            zoom: 10
-          });
-
-          var marker = new google.maps.Marker({
-            position: myCenter,
-            map: map,
-            draggable: true,
-            animation: google.maps.Animation.DROP,
-            title: 'Hello World!'
-          });
-
-          google.maps.event.addListener(marker, "dragend", function(a) {
-            lat = a.latLng.lat();
-            lng = a.latLng.lng();
-            document.getElementById("event_latitude").value = lat;
-            document.getElementById("event_longitude").value = lng;
-
-          });
-        }
-      %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3tpHZzNzF1JWKOruUBy3PrOksKDRvII&callback=initMap"}
     .form-group.line
       = e.label :tags, class: 'col-sm-2 control-label margin_label'
       .col-sm-10

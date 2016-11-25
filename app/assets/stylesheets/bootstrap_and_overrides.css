@@ -347,6 +347,10 @@ html, body {
     margin: 0px 5px 5px 5px;
     font-size: 1.2em;
 }
+/*MAP*/
+.marker_container {
+  background-color: white;
+}
 /*FORMS*/
 .hello_form {
   width: 630px;

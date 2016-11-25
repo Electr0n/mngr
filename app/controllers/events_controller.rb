@@ -9,7 +9,14 @@ class EventsController < ApplicationController
       params[:q]['tags_name_in'].delete("") 
     end
     @q = Event.ransack(params[:q])
-    @events = @q.result(distinct: true).page(params[:page]).per(10)
+    @events = @q.result(distinct: true)
+    @hash = Gmaps4rails.build_markers(@events) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+      # marker.infowindow event.name
+      marker.infowindow render_to_string(partial: 'marker_link', locals: { e: event})
+    end
+    @events = @events.page(params[:page]).per(10)
   end
 
   def new
@@ -29,6 +36,7 @@ class EventsController < ApplicationController
 
   def show
     # action find_event
+    @hash = [{lat: @event.latitude, lng: @event.longitude, infowindow: @event.name}]
   end
 
   def edit
