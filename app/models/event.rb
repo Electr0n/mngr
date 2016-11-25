@@ -15,4 +15,5 @@ class Event < ActiveRecord::Base
   validates :agemin, :agemax, :number, numericality: { greater_than_or_equal_to: 0 }
   validates :agemin, :agemax, numericality: { less_than_or_equal_to: 150 }
   validates :agemax, :numericality => { :greater_than_or_equal_to => :agemin }
+
 end

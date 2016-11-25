@@ -38,25 +38,6 @@
   = link_to "join", join_event_path(@event), class: "btn btn-confirm"
 = link_to "Edit", edit_event_path, class: "btn btn-confirm"
 = link_to "Delete", @event, method: :delete, class: "btn btn-confirm"
-/ Set height and width with CSS
-#googleMap{:style => "height:600px;width:100%;"}
-/ Add Google Maps
-
-:javascript
-  var map;
-  function initMap() {
-    var myCenter = {lat: #{@event.latitude}, lng: #{@event.longitude}};
-    map = new google.maps.Map(document.getElementById('googleMap'), {
-      center: myCenter,
-      zoom: 12
-    });
-
-    var marker = new google.maps.Marker({
-      position: myCenter,
-      map: map,
-      title: 'Hello World!'
-    });
-  }
-%script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3tpHZzNzF1JWKOruUBy3PrOksKDRvII&callback=initMap"}
-
-= commontator_thread(@event)
+.hello_form
+  = render partial: 'events_map'
+  = commontator_thread(@event)
