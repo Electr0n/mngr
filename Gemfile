@@ -7,8 +7,8 @@ source 'https://rubygems.org'
 
 gem 'devise'
 gem 'omniauth'
-gem	'omniauth-facebook'
-gem	'omniauth-vkontakte'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
 gem 'omniauth-twitter'
 gem 'twitter-bootstrap-rails'
 gem 'paperclip', '~> 4.3'
@@ -17,7 +17,7 @@ gem 'carmen-rails'
 gem 'commontator', '~> 4.10.0'
 gem 'acts_as_votable'
 gem 'geocoder'
-gem 'jquery-turbolinks'
+gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'active_link_to'
 gem 'pry'
 gem 'kaminari'
@@ -28,6 +28,7 @@ gem 'activeadmin', '~> 1.0.0.pre4'
 gem 'ransack'
 gem 'select2-rails'
 gem 'gmaps4rails'
+gem 'turbolinks', '~> 2.5.3'
 
 ###########
 
@@ -46,7 +47,6 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -64,7 +64,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem "rspec-rails", "~> 3.4.2"
+  gem "rspec-rails", "~> 3.4.1"
   gem 'factory_girl_rails'
 
 end
