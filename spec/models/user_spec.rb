@@ -113,6 +113,10 @@ RSpec.describe User, type: :model do
   end
 
   describe "omniauth" do
+    let(:role) {create(:role_user)}
+    before {
+      role
+    }
     describe "vk" do
       auth_hash = OmniAuth::AuthHash.new({
         :provider => 'vkontakte',

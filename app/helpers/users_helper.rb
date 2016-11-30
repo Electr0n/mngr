@@ -27,5 +27,13 @@ module UsersHelper
   def edit_user_button
     link_to "Edit profile", edit_user_path(current_user), class: "btn btn-confirm user_edit" if can? :edit, @user
   end
+
+  def country_name(user)
+    Carmen::Country.coded(user.country).name unless user.country.blank?
+  end
   
+  def city_name(user)
+    Carmen::Country.coded(user.country).subregions.coded(user.city).name unless user.city.blank?
+  end
+
 end
