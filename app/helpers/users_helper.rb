@@ -23,5 +23,9 @@ module UsersHelper
   def tags_list(tags)
     tags.any? ? tags.collect{|t| t.name}.join(", ") : 'No tags'
   end
+
+  def edit_button
+    link_to "Edit profile", edit_user_path(current_user), class: "btn btn-confirm user_edit" if can? :edit, @user
+  end
   
 end

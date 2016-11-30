@@ -50,9 +50,9 @@
         - if user_signed_in?
           = active_link_to "Profile", user_path(current_user), :active => :exclusive
           = active_link_to "Events", events_path, :active => :exclusive
-        = active_link_to "Peoples", root_path, :active => :exclusive
-        = active_link_to "Media", root_path, :active => :exclusive
-        = active_link_to "Help", root_path, :active => :exclusive
+        = active_link_to "Peoples", peoples_path, :active => :exclusive
+        = active_link_to "Media", media_path, :active => :exclusive
+        = active_link_to "Help", help_path, :active => :exclusive
       .left_side
         .banner.box2
           %p BANNER №1
