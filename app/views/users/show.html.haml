@@ -1,7 +1,7 @@
 .user_avatar
   = image_tag(@user.avatar.url(:medium))
   .user_edit
-    = link_to "Edit profile", edit_user_path(current_user), class: "btn btn-confirm user_edit"
+    = edit_button
 .user_info
   .col-1
     Name:

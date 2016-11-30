@@ -32,12 +32,9 @@
     Tags:
   .col-2
     = tags_list(@event.tags)
-- if !current_user.nil? && current_user.events.include?(@event)
-  = link_to "unfollow", unfollow_event_path(@event), class: "btn btn-confirm"
-- else
-  = link_to "join", join_event_path(@event), class: "btn btn-confirm"
-= link_to "Edit", edit_event_path, class: "btn btn-confirm"
-= link_to "Delete", @event, method: :delete, class: "btn btn-confirm"
+= follow_button
+= edit_button
+= delete_button
 .hello_form
   = render partial: 'events_map'
   = commontator_thread(@event)

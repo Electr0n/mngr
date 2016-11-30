@@ -39,8 +39,6 @@
       .col-sm-10
         = f.select :tags_name_in, options_from_collection_for_select(Tag.all, :name, :name), {}, { class: 'js-example-tokenizer form-control margin_area', multiple: true }
     = f.submit class: "btn btn-confirm"
-
-  /   = submit_tag "Search", :name => nil, :surname => nil, :gender => nil, :country => nil, :city => nil
 .sub_header
   All users
 - @users.each do |u|

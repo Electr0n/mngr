@@ -31,4 +31,20 @@ module EventsHelper
     event.longitude.nil?  ? event.longitude = 27.9534 : event.longitude
   end
 
+  def edit_button
+    link_to "Edit", edit_event_path, class: "btn btn-confirm" if can? :edit, @event
+  end
+
+  def delete_button
+    link_to "Delete", @event, method: :delete, class: "btn btn-confirm" if can? :delete, @event
+  end
+
+  def follow_button
+    if !current_user.nil? && current_user.events.include?(@event)
+      link_to "unfollow", unfollow_event_path(@event), class: "btn btn-confirm"
+    else
+      link_to "join", join_event_path(@event), class: "btn btn-confirm"
+    end
+  end
+
 end

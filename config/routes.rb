@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   root to: "users#index"
 
+  get '/help' => 'application#help'
+  get '/media' => 'application#media'
+  get '/peoples' => 'application#peoples'
+
   devise_for :users, controllers: { 
     users: "users", 
     omniauth_callbacks: "omniauth_callbacks", 
