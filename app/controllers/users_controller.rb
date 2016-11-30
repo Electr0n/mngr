@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if params[:q]
       # change params with calculated birthday by min age
       params[:q]['bday_lteq'] = (Time.now - params[:q]['bday_lteq'].to_i.years).to_s unless params[:q]['bday_lteq'].blank?
-      # change params woth calculated birthday by max age
+      # change params with calculated birthday by max age
       params[:q]['bday_gteq'] = (Time.now - params[:q]['bday_gteq'].to_i.years).to_s unless params[:q]['bday_gteq'].blank?
     end
     @q = User.ransack(params[:q])
