@@ -13,7 +13,6 @@ class EventsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@events) do |event, marker|
       marker.lat event.latitude
       marker.lng event.longitude
-      # marker.infowindow event.name
       marker.infowindow render_to_string(partial: 'marker_link', locals: { e: event})
     end
     @events = @events.page(params[:page]).per(10)
