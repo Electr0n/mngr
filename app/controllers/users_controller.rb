@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if params[:q]
       # change params with calculated birthday by min age
       params[:q]['bday_lteq'] = (Time.now - params[:q]['bday_lteq'].to_i.years).to_s unless params[:q]['bday_lteq'].blank?
-      # change params woth calculated birthday by max age
+      # change params with calculated birthday by max age
       params[:q]['bday_gteq'] = (Time.now - params[:q]['bday_gteq'].to_i.years).to_s unless params[:q]['bday_gteq'].blank?
     end
     @q = User.ransack(params[:q])
@@ -61,7 +61,8 @@ class UsersController < ApplicationController
 
   def show
     # find_user action
-    @events = @user.events.all.page(params[:page]).per(10) if can? :show, @user
+    @events_f = @user.events.where(['date >= ?', Date.today]).page(params[:events_f]).per(5) if can? :show, @user
+    @events_p = @user.events.where(['date < ?', Date.today]).page(params[:events_p]).per(5) if can? :show, @user
   end
 
   def destroy

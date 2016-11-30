@@ -285,6 +285,12 @@ html, body {
   text-overflow: ellipsis;
 }
 /*END PREVIEW ELEMENT*/
+#tabs_nav_bar {
+  height: 100px;
+}
+#tabs_nav_bar > li {
+  background-color: #c0ebfd;
+}
 .pagin_box {
   text-align: center;
   font-size: 20px;

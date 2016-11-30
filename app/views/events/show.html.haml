@@ -11,7 +11,7 @@
   .col-1
     Time:
   .col-2
-    = @event.time
+    = @event.time.strftime("%H:%M")
   .col-1
     Gender:
   .col-2
@@ -32,9 +32,9 @@
     Tags:
   .col-2
     = tags_list(@event.tags)
-= follow_button
-= edit_button
-= delete_button
+= follow_event_button
+= edit_event_button
+= delete_event_button
 .hello_form
   = render partial: 'events_map'
   = commontator_thread(@event)
