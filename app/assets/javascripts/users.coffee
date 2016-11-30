@@ -22,3 +22,12 @@ ready = ->
     select_wrapper.load(url)
 $(document).ready(ready)
 $(document).on('page:load', ready)
+
+$ ->
+  $('a[data-toggle="tab"]').on 'shown.bs.tab', (e) ->
+    localStorage.setItem 'lastTab', $(this).attr('href')
+    return
+  lastTab = localStorage.getItem('lastTab')
+  if lastTab
+    $('[href="' + lastTab + '"]').tab 'show'
+  return

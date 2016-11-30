@@ -61,7 +61,8 @@ class UsersController < ApplicationController
 
   def show
     # find_user action
-    @events = @user.events.all.page(params[:page]).per(10) if can? :show, @user
+    @events_f = @user.events.where(['date >= ?', Date.today]).page(params[:events_f]).per(5) if can? :show, @user
+    @events_p = @user.events.where(['date < ?', Date.today]).page(params[:events_p]).per(5) if can? :show, @user
   end
 
   def destroy

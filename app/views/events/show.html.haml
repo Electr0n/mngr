@@ -32,9 +32,9 @@
     Tags:
   .col-2
     = tags_list(@event.tags)
-= follow_button
-= edit_button
-= delete_button
+= follow_event_button
+= edit_event_button
+= delete_event_button
 .hello_form
   = render partial: 'events_map'
   = commontator_thread(@event)
