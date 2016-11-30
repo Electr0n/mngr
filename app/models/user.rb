@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.email = auth.uid+"@"+auth.provider+".com"
         user.password = Devise.friendly_token[0,20]
+        user.roles << Role.where(name: 'user').first
         if auth.provider != 'twitter'
           user.name = auth.extra.raw_info.first_name
           user.surname = auth.extra.raw_info.last_name
