@@ -1,0 +1,35 @@
+.hello_form
+  .sub_header
+    Dashboard
+%ul.nav.nav-pills.nav-justified#tabs_nav_bar
+  %li.active
+    %a{"data-toggle" => "tab", href: "#superadmins"} Superadmins
+  %li
+    %a{"data-toggle" => "tab", href: "#admins"} Admins
+  %li
+    %a{"data-toggle" => "tab", href: "#moderators"} Moderators
+  %li
+    %a{"data-toggle" => "tab", href: "#users"} Users
+  %li
+    %a{"data-toggle" => "tab", href: "#marked"} Marked for delete
+.tab-content
+  #superadmins.tab-pane.fade.in.active
+    = render partial: 'users_tab', locals: {users: @superadmins}
+    .pagin_box
+      = paginate @superadmins, param_name: :superadmins unless @superadmins.nil?
+  #admins.tab-pane.fade
+    = render partial: 'users_tab', locals: {users: @admins}
+    .pagin_box
+      = paginate @admins, param_name: :admins unless @admins.nil?
+  #moderators.tab-pane.fade
+    = render partial: 'users_tab', locals: {users: @moderators}
+    .pagin_box
+      = paginate @moderators, param_name: :moderators unless @moderators.nil?
+  #users.tab-pane.fade
+    = render partial: 'users_tab', locals: {users: @users}
+    .pagin_box
+      = paginate @users, param_name: :users unless @users.nil?
+  #marked.tab-pane.fade
+    = render partial: 'users_tab', locals: {users: @users_d}
+    .pagin_box
+      = paginate @users_d, param_name: :marked unless @users_d.nil?

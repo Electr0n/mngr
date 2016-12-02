@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   end
   resources :tags do
   end
+  resources :admin do
+    get :users, on: :collection
+  end
 
   mount Commontator::Engine => '/commontator'
  

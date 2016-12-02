@@ -13,17 +13,26 @@ html, body {
 }
 
 /*Layout control panel*/
+.admin_panel {
+  width: 100%;
+  background-color: black;
+  height: 30px;
+  line-height: 30px;
+}
+.admin_panel > a {
+  color: white;
+  padding-left: 60px;
+}
 .main_header {
   min-height: 60px;
   height: auto;
   background-color: #E0FFFF;
-  padding-top: 10px;
 }
 .account_links {
   position: relative;
   min-width: 290px;
   width: 25%;
-  padding: 0 1% 0 1%;
+  padding: 10px 1% 0 1%;
   float: right;
 }
 .logo {
@@ -37,6 +46,7 @@ html, body {
   margin-bottom: 1.0%;
   background-color: #5F9EA0;
   padding: 1.0%;
+  margin-top: 20px;
   color: #fff;
   text-align: center;
   font-weight: bold;
@@ -113,6 +123,9 @@ html, body {
   clear: both;
 }
 /*Contents' elements style*/
+.tab_content {
+  padding: 30px 0px 0px 100px;
+}
 .user_avatar {
   min-width: 300px;
   min-height: 300px;

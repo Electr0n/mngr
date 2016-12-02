@@ -25,4 +25,15 @@ RSpec.describe UsersHelper, type: :helper do
       expect(tags_list(user.tags)).to eq('No tags')
     end
   end
+
+  describe 'full_name' do
+    it 'should return full name' do
+      expect(full_name(user)).to eq('realy_valid RLYRLY')
+    end
+    it 'should return namee EMPTY' do
+      u = create(:user)
+      expect(full_name(u)).to eq('namee EMPTY')
+    end
+  end
+
 end
