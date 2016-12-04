@@ -355,7 +355,7 @@ RSpec.describe EventsController, type: :controller do
           user.roles.delete(role_user)
           user.roles << role_superadmin
           delete :destroy, id: e.id
-          expect(response).to redirect_to user_path(user)
+          expect(response).to render_template :index
         end
         it "render 403 page if ADMIN" do
           user.roles.delete(role_user)

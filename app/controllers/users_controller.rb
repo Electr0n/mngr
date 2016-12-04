@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
-  before_action :find_user, only: [:show, :edit, :update, :destroy, :del_request]
+  before_action :find_user, only: [:show, :edit, :update, :destroy, :del_request, :ban, :disban]
 
   def index
     if params[:q]
@@ -68,7 +68,23 @@ class UsersController < ApplicationController
   def destroy
     if can? :destroy, @user
       @user.destroy
-      render "index"
+      render "/admin/index"
+    else
+      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
+    end
+  end
+
+  def ban
+    if can? :ban, @user
+      redirect_to :back
+    else
+      render file: "#{Rails.root}/public/403.html", layout: false, status: 403
+    end
+  end
+
+  def disban
+    if can? :disban, @user
+      redirect_to :back
     else
       render file: "#{Rails.root}/public/403.html", layout: false, status: 403
     end

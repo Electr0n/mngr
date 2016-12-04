@@ -9,9 +9,13 @@
         %td Name
         %td Events ctreated
         %td Events followed
+        %td Ban
+        %td X
       - users.each do |u|
         %tr
           %td= u.id
           %td= link_to full_name(u), user_path(u)
           %td= u.products.count
           %td= u.events.count
+          %td= link_to 'Ban', ban_user_path(u)
+          %td= link_to 'x', u, method: :delete

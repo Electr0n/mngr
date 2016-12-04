@@ -67,7 +67,7 @@ class EventsController < ApplicationController
     # action find_event 
     if can? :destroy, @event 
       @event.destroy
-      redirect_to user_path(current_user)
+      render '/admin/index'
     else
       render file: "#{Rails.root}/public/403.html", layout: false, status: 403
     end

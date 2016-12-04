@@ -7,8 +7,9 @@ class Ability
       can :manage, :all
     end
     if user.admin?
-      can :manage, :all
-      cannot :destroy, :all
+      can [:read, :create, :update, :del_request], [User, Event]
+      can [:ban, :disban], User
+      can [:index, :users, :events], Admin
     end
     if user.moderator?
       can :read, [User, Event]
@@ -19,7 +20,7 @@ class Ability
       can [:create, :edit, :update, :del_request], Event
     end
     if user.user?
-      can :read, :all
+      can :read, [User, Event]
       can :create, Event
       can [:edit, :update, :del_request], User do |u|
         u == user
