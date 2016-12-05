@@ -115,11 +115,11 @@ RSpec.describe EventsController, type: :controller do
           delete :destroy, id: e.id
           expect(response.status).to eq(403)
         end
-        it "responds status 302 if SUPERADMIN" do
+        it "responds status 200 if SUPERADMIN" do
           user.roles.delete(role_user)
           user.roles << role_superadmin
           delete :destroy, id: e.id
-          expect(response.status).to eq(302)
+          expect(response.status).to eq(200)
         end
         it "responds status 403 if ADMIN" do
           user.roles.delete(role_user)

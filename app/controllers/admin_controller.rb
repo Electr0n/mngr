@@ -35,6 +35,9 @@ class AdminController < ApplicationController
   def ban
     if can? :ban, Admin
       @user.roles << Role.find_by_name('banned') unless @user.nil? || @user.banned?
+      # TODO
+      # remove rerandering using remote:true
+      # update button using js
       redirect_to(:back)
     else
       render file: "#{Rails.root}/public/403.html", layout: false, status: 403
@@ -44,6 +47,9 @@ class AdminController < ApplicationController
   def unban
     if can? :unban, Admin
       @user.roles.delete(Role.find_by_name('banned')) if @user.banned? && !@user.nil?
+      # TODO
+      # remove rerandering using remote:true
+      # update button using js
       redirect_to(:back)
     else
       render file: "#{Rails.root}/public/403.html", layout: false, status: 403
