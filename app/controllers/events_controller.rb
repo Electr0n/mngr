@@ -25,6 +25,7 @@ class EventsController < ApplicationController
   def create 
     params_init if event_params
     @event = Event.new(event_params)
+    @event.tags = Tag.where(name: tags_params[:tags]).uniq
     if (can? :create, @event) && @event.save
       current_user.products << @event
       redirect_to @event
@@ -108,7 +109,7 @@ class EventsController < ApplicationController
     else
       current_user.events << @event
       redirect_to(:back)
-    end 
+    end
   end
 
   def unfollow

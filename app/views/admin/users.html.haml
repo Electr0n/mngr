@@ -11,7 +11,9 @@
   %li
     %a{"data-toggle" => "tab", href: "#users"} Users
   %li
-    %a{"data-toggle" => "tab", href: "#marked"} Marked for delete
+    %a{"data-toggle" => "tab", href: "#banned"} Banned
+  %li
+    %a{"data-toggle" => "tab", href: "#marked"} To delete
 .tab-content
   #superadmins.tab-pane.fade.in.active
     = render partial: 'users_tab', locals: {users: @superadmins}
@@ -29,7 +31,11 @@
     = render partial: 'users_tab', locals: {users: @users}
     .pagin_box
       = paginate @users, param_name: :users unless @users.nil?
-  #marked.tab-pane.fade
+  #banned.tab-pane.fade
+    = render partial: 'users_tab', locals: {users: @banned}
+    .pagin_box
+      = paginate @banned, param_name: :banned unless @banned.nil?
+  #users_d.tab-pane.fade
     = render partial: 'users_tab', locals: {users: @users_d}
     .pagin_box
-      = paginate @users_d, param_name: :marked unless @users_d.nil?
+      = paginate @users_d, param_name: :users_d unless @users_d.nil?

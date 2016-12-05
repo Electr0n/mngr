@@ -67,4 +67,8 @@ class User < ActiveRecord::Base
     roles.find_by_name('user').nil? ? false : true
   end
 
+  def banned?
+    roles.find_by_name('banned').nil? ? false : true
+  end
+
 end

@@ -8,7 +8,7 @@ class Ability
     end
     if user.admin?
       can [:read, :create, :update, :del_request], [User, Event]
-      can [:ban, :disban], User
+      can [:ban, :unban], Admin
       can [:index, :users, :events], Admin
     end
     if user.moderator?
@@ -28,6 +28,10 @@ class Ability
       can [:edit, :update, :del_request], Event do |e|
         user.products.include? e
       end
+    end
+    if user.banned?
+      cannot :manage, :all
+      cannot :read, :all
     end
   end
 end

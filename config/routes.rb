@@ -16,8 +16,6 @@ Rails.application.routes.draw do
     get :city_search
     get :subregion_options
     get :del_request,       on: :member
-    get :ban,               on: :member
-    get :disban,            on: :member
   end
   resources :events do
     get :join,        on: :member
@@ -29,6 +27,8 @@ Rails.application.routes.draw do
   resources :admin do
     get :users,   on: :collection
     get :events,  on: :collection
+    get :ban,     on: :member
+    get :unban,   on: :member
   end
 
   mount Commontator::Engine => '/commontator'
