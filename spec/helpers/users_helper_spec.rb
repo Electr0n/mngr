@@ -36,4 +36,8 @@ RSpec.describe UsersHelper, type: :helper do
     end
   end
 
+  it 'info' do
+    expect(info(user)).to eq('ID: ' + user.id.to_s + '. realy_valid RLYRLY')
+  end
+
 end

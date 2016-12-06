@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
+
   describe "Action responses" do
     context "if user SIGNED" do
       let(:user)            {create(:user)}
