@@ -1,0 +1,23 @@
+.tab_content
+  - if events.nil?
+    Empty
+  - else
+    %h4 Total: #{events.count}
+    %table{:style => "width: 100%"}
+      %tr
+        %td ID
+        %td Name
+        %td Date
+        %td Owner
+        %td Followers
+        %td X
+      - events.each do |e|
+        %tr
+          %td= e.id
+          %td= link_to e.name, event_path(e)
+          %td= e.date
+          %td
+            - e.owners.each do |t|
+              = link_to full_name(t), user_path(t)
+          %td= e.users.count
+          %td= link_to 'x', e, method: :delete

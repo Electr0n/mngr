@@ -3,12 +3,15 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-    can :manage, :all if user.roles.find_by_name('superadmin')
-    if user.roles.find_by_name('admin')
+    if user.superadmin?
       can :manage, :all
-      cannot :destroy, :all
     end
-    if user.roles.find_by_name('moderator')
+    if user.admin?
+      can [:read, :create, :update, :del_request], [User, Event]
+      can [:ban, :unban], Admin
+      can [:index, :users, :events], Admin
+    end
+    if user.moderator?
       can :read, [User, Event]
       can :del_request, User
       can [:edit, :update, :del_request], User do |u|
@@ -16,8 +19,8 @@ class Ability
       end
       can [:create, :edit, :update, :del_request], Event
     end
-    if user.roles.find_by_name('user')
-      can :read, :all
+    if user.user?
+      can :read, [User, Event]
       can :create, Event
       can [:edit, :update, :del_request], User do |u|
         u == user
@@ -25,6 +28,10 @@ class Ability
       can [:edit, :update, :del_request], Event do |e|
         user.products.include? e
       end
+    end
+    if user.banned?
+      cannot :manage, :all
+      cannot :read, :all
     end
   end
 end

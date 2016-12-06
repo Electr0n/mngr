@@ -17,38 +17,58 @@ class User < ActiveRecord::Base
 
   acts_as_commontator
   
-    def self.from_omniauth(auth)
-      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-        user.email = auth.uid+"@"+auth.provider+".com"
-        user.password = Devise.friendly_token[0,20]
-        user.roles << Role.where(name: 'user').first
-        if auth.provider != 'twitter'
-          user.name = auth.extra.raw_info.first_name
-          user.surname = auth.extra.raw_info.last_name
-        else
-          fullname      = auth.info.name.split(' ')
-          user.name     = fullname[0]
-          user.surname  = fullname[1]
-        end
-        # user.image = auth.info.image # assuming the user model has an image
-      end
-    end
-
-    def country_
-      Carmen::Country.coded(country).name
-    end
-
-    def city_
-      Carmen::Country.coded(country).subregions.coded(city).name
-    end
-
-    def age
-      unless bday.nil?
-        age = Time.now.year - bday.year
-        (bday + age.year) > Date.today ? age = age - 1 : age
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.uid+"@"+auth.provider+".com"
+      user.password = Devise.friendly_token[0,20]
+      user.roles << Role.where(name: 'user').first
+      if auth.provider != 'twitter'
+        user.name = auth.extra.raw_info.first_name
+        user.surname = auth.extra.raw_info.last_name
       else
-        nil
+        fullname      = auth.info.name.split(' ')
+        user.name     = fullname[0]
+        user.surname  = fullname[1]
       end
+      # user.image = auth.info.image # assuming the user model has an image
     end
+  end
+
+  def country_
+    Carmen::Country.coded(country).name
+  end
+
+  def city_
+    Carmen::Country.coded(country).subregions.coded(city).name
+  end
+
+  def age
+    unless bday.nil?
+      age = Time.now.year - bday.year
+      (bday + age.year) > Date.today ? age = age - 1 : age
+    else
+      nil
+    end
+  end
+
+  def superadmin?
+    roles.find_by_name('superadmin').nil? ? false : true
+  end
+
+  def admin?
+    roles.find_by_name('admin').nil? ? false : true
+  end
+
+  def moderator?
+    roles.find_by_name('moderator').nil? ? false : true
+  end
+
+  def user?
+    roles.find_by_name('user').nil? ? false : true
+  end
+
+  def banned?
+    roles.find_by_name('banned').nil? ? false : true
+  end
 
 end

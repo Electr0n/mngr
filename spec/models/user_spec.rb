@@ -212,4 +212,48 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'check roles' do
+    let(:user) {create(:filled_user)}
+    let(:r1) {create(:role_user)}
+    let(:r2) {create(:role_moderator)}
+    let(:r3) {create(:role_admin)}
+    let(:r4) {create(:role_superadmin)}
+    before {
+      [r1, r2, r3, r4]
+    }
+    it 'superadmin? should return true for superadmin' do
+      user.roles << r4
+      expect(user.superadmin?).to be true
+    end
+    it 'superadmin? should return false for not superadmin' do
+      user.roles << [r1, r2, r3]
+      expect(user.superadmin?).to be false
+    end
+    it 'admin? should return true for admin' do
+      user.roles << r3
+      expect(user.admin?).to be true
+    end
+    it 'admin? should return false for not admin' do
+      user.roles << [r1, r2, r4]
+      expect(user.admin?).to be false
+    end
+    it 'moderator? should return true for moderator' do
+      user.roles << r2
+      expect(user.moderator?).to be true
+    end
+    it 'moderator? should return false for not moderator' do
+      user.roles << [r1, r4, r3]
+      expect(user.moderator?).to be false
+    end
+    it 'user? should return true for user' do
+      user.roles << r1
+      expect(user.user?).to be true
+    end
+    it 'user? should return false for not user' do
+      user.roles << [r4, r2, r3]
+      expect(user.user?).to be false
+    end
+  end
+
 end

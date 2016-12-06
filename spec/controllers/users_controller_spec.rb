@@ -236,6 +236,7 @@ RSpec.describe UsersController, type: :controller do
         get :destroy, id: u.id
         expect(response.status).to eq(302)
       end
+
     end
   end
   
@@ -443,6 +444,7 @@ RSpec.describe UsersController, type: :controller do
         delete :destroy, id: u.id
         expect(response).to redirect_to new_user_session_path
       end
+
     end
   end
 

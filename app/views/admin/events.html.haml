@@ -1,0 +1,29 @@
+.hello_form
+  .sub_header
+    Events
+%ul.nav.nav-pills.nav-justified#tabs_nav_bar
+  %li.active
+    %a{"data-toggle" => "tab", href: "#e_future"} Future
+  %li
+    %a{"data-toggle" => "tab", href: "#e_today"} Today
+  %li
+    %a{"data-toggle" => "tab", href: "#e_past"} Past
+  %li
+    %a{"data-toggle" => "tab", href: "#e_del"} Marked for delete
+.tab-content
+  #e_future.tab-pane.fade.in.active
+    = render partial: 'events_tab', locals: {events: @e_future}
+    .pagin_box
+      = paginate @e_future, param_name: :e_future unless @e_future.nil?
+  #e_today.tab-pane.fade
+    = render partial: 'events_tab', locals: {events: @e_today}
+    .pagin_box
+      = paginate @e_today, param_name: :e_today unless @e_today.nil?
+  #e_past.tab-pane.fade
+    = render partial: 'events_tab', locals: {events: @e_past}
+    .pagin_box
+      = paginate @e_past, param_name: :e_past unless @e_past.nil?
+  #e_del.tab-pane.fade
+    = render partial: 'events_tab', locals: {events: @e_del}
+    .pagin_box
+      = paginate @e_del, param_name: :e_del unless @e_del.nil?

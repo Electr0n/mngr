@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
+
   describe "Action responses" do
     context "if user SIGNED" do
       let(:user)            {create(:user)}
@@ -115,11 +116,11 @@ RSpec.describe EventsController, type: :controller do
           delete :destroy, id: e.id
           expect(response.status).to eq(403)
         end
-        it "responds status 302 if SUPERADMIN" do
+        it "responds status 200 if SUPERADMIN" do
           user.roles.delete(role_user)
           user.roles << role_superadmin
           delete :destroy, id: e.id
-          expect(response.status).to eq(302)
+          expect(response.status).to eq(200)
         end
         it "responds status 403 if ADMIN" do
           user.roles.delete(role_user)
@@ -355,7 +356,7 @@ RSpec.describe EventsController, type: :controller do
           user.roles.delete(role_user)
           user.roles << role_superadmin
           delete :destroy, id: e.id
-          expect(response).to redirect_to user_path(user)
+          expect(response).to render_template :index
         end
         it "render 403 page if ADMIN" do
           user.roles.delete(role_user)

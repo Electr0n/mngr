@@ -1,20 +1,23 @@
-- events.each do |e|
-  .event_header
-    = link_to e.name, event_path(e)
-  .event_el
-    .wrapper_1
-      .auth_img
-        = image_tag(e.owners.first.avatar.url(:thumb))
-      .wrapper_2
-        .event_desc
-          = e.description
-        .wrapper_3
-          .event_date
-            = e.date
-            = e.time.strftime("%H:%M")
-          .event_adr
-            = e.location
-          .event_tags
-            = tags_list(e.tags)
-    .event_img
-      = image_tag(e.photo.url(:thumb))
+- if events.nil?
+  Epmty
+- else
+  - events.each do |e|
+    .event_header
+      = link_to e.name, event_path(e)
+    .event_el
+      .wrapper_1
+        .auth_img
+          = image_tag(e.owners.first.avatar.url(:thumb))
+        .wrapper_2
+          .event_desc
+            = e.description
+          .wrapper_3
+            .event_date
+              = e.date
+              = e.time.strftime("%H:%M")
+            .event_adr
+              = e.location
+            .event_tags
+              = tags_list(e.tags)
+      .event_img
+        = image_tag(e.photo.url(:thumb))

@@ -1,0 +1,7 @@
+= active_link_to "Main", root_path, :active => :exclusive
+- if user_signed_in?
+  = active_link_to "Profile", user_path(current_user), :active => :exclusive
+  = active_link_to "Events", events_path, :active => :exclusive
+= active_link_to "Peoples", peoples_path, :active => :exclusive
+= active_link_to "Media", media_path, :active => :exclusive
+= active_link_to "Help", help_path, :active => :exclusive

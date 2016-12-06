@@ -20,6 +20,12 @@ module UsersHelper
     end
   end
 
+  def full_name(user)
+    user.name.nil? ? name = 'EMPTY' : name = user.name
+    user.surname.nil? ? surname = 'EMPTY' : surname = user.surname
+    name + ' ' + surname
+  end
+
   def tags_list(tags)
     tags.any? ? tags.collect{|t| t.name}.join(", ") : 'No tags'
   end
@@ -34,6 +40,10 @@ module UsersHelper
   
   def city_name(user)
     Carmen::Country.coded(user.country).subregions.coded(user.city).name unless user.city.blank?
+  end
+
+  def info(user)
+    'ID: ' + user.id.to_s + '. ' + full_name(user)
   end
 
 end

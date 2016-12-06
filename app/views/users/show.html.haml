@@ -63,8 +63,8 @@
   #future.tab-pane.fade.in.active
     = render partial: 'events_tab', locals: {events: @events_f}
     .pagin_box
-      = paginate @events_f, param_name: :events_f
+      = paginate @events_f, param_name: :events_f unless @events_f.nil?
   #past.tab-pane.fade
     = render partial: 'events_tab', locals: {events: @events_p}
     .pagin_box
-      = paginate @events_p, param_name: :events_p
+      = paginate @events_p, param_name: :events_p unless @events_f.nil?

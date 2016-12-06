@@ -16,43 +16,17 @@
   %body
     .content_wrapper
       .main_header
+        - unless current_user.nil?
+          = render partial: 'dashboard' if current_user.superadmin? || current_user.admin?
         .logo
         .account_links
-          - if user_signed_in?
-            Logged in as
-            = succeed "." do
-              %strong= current_user.email
-            %br
-            = link_to "Main", root_path, :class => 'navbar-link'
-            |
-            = link_to "Events", events_path, :class => 'navbar-link'
-            |
-            = link_to "Edit profile", edit_user_path(current_user), :class => 'navbar-link'
-            |
-            = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'
-            %br
-          - else
-            = link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
-            |
-            = link_to "Login", new_user_session_path, :class => 'navbar-link'
-            |
-            = link_to image_tag('icon-tw16.png'), user_omniauth_authorize_path(:twitter) 
-            |
-            = link_to image_tag('icon-fb16.png'), user_omniauth_authorize_path(:facebook) 
-            |
-            = link_to image_tag('icon-vk16.png'), user_omniauth_authorize_path(:vkontakte)
+          = render partial: 'account_links'
       - if notice
         %p.alert.alert-success= notice
       - if alert
         %p.alert.alert-danger= alert
       .control_panel
-        = active_link_to "Main", root_path, :active => :exclusive
-        - if user_signed_in?
-          = active_link_to "Profile", user_path(current_user), :active => :exclusive
-          = active_link_to "Events", events_path, :active => :exclusive
-        = active_link_to "Peoples", peoples_path, :active => :exclusive
-        = active_link_to "Media", media_path, :active => :exclusive
-        = active_link_to "Help", help_path, :active => :exclusive
+        = render partial: 'cp'
       .left_side
         .banner.box2
           %p BANNER №1
@@ -60,7 +34,7 @@
           %p BANNER №2
       .right_side
         .banner.box1
-          %p EVENT'S VINDGET
+          %p EVENT'S VIDGET
         .banner.box3
           %p BANNER №3
       .content

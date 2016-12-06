@@ -61,14 +61,14 @@ class UsersController < ApplicationController
 
   def show
     # find_user action
-    @events_f = @user.events.where(['date >= ?', Date.today]).page(params[:events_f]).per(5) if can? :show, @user
-    @events_p = @user.events.where(['date < ?', Date.today]).page(params[:events_p]).per(5) if can? :show, @user
+    @events_f = @user.events.where(['date >= ?', Date.today]).page(params[:events_f]).per(5)
+    @events_p = @user.events.where(['date < ?', Date.today]).page(params[:events_p]).per(5)
   end
 
   def destroy
     if can? :destroy, @user
       @user.destroy
-      render "index"
+      render "/admin/index"
     else
       render file: "#{Rails.root}/public/403.html", layout: false, status: 403
     end

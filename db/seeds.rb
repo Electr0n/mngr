@@ -10,6 +10,9 @@ r3 = Role.create(
 r4 = Role.create(
   name: 'user'
   )
+r5 = Role.create(
+  name: 'banned'
+  )
 
 u1 = User.create(
   email: 'electron@gmail.com',
@@ -617,6 +620,7 @@ r1.users << [u1, u2]
 r2.users << [u1, u2]
 r3.users << [u1, u3, u4, u5, u6]
 r4.users << [u1, u7, u8, u9, u10, u11, u12, u13, u14, u15, u16, u17, u18, u19, u20, u21, u22, u23, u24, u25]
+r5.users << [u5]
 
 u1.events << [e1, e3, e5, e6, e8, e9, e15, e11, e10, e19, e20, e21, e23]
 u2.events << [e2, e1, e25]
