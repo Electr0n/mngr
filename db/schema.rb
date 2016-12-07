@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104170743) do
+ActiveRecord::Schema.define(version: 20161206093435) do
 
   create_table "commontator_comments", force: :cascade do |t|
     t.string   "creator_type",      limit: 255
@@ -109,6 +109,13 @@ ActiveRecord::Schema.define(version: 20161104170743) do
   add_index "owners_products", ["event_id"], name: "index_owners_products_on_event_id", using: :btree
   add_index "owners_products", ["user_id"], name: "index_owners_products_on_user_id", using: :btree
 
+  create_table "phones", force: :cascade do |t|
+    t.integer "user_id",     limit: 4
+    t.integer "code",        limit: 4
+    t.integer "number",      limit: 4
+    t.string  "description", limit: 255
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name", limit: 255
   end
@@ -147,8 +154,6 @@ ActiveRecord::Schema.define(version: 20161104170743) do
     t.string   "surname",                limit: 255
     t.date     "bday"
     t.string   "gender",                 limit: 255
-    t.integer  "age",                    limit: 4
-    t.integer  "phone",                  limit: 4
     t.string   "country",                limit: 255
     t.string   "city",                   limit: 255
     t.string   "hobby",                  limit: 255
@@ -164,7 +169,6 @@ ActiveRecord::Schema.define(version: 20161104170743) do
     t.boolean  "del_flag",                           default: false, null: false
   end
 
-  add_index "users", ["age"], name: "index_users_on_age", using: :btree
   add_index "users", ["bday"], name: "index_users_on_bday", using: :btree
   add_index "users", ["city"], name: "index_users_on_city", using: :btree
   add_index "users", ["country"], name: "index_users_on_country", using: :btree

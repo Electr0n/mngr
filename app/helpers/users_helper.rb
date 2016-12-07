@@ -46,4 +46,12 @@ module UsersHelper
     'ID: ' + user.id.to_s + '. ' + full_name(user)
   end
 
+  def phones_info(p)
+    unless p.nil?
+      '+' + p.code.to_s + ' ' + p.number.to_s + ' (' + p.description + ')'
+    else
+      ''
+    end
+  end
+
 end

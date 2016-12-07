@@ -29,6 +29,7 @@ gem 'ransack'
 gem 'select2-rails'
 gem 'gmaps4rails'
 gem 'turbolinks', '~> 2.5.3'
+gem 'cocoon'
 
 ###########
 

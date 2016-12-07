@@ -1,0 +1,8 @@
+.nested-fields
+  .col-sm-2
+    = f.text_field :code, placeholder: '375', class: 'form-control'
+  .col-sm-4
+    = f.text_field :number, placeholder: 'number', class: 'form-control'
+  .col-sm-5
+    = f.text_field :description, placeholder: 'description', class: 'form-control'
+  = link_to_remove_association "X", f

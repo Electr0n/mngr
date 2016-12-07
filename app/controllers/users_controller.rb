@@ -37,8 +37,39 @@ class UsersController < ApplicationController
   def update
     # find_user action
     if can? :update, @user
+      # updating primary attributes
       @user.update_attributes(user_params)
+      # updateing tags
       @user.tags = Tag.where(name: tags_params[:tags]).uniq
+      # updating phones
+      phones_params[:phones_attributes].each do |data|
+        @i = data.first.to_i
+        if @user.phones[@i].nil?
+          binding.pry
+          @user.phones.new(
+            code:         data.last[:code],
+            number:       data.last[:number],
+            description:  data.last[:description]
+            )
+          @user.phones.last.save
+        else
+          binding.pry
+          if data.last[:_destroy]
+            @user.phones[@i].delete
+          binding.pry
+          else
+          binding.pry
+            @user.phones[@i].update_attributes(
+              code:         data.last[:code],
+              number:       data.last[:number],
+              description:  data.last[:description]
+              )
+          end
+        end
+      end
+      # @user.phones.each_with_index do |p, index|
+      #   p.update_attributes(phones_params[:phones_attributes]["#{index}"])
+      # end
       if @user.errors.empty?
         sign_in(@user, :bypass => true)
         redirect_to user_path(@user)
@@ -91,7 +122,6 @@ class UsersController < ApplicationController
     render partial: 'q_subregion_select'
   end
 
-
   protected
 
   def find_user
@@ -103,11 +133,15 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :surname, :email, :bday, :gender, :phone, :hobby, :about, :del_flag, :password, :password_confirmation, :avatar, :country, :city)
+    params.require(:user).permit(:name, :surname, :email, :bday, :gender, :hobby, :about, :del_flag, :password, :password_confirmation, :avatar, :country, :city)
   end
 
   def tags_params
     params.require(:user).permit(tags: [])
+  end
+
+  def phones_params
+    params.require(:user).permit(phones_attributes: [:id, :code, :number, :description, :_destroy])
   end
 
 end

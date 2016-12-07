@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     get :ban,     on: :member
     get :unban,   on: :member
   end
+  resources :phones do
+  end
 
   mount Commontator::Engine => '/commontator'
  

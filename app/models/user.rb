@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_and_belongs_to_many :tags
   accepts_nested_attributes_for :tags
+  has_many :phones
+  accepts_nested_attributes_for :phones, reject_if: :all_blank, allow_destroy: true
   
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => 
     "120x120#" }, :default_url => "/images/:style/missing.png"
