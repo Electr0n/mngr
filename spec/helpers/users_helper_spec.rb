@@ -40,4 +40,10 @@ RSpec.describe UsersHelper, type: :helper do
     expect(info(user)).to eq('ID: ' + user.id.to_s + '. realy_valid RLYRLY')
   end
 
+  it 'phones_info' do
+    p = create(:phone)
+    user.phones << p
+    expect(phones_info(user.phones.first)).to eq('+111 222222222 (mts)')
+  end
+
 end

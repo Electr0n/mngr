@@ -42,23 +42,25 @@ class UsersController < ApplicationController
       # updateing tags
       @user.tags = Tag.where(name: tags_params[:tags]).uniq
       # updating phones
-      phones_params[:phones_attributes].each do |data|
-        @i = data.first.to_i
-        if @user.phones[@i].nil?
-          @user.phones.new(
-            code:         data.last[:code],
-            number:       data.last[:number],
-            description:  data.last[:description]
-            )
-          @user.phones.last.save
-        elsif data.last[:_destroy] == 'false'
-          @user.phones[@i].update_attributes(
-            code:         data.last[:code],
-            number:       data.last[:number],
-            description:  data.last[:description]
-            )
-        else
-          @user.phones[@i].delete
+      unless phones_params[:phones_attributes].nil?
+        phones_params[:phones_attributes].each do |data|
+          @i = data.first.to_i
+          if @user.phones[@i].nil?
+            @user.phones.new(
+              code:         data.last[:code],
+              number:       data.last[:number],
+              description:  data.last[:description]
+              )
+            @user.phones.last.save
+          elsif data.last[:_destroy] == 'false'
+            @user.phones[@i].update_attributes(
+              code:         data.last[:code],
+              number:       data.last[:number],
+              description:  data.last[:description]
+              )
+          else
+            @user.phones[@i].delete
+          end
         end
       end
       if @user.errors.empty?

@@ -11,6 +11,10 @@ RSpec.describe User, type: :model do
     let(:t2) {create(:tag)}
     let(:r1) {create(:role_user)}
     let(:r2) {create(:role_admin)}
+    let(:p1) {create(:phone)}
+    let(:p2) {create(:phone_1)}
+    let(:p3) {create(:phone_2)}
+
     describe 'Roles-Users' do
       it 'User should have many roles' do
         u1.roles << [r1, r2]
@@ -61,6 +65,25 @@ RSpec.describe User, type: :model do
         expect(u1.tags.count).to eq(1)
         expect(u2.tags.count).to eq(1)
       end
+    end
+
+    before {
+      u1.phones << [p1, p3]
+      u2.phones << p2
+    }
+
+    it 'user cant have same phone' do
+      u2.phones << p1
+      expect(u1.phones.count).to eq(1)
+      expect(u2.phones.count).to eq(2)
+    end
+
+    it 'phone cant have 1 user' do
+      p1.user_id = u2.id
+      p1.save
+      p1.reload
+      expect(u1.phones.count).to eq(1)
+      expect(u2.phones.count).to eq(2)
     end
   end
 
