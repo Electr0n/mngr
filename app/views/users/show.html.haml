@@ -38,7 +38,9 @@
   .col-1
     Phone:
   .col-2
-    = @user.phone
+    - @user.phones.each do |p|
+      = phones_info(p)
+      %br
   .col-1
     Hobby:
   .col-2.text_area

@@ -1,0 +1,8 @@
+.nested-fields
+  .col-sm-2
+    = f.text_field :code, placeholder: '375', maxlength: 3, class: 'form-control'
+  .col-sm-4
+    = f.text_field :number, placeholder: 'number', maxlength: 10, class: 'form-control'
+  .col-sm-5
+    = f.text_field :description, placeholder: 'description', maxlength: 50, class: 'form-control'
+  = link_to_remove_association "X", f

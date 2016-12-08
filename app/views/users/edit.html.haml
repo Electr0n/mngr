@@ -36,9 +36,12 @@
       .col-sm-10
         = render partial: 'subregion_select', locals: {parent_region: f.object.country}
     .form-group.line
-      = f.label :phone, class: 'col-sm-2 control-label margin_label'
-      .col-sm-10
-        = telephone_field("user", "phone", class: 'form-control')
+      = f.label :phones, class: 'col-sm-2 control-label margin_label'
+      = f.fields_for :phones do |p|
+        = render partial: 'phone_fields', locals: {f: p}
+      %br
+      .links.pagin_box
+        = link_to_add_association 'add', f, :phones
     .form-group.line
       = f.label :hobby, class: 'col-sm-2 control-label'
       .col-sm-10

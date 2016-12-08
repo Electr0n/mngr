@@ -23,7 +23,6 @@ u1 = User.create(
   bday: "29 Dec 1992",
   country: 'BY',
   city: 'HM',
-  phone: "291363912",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u2 = User.create(
@@ -35,7 +34,6 @@ u2 = User.create(
   bday: "9 Jan 1992",
   country: 'BY',
   city: 'HM',
-  phone: "293407694",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u3 = User.create(
@@ -47,7 +45,6 @@ u3 = User.create(
   bday: "14 Mar 1879",
   country: 'BY',
   city: 'HM',
-  phone: '0',
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u4 = User.create(
@@ -59,7 +56,6 @@ u4 = User.create(
   bday: "14 May 1984",
   country: 'BY',
   city: 'HM',
-  phone: "291234567",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u5 = User.create(
@@ -71,7 +67,6 @@ u5 = User.create(
   bday: "1 Jul 1967",
   country: 'BY',
   city: 'HM',
-  phone: "0",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u6 = User.create(
@@ -83,7 +78,6 @@ u6 = User.create(
   bday: "22 Oct 1949",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u7 = User.create(
@@ -95,7 +89,6 @@ u7 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u8 = User.create(
@@ -107,7 +100,6 @@ u8 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u9 = User.create(
@@ -119,7 +111,6 @@ u9 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u10 = User.create(
@@ -131,7 +122,6 @@ u10 = User.create(
   bday: "11 Nov 1994",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u11 = User.create(
@@ -143,7 +133,6 @@ u11 = User.create(
   bday: "19 Jan 1979",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u12 = User.create(
@@ -155,7 +144,6 @@ u12 = User.create(
   bday: "11 Dec 1989",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u13 = User.create(
@@ -167,7 +155,6 @@ u13 = User.create(
   bday: "11 Nov 1974",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u14 = User.create(
@@ -179,7 +166,6 @@ u14 = User.create(
   bday: "11 Nov 1874",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u15 = User.create(
@@ -191,7 +177,6 @@ u15 = User.create(
   bday: "11 Nov 1956",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u16 = User.create(
@@ -203,7 +188,6 @@ u16 = User.create(
   bday: "21 May 2011",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u17 = User.create(
@@ -215,7 +199,6 @@ u17 = User.create(
   bday: "12 Sep 1984",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u18 = User.create(
@@ -227,7 +210,6 @@ u18 = User.create(
   bday: "08 Feb 1674",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u19 = User.create(
@@ -239,7 +221,6 @@ u19 = User.create(
   bday: "14 Aug 2004",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u20 = User.create(
@@ -251,7 +232,6 @@ u20 = User.create(
   bday: "18 Dec 1989",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u21 = User.create(
@@ -263,7 +243,6 @@ u21 = User.create(
   bday: "18 Dec 1984",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u22 = User.create(
@@ -275,7 +254,6 @@ u22 = User.create(
   bday: "01 Nov 2000",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u23 = User.create(
@@ -287,7 +265,6 @@ u23 = User.create(
   bday: "11 Nov 1964",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u24 = User.create(
@@ -299,7 +276,6 @@ u24 = User.create(
   bday: "11 Nov 1988",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 u25 = User.create(
@@ -311,7 +287,6 @@ u25 = User.create(
   bday: "19 Nov 1996",
   country: 'BY',
   city: 'HM',
-  phone: "293614521",
   hobby: 'Lorem ipsum dolor sit amet.',
   about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sagittis vehicula erat')
 
