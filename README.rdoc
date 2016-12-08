@@ -27,3 +27,4 @@ comments    all      edit     edit     read, create, [edit, delete] if owner
 - gmaps4rails (google maps) https://github.com/apneadiving/Google-Maps-for-Rails
 	tutorial https://www.youtube.com/watch?v=R0l-7en3dUw&feature=youtu.be
 	docs errors https://developers.google.com/maps/documentation/javascript/error-messages
+- cocoon (nested attributes in forms) https://github.com/nathanvda/cocoon

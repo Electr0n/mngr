@@ -45,31 +45,22 @@ class UsersController < ApplicationController
       phones_params[:phones_attributes].each do |data|
         @i = data.first.to_i
         if @user.phones[@i].nil?
-          binding.pry
           @user.phones.new(
             code:         data.last[:code],
             number:       data.last[:number],
             description:  data.last[:description]
             )
           @user.phones.last.save
+        elsif data.last[:_destroy] == 'false'
+          @user.phones[@i].update_attributes(
+            code:         data.last[:code],
+            number:       data.last[:number],
+            description:  data.last[:description]
+            )
         else
-          binding.pry
-          if data.last[:_destroy]
-            @user.phones[@i].delete
-          binding.pry
-          else
-          binding.pry
-            @user.phones[@i].update_attributes(
-              code:         data.last[:code],
-              number:       data.last[:number],
-              description:  data.last[:description]
-              )
-          end
+          @user.phones[@i].delete
         end
       end
-      # @user.phones.each_with_index do |p, index|
-      #   p.update_attributes(phones_params[:phones_attributes]["#{index}"])
-      # end
       if @user.errors.empty?
         sign_in(@user, :bypass => true)
         redirect_to user_path(@user)
